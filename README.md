@@ -1,4 +1,4 @@
-# vcs-management
+# Code base for vue 3 and vite
 
 This template should help get you started developing with Vue 3 in Vite.
 
