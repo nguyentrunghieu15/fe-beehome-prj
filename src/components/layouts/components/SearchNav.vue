@@ -1,23 +1,25 @@
 <template>
     <div class="md:flex items-center h-full z-20">
-        <div class="flex shrink grow items-center" @click="returnHome">
+        <div class="flex shrink grow items-center">
             <img
+                @click="returnHome"
                 src="@/assets/icon.png"
                 alt="Image description"
                 class="w-16 h-16 hover:cursor-pointer"
             />
             <span
+                @click="returnHome"
                 class="flex items-center text-sky-500 font-semibold text-2xl hover:cursor-pointer"
                 >Bee Home</span
             >
             <input
                 type="text"
-                class="ml-4 w-80 border focus:text-gray-900 border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="ml-4 w-96 border focus:text-gray-900 border-gray-300 text-gray-400 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="What's on to-do list?"
             />
-            <v-btn class="m-0" color="primary">
+            <v-btn class="m-0" rounded="0" color="primary">
                 Search
-                <v-icon  icon="mdi-magnify"></v-icon>
+                <v-icon icon="mdi-magnify"></v-icon>
             </v-btn>
         </div>
         <div class="flex items-center px-4 h-full z-20">
