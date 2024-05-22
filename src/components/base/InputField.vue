@@ -7,13 +7,12 @@
             <span v-if="isRequired" class="text-red-800">*</span></label
         >
         <input
-            type="text"
-            id="input"
-            :value="props.modelValue"
-            @input="emit('update:modelValue', $event.target.value)"
+            :type="props.type"
+            v-model="modelValue"
             :required="isRequired"
-            class="text-gray-900 dark:text-gray-400 placeholder-gray-700 dark:placeholder-gray-500 text-sm rounded-lg focus:ring-bule-500 focus:border-bule-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500"
+            class="bg-gray-50 border focus:text-gray-900 border-gray-300 text-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             :placeholder="props.placeHolder"
+            :disabled="props.isDisable"
         />
         <p
             v-if="props.errors"
@@ -24,12 +23,16 @@
     </div>
 </template>
 <script setup lang="ts">
+import type { InputTypeHTMLAttribute } from "vue";
+
 const props = defineProps<{
     label: string;
     isRequired: boolean;
     placeHolder?: string;
     errors?: string;
-    modelValue: string | undefined;
+    isDisable?: boolean;
+    type?: InputTypeHTMLAttribute | "text";
 }>();
-const emit = defineEmits(["update:modelValue"]);
+
+const modelValue = defineModel({ type: String });
 </script>
