@@ -1,6 +1,11 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
+export enum NavigationComponent {
+    VISIT_SITE,
+    MAIN_SITE,
+}
+
 export interface Nofitication {
     title: string;
     content: string;
@@ -9,6 +14,15 @@ export interface Nofitication {
 
 export const useMainStore = defineStore("main", () => {
     const listNofitications = ref<Nofitication[]>([]);
+    const currentNav = ref<NavigationComponent>(NavigationComponent.VISIT_SITE);
+
+    const currentNavComputed = computed(() => {
+        return currentNav;
+    });
+
+    function setNavigation(value: NavigationComponent) {
+        currentNav.value = value;
+    }
 
     const nofiticationsComputed = computed(() => {
         return listNofitications;
@@ -21,5 +35,10 @@ export const useMainStore = defineStore("main", () => {
         }, 3000);
     }
 
-    return { nofiticationsComputed, showNofitication };
+    return {
+        nofiticationsComputed,
+        showNofitication,
+        currentNavComputed,
+        setNavigation,
+    };
 });

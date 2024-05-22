@@ -1,12 +1,36 @@
-import type { SidebarItem } from "@/components/layouts/components/interfaces";
-import { useSideBarStore } from "@/stores/sideBarStore";
+import MainLayout from "@/components/layouts/MainLayout.vue";
+import VisitSite from "@/components/views/visitsite/VisitSite.vue";
+import Login from "@/components/views/login/Login.vue";
+import SignUp from "@/components/views/signup/SignUp.vue";
 import {
     createRouter,
     createWebHistory,
     type RouteRecordRaw,
 } from "vue-router";
 
-const routes: RouteRecordRaw[] = [];
+const routes: RouteRecordRaw[] = [
+    {
+        path: "/",
+        component: MainLayout,
+        children: [
+            {
+                path: "",
+                component: VisitSite,
+                name: "visit",
+            },
+            {
+                path: "/login",
+                component: Login,
+                name: "login",
+            },
+            {
+                path: "/signup",
+                component: SignUp,
+                name: "signup",
+            },
+        ],
+    },
+];
 
 const router = createRouter({
     history: createWebHistory("/"),
@@ -24,11 +48,6 @@ router.beforeEach((to, from) => {
             // save the location we were at to come back later
             query: { redirect: to.fullPath },
         };
-    }
-
-    if (to.meta?.sideBar) {
-        const store = useSideBarStore();
-        store.updateSideBar(to.meta.sideBar as SidebarItem[]);
     }
 });
 
