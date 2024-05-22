@@ -14,5 +14,5 @@
 <script setup lang="ts">
 import Footer from "@/components/base/Footer.vue";
 import SignupCard from "./components/SignupCard.vue";
-import InforSection from "../visitsite/components/InforSection.vue";
+import InforSection from "../mainsite/components/InforSection.vue";
 </script>

@@ -1,12 +1,14 @@
 import MainLayout from "@/components/layouts/MainLayout.vue";
-import VisitSite from "@/components/views/visitsite/VisitSite.vue";
+import MainSite from "@/components/views/mainsite/MainSite.vue";
 import Login from "@/components/views/login/Login.vue";
 import SignUp from "@/components/views/signup/SignUp.vue";
+import Page404 from "@/components/views/error/Page404.vue";
 import {
     createRouter,
     createWebHistory,
     type RouteRecordRaw,
 } from "vue-router";
+import ProfilePage from "@/components/views/profile/ProfilePage.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -15,7 +17,7 @@ const routes: RouteRecordRaw[] = [
         children: [
             {
                 path: "",
-                component: VisitSite,
+                component: MainSite,
                 name: "visit",
             },
             {
@@ -28,7 +30,17 @@ const routes: RouteRecordRaw[] = [
                 component: SignUp,
                 name: "signup",
             },
+            {
+                path: "/profile",
+                component: ProfilePage,
+                name: "profile",
+            },
         ],
+    },
+    {
+        path: "/error",
+        component: Page404,
+        name: "error",
     },
 ];
 

@@ -9,7 +9,8 @@
 import { NavigationComponent, useMainStore } from "@/stores/mainStore";
 import MainNav from "./components/MainNav.vue";
 import VisitNav from "./components/VisitNav.vue";
-import { computed, onMounted } from "vue";
+import SearchNav from "./components/SearchNav.vue";
+import { computed } from "vue";
 
 const mainStore = useMainStore();
 
@@ -17,10 +18,12 @@ const nav = mainStore.currentNavComputed;
 
 const matchComponent = computed(() => {
     switch (nav.value) {
-        case NavigationComponent.VISIT_SITE:
+        case NavigationComponent.VISIT_NAV:
             return VisitNav;
-        case NavigationComponent.MAIN_SITE:
+        case NavigationComponent.MAIN_NAV:
             return MainNav;
+        case NavigationComponent.SEARCH_NAV:
+            return SearchNav;
         default:
             break;
     }
