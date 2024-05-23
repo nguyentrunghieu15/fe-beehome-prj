@@ -13,7 +13,7 @@
                 :is-required="true"
                 label="Last name:"
                 v-model:model-value="form.lastName.value"
-                type="password"
+                type="Text"
                 class="mb-6"
                 :errors="form.errors.value.lastName"
             ></InputField>

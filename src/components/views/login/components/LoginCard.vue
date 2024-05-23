@@ -20,7 +20,7 @@
             <div>
                 <input
                     type="checkbox"
-                    class="w-[20px] h-[20px] border-2 rounded border-slate-700 bg-slate-200 mr-2"
+                    class="w-[20px] h-[20px] border border-gray-300 rounded mr-2"
                 />
                 <span>Remember me</span>
             </div>

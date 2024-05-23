@@ -2,7 +2,7 @@
     <nav class="h-16 border-b-[1px] border-b-slate-300">
         <component :is="matchComponent"></component>
     </nav>
-    <RouterView :key="$route.path"></RouterView>
+    <RouterView />
 </template>
 
 <script setup lang="ts">

@@ -15,7 +15,7 @@ export interface Nofitication {
 
 export const useMainStore = defineStore("main", () => {
     const listNofitications = ref<Nofitication[]>([]);
-    const currentNav = ref<NavigationComponent>(NavigationComponent.SEARCH_NAV);
+    const currentNav = ref<NavigationComponent>();
 
     const currentNavComputed = computed(() => {
         return currentNav;

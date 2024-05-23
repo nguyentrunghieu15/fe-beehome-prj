@@ -1,5 +1,5 @@
 <template>
-    <RouterView :key="$route.path" />
+    <RouterView />
     <ul class="fixed top-2 right-0">
         <li v-for="nofi in nofitications">
             <NofiticationItem

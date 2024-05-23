@@ -44,9 +44,14 @@
             >Inbox</RouterLink
         >
         <DropdownAvatar class="mr-4" avatar-url="" initials="JM">
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Logout</a>
+            <RouterLink
+                :to="{ path: '/profile' }"
+                class="block px-4 py-2 hover:bg-gray-100"
+                >Profile</RouterLink
+            >
+            <p @click="logout" class="block px-4 py-2 hover:bg-gray-100">
+                Logout
+            </p>
         </DropdownAvatar>
     </div>
 </template>
@@ -57,5 +62,9 @@ import DropdownAvatar from "@/components/base/DropdownAvatar.vue";
 const router = useRouter();
 const returnHome = () => {
     router.push({ path: "/" });
+};
+const logout = () => {
+    // Do something before return home
+    returnHome();
 };
 </script>

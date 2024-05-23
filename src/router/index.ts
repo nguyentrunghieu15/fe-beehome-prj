@@ -9,6 +9,10 @@ import {
     type RouteRecordRaw,
 } from "vue-router";
 import ProfilePage from "@/components/views/profile/ProfilePage.vue";
+import ProfileInfor from "@/components/views/profile/components/ProfileInfor.vue";
+import AccountSettings from "@/components/views/profile/components/AccountSettings.vue";
+import { NavigationComponent, useMainStore } from "@/stores/mainStore";
+import DeleteAccount from "@/components/views/profile/components/DeleteAccount.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -18,22 +22,52 @@ const routes: RouteRecordRaw[] = [
             {
                 path: "",
                 component: MainSite,
-                name: "visit",
+                name: "main",
             },
             {
                 path: "/login",
                 component: Login,
                 name: "login",
+                meta: {
+                    nav: NavigationComponent.VISIT_NAV,
+                },
             },
             {
                 path: "/signup",
                 component: SignUp,
                 name: "signup",
+                meta: {
+                    nav: NavigationComponent.VISIT_NAV,
+                },
             },
             {
                 path: "/profile",
                 component: ProfilePage,
-                name: "profile",
+                children: [
+                    {
+                        path: "",
+                        component: ProfileInfor,
+                        meta: {
+                            nav: NavigationComponent.SEARCH_NAV,
+                        },
+                    },
+                    {
+                        path: "/account-settings",
+                        component: AccountSettings,
+                        name: "account-settings",
+                        meta: {
+                            nav: NavigationComponent.MAIN_NAV,
+                        },
+                    },
+                    {
+                        path: "/delete-account",
+                        component: DeleteAccount,
+                        name: "delete-account",
+                        meta: {
+                            nav: NavigationComponent.MAIN_NAV,
+                        },
+                    },
+                ],
             },
         ],
     },
@@ -49,17 +83,22 @@ const router = createRouter({
     routes,
 });
 
+function isLogin(): boolean {
+    return true;
+}
+
 router.beforeEach((to, from) => {
     // instead of having to check every route record with
     // to.matched.some(record => record.meta.requiresAuth)
-    if (to.meta?.requiresAuth) {
-        // this route requires auth, check if logged in
-        // if not, redirect to login page.
-        return {
-            path: "/login",
-            // save the location we were at to come back later
-            query: { redirect: to.fullPath },
-        };
+    const mainStore = useMainStore();
+    if (to.meta?.nav !== undefined) {
+        mainStore.setNavigation(to.meta?.nav as NavigationComponent);
+    } else {
+        if (isLogin()) {
+            mainStore.setNavigation(NavigationComponent.MAIN_NAV);
+        } else {
+            mainStore.setNavigation(NavigationComponent.VISIT_NAV);
+        }
     }
 });
 
