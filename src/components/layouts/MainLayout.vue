@@ -13,7 +13,6 @@ import SearchNav from "./components/SearchNav.vue";
 import { computed } from "vue";
 
 const mainStore = useMainStore();
-
 const nav = mainStore.currentNavComputed;
 
 const matchComponent = computed(() => {
