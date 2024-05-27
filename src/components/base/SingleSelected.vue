@@ -1,20 +1,22 @@
 <template>
     <div>
         <div>
-            <label for="" class="font-bold">{{ props.label }}</label
+            <label for="" class="font-bold mb-2">{{ props.label }}</label
             ><span v-if="props.isRequired" class="text-red-700">*</span>
         </div>
         <ul>
-            <li v-for="i in showList" :key="i.id">
-                <input
-                    class="border border-gray-900 mr-2"
-                    type="radio"
-                    :id="i.label"
-                    :name="props.label"
-                    :value="i.value"
-                    v-model="modelValue"
-                />
-                <label :for="i.label">{{ i.label }}</label>
+            <li class="flex mb-1" v-for="i in showList" :key="i.id">
+                <div>
+                    <input
+                        class="border border-gray-900"
+                        type="radio"
+                        :id="i.label"
+                        :name="props.label"
+                        :value="i.value"
+                        v-model="modelValue"
+                    />
+                </div>
+                <label class="pl-2 text-sm" :for="i.label">{{ i.label }}</label>
             </li>
         </ul>
         <p

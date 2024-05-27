@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Filters</h1>
+        <h1 class="text-bold font-bold text-2xl mb-4">Filters</h1>
         <SingleSelected
             label="Test SingleSelected"
             :is-required="false"
@@ -17,23 +17,23 @@ import { ref, watch } from "vue";
 const data = ref<SingleSelectedItem[]>([
     {
         id: 1,
-        label: "Test1",
+        label: "Plumbing Pipe Repair",
         value: 1,
     },
 
     {
         id: 2,
-        label: "Test2",
+        label: "Plumbing Drain Repair",
         value: 2,
     },
     {
         id: 3,
-        label: "Test3",
+        label: "Plumbing Pipe Installation or Replacement",
         value: 3,
     },
     {
         id: 4,
-        label: "Test4",
+        label: "Plumbing Inspection",
         value: 4,
     },
 ]);
