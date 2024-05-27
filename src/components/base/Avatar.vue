@@ -1,5 +1,5 @@
 <template>
-    <div class="relative z-50">
+    <div class="relative z-50 box-border">
         <slot name="avatar">
             <img
                 v-if="props.avatarUrl"
