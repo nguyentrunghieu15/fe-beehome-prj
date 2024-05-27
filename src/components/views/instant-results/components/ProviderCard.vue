@@ -1,6 +1,11 @@
 <template>
     <div class="flex pb-4">
-        <Avatar avatarUrl="" initials="TH" class="w-36 h-36 mr-4"></Avatar>
+        <Avatar
+            :is-rounded="false"
+            avatarUrl=""
+            initials="TH"
+            class="w-36 h-36 mr-4"
+        ></Avatar>
         <div class="flex flex-wrap justify-between lg:w-[45rem]">
             <div class="w-[32rem] flex flex-col space-y-2">
                 <p class="text-lg font-bold">Knockout Plumbing & Repipe Inc</p>
@@ -36,7 +41,7 @@
                         out for a few things and to do a general
                         inspection."</span
                     ><span class="justify-self-end"
-                        >...<button type="button">See more</button></span
+                        >...<button class="text-sky-500">See more</button></span
                     >
                 </p>
             </div>

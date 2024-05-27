@@ -14,6 +14,7 @@ import AccountSettings from "@/components/views/profile/components/AccountSettin
 import { NavigationComponent, useMainStore } from "@/stores/mainStore";
 import DeleteAccount from "@/components/views/profile/components/DeleteAccount.vue";
 import InstantResults from "@/components/views/instant-results/InstantResults.vue";
+import ProfileProvider from "@/components/views/profileprovider/ProfileProvider.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -73,6 +74,12 @@ const routes: RouteRecordRaw[] = [
             {
                 path: "/view-results",
                 component: InstantResults,
+                name: "view-results",
+            },
+            {
+                path: "/pro-profile",
+                component: ProfileProvider,
+                name: "pro-provider",
             },
         ],
     },
