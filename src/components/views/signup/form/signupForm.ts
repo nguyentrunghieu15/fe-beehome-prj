@@ -1,3 +1,4 @@
+import authService from "@/api/auth";
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 
@@ -22,7 +23,13 @@ export default function () {
 
     const onSubmit = handleSubmit(async (data) => {
         // Handle form submission logic here (e.g., sending signup data to server)
-        console.log("Form data:", data);
+        return authService.signup({
+            email: data["email"],
+            password: data["password"],
+            firstName: data["firstName"],
+            lastName: data["lastName"],
+            phone: data["phone"],
+        });
     });
 
     const [firstName, firstNameAttrs] = defineField("firstName");

@@ -68,14 +68,25 @@
 import InputField from "@/components/base/InputField.vue";
 import useForm from "../form/signupForm";
 import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useMainStore } from "@/stores/mainStore";
 
 const form = useForm();
+const router = useRouter();
+const mainStore = useMainStore();
 
 onMounted(() => {
     form.resetForm();
 });
 
 const submit = () => {
-    form.onSubmit();
+    form.onSubmit().then(() => {
+        mainStore.showNofitication({
+            content: "Sign up success",
+            title: "Success",
+            typeNotification: "infor",
+        });
+        router.push({ name: "main" });
+    });
 };
 </script>

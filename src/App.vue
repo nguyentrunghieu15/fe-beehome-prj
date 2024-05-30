@@ -1,6 +1,6 @@
 <template>
     <RouterView />
-    <ul class="fixed top-2 right-0">
+    <ul class="fixed top-16 right-0">
         <li v-for="nofi in nofitications">
             <NofiticationItem
                 :content="nofi?.content"

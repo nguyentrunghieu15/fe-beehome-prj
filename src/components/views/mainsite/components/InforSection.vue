@@ -28,11 +28,9 @@
                 >
             </div>
             <div class="mb-2 flex">
-                <el-icon class="mr-2">
-                    <CameraFilled />
-                </el-icon>
-                <img src="./../assets/twitter.svg" class="w-4 h-4 mr-2" />
-                <img src="./../assets/facebook.svg" class="w-4 h-4 mr-2" />
+                <v-icon icon="mdi-camera"></v-icon>
+                <v-icon icon="mdi-facebook"></v-icon
+                ><v-icon icon="mdi-twitter"></v-icon>
             </div>
         </div>
         <div class="flex flex-col justify-start">

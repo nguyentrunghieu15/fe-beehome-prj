@@ -96,7 +96,8 @@ const router = createRouter({
 });
 
 function isLogin(): boolean {
-    return true;
+    if (sessionStorage.getItem("ACCESS_TOKEN")) return true;
+    return false;
 }
 
 router.beforeEach((to, from) => {

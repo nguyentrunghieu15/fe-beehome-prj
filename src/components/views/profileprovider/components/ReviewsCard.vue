@@ -22,7 +22,7 @@
                     </v-icon>
                     <ProgressBar
                         color="bg-blue-500"
-                        :progress="1"
+                        :progress="75"
                     ></ProgressBar>
                     <span>75%</span>
                 </div>

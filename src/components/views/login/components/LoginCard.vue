@@ -40,14 +40,18 @@
 import InputField from "@/components/base/InputField.vue";
 import useForm from "../form/loginForm";
 import { onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 const form = useForm();
+const router = useRouter();
 
 onMounted(() => {
     form.resetForm();
 });
 
 const submit = () => {
-    form.onSubmit();
+    form.onSubmit().then(() => {
+        router.push({ name: "main" });
+    });
 };
 </script>
