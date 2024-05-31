@@ -8,7 +8,7 @@ import type {
     Pagination,
     Sort,
 } from "./interfaces";
-import { ErrorInterceptor } from "./interceptor";
+import { AuthInterceptor, ErrorInterceptor } from "./interceptor";
 
 export class UserService extends BaseService {
     constructor(baseURL: string) {
@@ -67,5 +67,6 @@ export class UserService extends BaseService {
 
 const userService = new UserService("http://localhost:3000/api/v1");
 userService.addInterceptor("error", new ErrorInterceptor());
+userService.addInterceptor("auth", new AuthInterceptor());
 
 export default userService;
