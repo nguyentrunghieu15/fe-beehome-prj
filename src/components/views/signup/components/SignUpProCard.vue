@@ -4,28 +4,28 @@
             <InputField
                 :is-required="true"
                 label="Name:"
-                v-model:model-value="form.firstName.value"
+                v-model:model-value="form.name.value"
                 type="text"
                 class="mb-6"
-                :errors="form.errors.value.firstName"
+                :errors="form.errors.value.name"
             ></InputField>
             <InputField
                 :is-required="true"
                 label="Year:"
-                v-model:model-value="form.lastName.value"
+                v-model:model-value="form.year.value"
                 type="number"
                 class="mb-6"
-                :errors="form.errors.value.lastName"
+                :errors="form.errors.value.year"
             ></InputField>
         </div>
         <div>
             <InputField
                 :is-required="true"
                 label="Postal Code:"
-                v-model:model-value="form.email.value"
+                v-model:model-value="form.postalCode.value"
                 type="text"
                 class="mb-6 w-24"
-                :errors="form.errors.value.email"
+                :errors="form.errors.value.postalCode"
             ></InputField>
         </div>
         <div>
@@ -34,9 +34,9 @@
                 :cols="3"
                 :is-required="true"
                 label="Introduction"
-                v-model:model-value="form.password.value"
+                v-model:model-value="form.introduction.value"
                 class="mb-6"
-                :errors="form.errors.value.password"
+                :errors="form.errors.value.introduction"
             ></AreaTextField>
         </div>
         <div class="mb-6 text-slate-500">
@@ -75,14 +75,11 @@ onMounted(() => {
     form.resetForm();
 });
 
-const submit = () => {
-    form.onSubmit().then(() => {
-        mainStore.showNofitication({
-            content: "Sign up success",
-            title: "Success",
-            typeNotification: "infor",
+const submit = async () => {
+    if ((await form.validate()).valid) {
+        form.onSubmit().then(() => {
+            router.push({ name: "main" });
         });
-        router.push({ name: "main" });
-    });
+    }
 };
 </script>

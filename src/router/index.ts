@@ -14,8 +14,13 @@ import AccountSettings from "@/components/views/profile/components/AccountSettin
 import { NavigationComponent, useMainStore } from "@/stores/mainStore";
 import DeleteAccount from "@/components/views/profile/components/DeleteAccount.vue";
 import InstantResults from "@/components/views/instant-results/InstantResults.vue";
-import ProfileProvider from "@/components/views/profileprovider/ProfileProvider.vue";
 import SignUpProvider from "@/components/views/signup/SignUpProvider.vue";
+import ProviderProject from "@/components/views/provider/ProviderProject.vue";
+import ViewProvider from "@/components/views/reviews-pro/ViewProvider.vue";
+
+import ProProfilePage from "@/components/views/provider/ProProfilePage.vue";
+import ProProfile from "@/components/views/provider/components/ProProfile.vue";
+import ProviderSettings from "@/components/views/provider/components/ProviderSettings.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -28,7 +33,7 @@ const routes: RouteRecordRaw[] = [
                 name: "main",
             },
             {
-                path: "/login",
+                path: "login",
                 component: Login,
                 name: "login",
                 meta: {
@@ -36,7 +41,7 @@ const routes: RouteRecordRaw[] = [
                 },
             },
             {
-                path: "/signup",
+                path: "signup",
                 component: SignUp,
                 name: "signup",
                 meta: {
@@ -44,7 +49,7 @@ const routes: RouteRecordRaw[] = [
                 },
             },
             {
-                path: "/profile",
+                path: "profile",
                 component: ProfilePage,
                 children: [
                     {
@@ -56,7 +61,7 @@ const routes: RouteRecordRaw[] = [
                         },
                     },
                     {
-                        path: "/account-settings",
+                        path: "account-settings",
                         component: AccountSettings,
                         name: "account-settings",
                         meta: {
@@ -65,7 +70,7 @@ const routes: RouteRecordRaw[] = [
                         },
                     },
                     {
-                        path: "/delete-account",
+                        path: "delete-account",
                         component: DeleteAccount,
                         name: "delete-account",
                         meta: {
@@ -76,19 +81,26 @@ const routes: RouteRecordRaw[] = [
                 ],
             },
             {
-                path: "/view-results",
+                path: "view-results",
                 component: InstantResults,
                 name: "view-results",
+                meta: {
+                    nav: NavigationComponent.SEARCH_NAV,
+                },
             },
             {
-                path: "/pro-profile",
-                component: ProfileProvider,
-                name: "pro-provider",
+                path: "view-pro",
+                component: ViewProvider,
+                name: "view-pro",
             },
             {
-                path: "/signup-pro",
+                path: "signup-pro",
                 component: SignUpProvider,
                 name: "signup-pro",
+                meta: {
+                    nav: NavigationComponent.SEARCH_NAV,
+                    requiredAuth: true,
+                },
             },
         ],
     },
@@ -96,6 +108,45 @@ const routes: RouteRecordRaw[] = [
         path: "/error",
         component: Page404,
         name: "error",
+    },
+    {
+        path: "/pro",
+        component: MainLayout,
+        children: [
+            {
+                path: "",
+                component: ProviderProject,
+                name: "project-pro",
+                meta: {
+                    requiredAuth: true,
+                    nav: NavigationComponent.PROVIDER_NAV,
+                },
+            },
+            {
+                path: "profile",
+                component: ProProfilePage,
+                children: [
+                    {
+                        path: "",
+                        component: ProProfile,
+                        name: "profile-pro",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.PROVIDER_NAV,
+                        },
+                    },
+                    {
+                        path: "/provider-settings",
+                        component: ProviderSettings,
+                        name: "provider-settings",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.PROVIDER_NAV,
+                        },
+                    },
+                ],
+            },
+        ],
     },
 ];
 

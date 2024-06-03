@@ -28,23 +28,24 @@
             </v-btn>
         </div>
         <div class="flex items-center px-4 h-full z-20">
-            <RouterLink
-                :to="{ name: 'error' }"
+            <button
+                @click="onClickAsPro"
                 class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer shrink-0"
-                >Sign up as a pro</RouterLink
             >
+                {{ provider ? "Join up as a pro" : "Sign up as a pro" }}
+            </button>
         </div>
         <a
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
             >Project</a
         >
         <RouterLink
-            :to="{ name: 'signup' }"
+            :to="{ name: 'error' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
             >Team</RouterLink
         >
         <RouterLink
-            :to="{ name: 'login' }"
+            :to="{ name: 'error' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
             >Inbox</RouterLink
         >
@@ -65,6 +66,7 @@ import { useRouter } from "vue-router";
 import DropdownAvatar from "@/components/base/DropdownAvatar.vue";
 import { computed, onMounted, ref } from "vue";
 import { useUserStore } from "@/stores/userStore";
+import { useProviderStore } from "@/stores/providerStore";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -75,19 +77,29 @@ const returnHome = () => {
 const logout = () => {
     // Do something before return home
     sessionStorage.clear();
-    router.go(0)
+    router.go(0);
 };
 const user = userStore.userComputed;
 const initialsAvatar = computed(() => {
     if (
-        user.value?.firstName.charAt(0).toUpperCase() &&
-        user.value?.lastName.charAt(0).toUpperCase()
+        user.value?.firstName?.charAt(0)?.toUpperCase() &&
+        user.value?.lastName?.charAt(0)?.toUpperCase()
     ) {
         return (
-            user.value?.firstName.charAt(0).toUpperCase() +
-            user.value?.lastName.charAt(0).toUpperCase()
+            user.value?.firstName?.charAt(0)?.toUpperCase() +
+            user.value?.lastName?.charAt(0)?.toUpperCase()
         );
     }
     return "";
 });
+
+const providerStore = useProviderStore();
+const provider = providerStore.providerComputed;
+
+function onClickAsPro() {
+    if (provider.value) {
+    } else {
+        router.push({ name: "signup-pro" });
+    }
+}
 </script>

@@ -5,6 +5,7 @@ export enum NavigationComponent {
     VISIT_NAV,
     MAIN_NAV,
     SEARCH_NAV,
+    PROVIDER_NAV,
 }
 
 export interface Nofitication {

@@ -19,9 +19,9 @@ import ImageCard from "./components/ImageCard.vue";
 import FindCustomerCard from "./components/FindCustomerCard.vue";
 import InforSection from "./components/InforSection.vue";
 import Footer from "@/components/base/Footer.vue";
-import { ref } from "vue";
+import { shallowRef } from "vue";
 
-const selectedComponent = ref(SearchProCard);
+const selectedComponent = shallowRef(SearchProCard);
 
 const setComponent = (name: string) => {
     switch (name) {

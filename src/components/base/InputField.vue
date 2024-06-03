@@ -36,5 +36,5 @@ const props = defineProps<{
     type?: InputTypeHTMLAttribute | "text";
 }>();
 
-const modelValue = defineModel({ type: String });
+const modelValue = defineModel();
 </script>

@@ -1,54 +1,56 @@
 import authService from "@/api/auth";
+import providerService from "@/api/provider";
+import type { SignUpProRequest } from "@/api/provider/interfaces";
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 
 export default function () {
     const schema = yup.object({
-        firstName: yup.string().required("First name is required"),
-        lastName: yup.string().required("Last name is required"),
-        email: yup
-            .string()
-            .email("Invalid email format")
-            .required("Email is required"),
-        password: yup
-            .string()
-            .min(8, "Password must be at least 8 characters")
-            .required("Password is required"),
+        name: yup.string().required("Name is required"),
+        year: yup
+            .number()
+            .positive("Years of experience must be positive")
+            .required("Years of experience is required"),
+        postalCode: yup.string().required("Postal code is required"),
+        introduction: yup.string().required("Introduction is required"),
     });
 
-    const { handleSubmit, errors, isValidating, defineField, resetForm } =
-        useForm({
-            validationSchema: schema,
-        });
+    const {
+        handleSubmit,
+        errors,
+        isValidating,
+        defineField,
+        resetForm,
+        setFieldValue,
+        validate,
+    } = useForm({
+        validationSchema: schema,
+    });
 
     const onSubmit = handleSubmit(async (data) => {
         // Handle form submission logic here (e.g., sending signup data to server)
-        return authService.signup({
-            email: data["email"],
-            password: data["password"],
-            firstName: data["firstName"],
-            lastName: data["lastName"],
-            phone: data["phone"],
-        });
+        return providerService.signUpAsPro(data as SignUpProRequest);
     });
 
-    const [firstName, firstNameAttrs] = defineField("firstName");
-    const [lastName, lastNameAttrs] = defineField("lastName");
-    const [email, emailAttrs] = defineField("email");
-    const [password, passwordAttrs] = defineField("password");
+    const [name, nameAttrs] = defineField("name");
+    const [year, yearAttrs] = defineField("year");
+    const [postalCode, postalCodeAttrs] = defineField("postalCode");
+    const [introduction, introductionAttrs] = defineField("introduction");
 
     return {
         onSubmit,
-        firstName,
-        firstNameAttrs,
-        lastName,
-        lastNameAttrs,
-        email,
-        emailAttrs,
-        password,
-        passwordAttrs,
+        name,
+        nameAttrs,
+        year,
+        yearAttrs,
+        postalCode,
+        postalCodeAttrs,
+        introduction,
+        introductionAttrs,
         errors,
         isValidating,
         resetForm,
+        setFieldValue,
+        validate,
     };
 }

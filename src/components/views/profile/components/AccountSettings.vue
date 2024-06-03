@@ -101,7 +101,7 @@ onMounted(() => {
 function submit() {
     updateForm.onSubmit().then((ok) => {
         if (ok != undefined) {
-            userStore.updateUser().then(() => {
+            userStore.fetchUser().then(() => {
                 setFormValue();
             });
         }

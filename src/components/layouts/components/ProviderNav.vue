@@ -15,29 +15,29 @@
         </div>
         <div class="flex items-center px-4 h-full z-20">
             <button
-                @click="onClickAsPro"
+                @click="onClickAsCustomer"
                 class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer shrink-0"
             >
-                {{ provider ? "Join up as a pro" : "Sign up as a pro" }}
+                Join as customers
             </button>
         </div>
         <a
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Project</a
-        >
-        <RouterLink
-            :to="{ name: 'error' }"
-            class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Team</RouterLink
+            >Schedule</a
         >
         <RouterLink
             :to="{ name: 'error' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
             >Inbox</RouterLink
         >
+        <RouterLink
+            :to="{ name: 'project-pro' }"
+            class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
+            >Project</RouterLink
+        >
         <DropdownAvatar class="mr-4" avatar-url="" :initials="initialsAvatar">
             <RouterLink
-                :to="{ path: '/profile' }"
+                :to="{ name: 'profile-pro' }"
                 class="block px-4 py-2 hover:bg-gray-100"
                 >Profile</RouterLink
             >
@@ -82,7 +82,7 @@ const initialsAvatar = computed(() => {
 const providerStore = useProviderStore();
 const provider = providerStore.providerComputed;
 
-function onClickAsPro() {
+function onClickAsCustomer() {
     if (provider.value) {
     } else {
         router.push({ name: "signup-pro" });

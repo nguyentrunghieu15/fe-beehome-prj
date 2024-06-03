@@ -5,17 +5,17 @@ import { computed, ref } from "vue";
 
 export const useUserStore = defineStore("user", () => {
     const user = ref<UserInfor>();
+    const needFetchUser = ref<Boolean>(true);
 
     const userComputed = computed(() => {
-        if (!user.value) {
-            profileService.getProfile().then((data) => {
-                setUser(data);
-            });
+        if (needFetchUser.value) {
+            fetchUser();
+            needFetchUser.value = false;
         }
         return user;
     });
 
-    function updateUser() {
+    function fetchUser() {
         return profileService.getProfile().then((data) => {
             setUser(data);
         });
@@ -28,6 +28,6 @@ export const useUserStore = defineStore("user", () => {
     return {
         setUser,
         userComputed,
-        updateUser,
+        fetchUser,
     };
 });
