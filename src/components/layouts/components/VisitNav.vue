@@ -1,21 +1,16 @@
 <template>
     <div class="md:flex items-center h-full z-20">
-        <div class="flex shrink grow" @click="returnHome">
+        <div class="flex shrink grow">
             <img
+                @click="returnHome"
                 src="@/assets/icon.png"
                 alt="Image description"
                 class="w-16 h-16 hover:cursor-pointer"
             />
             <span
+                @click="returnHome"
                 class="flex items-center text-sky-500 font-semibold text-2xl hover:cursor-pointer"
                 >Bee Home</span
-            >
-        </div>
-        <div class="flex items-center px-4 h-full z-20">
-            <RouterLink
-                :to="{ name: 'error' }"
-                class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer"
-                >Join as a pro</RouterLink
             >
         </div>
         <a

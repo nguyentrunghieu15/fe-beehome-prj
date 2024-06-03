@@ -9,8 +9,9 @@ export interface UserInfor {
     deletedAt: string;
     email: string;
     phone: string;
-    name: string;
     status: string;
+    firstName: string;
+    lastName: string;
 }
 
 export interface AddCardRequest {

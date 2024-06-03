@@ -14,7 +14,7 @@
         <div class="flex items-center px-4 h-full z-20">
             <RouterLink
                 :to="{ name: 'error' }"
-                class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer"
+                class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer shrink-0"
                 >Sign up as a pro</RouterLink
             >
         </div>
@@ -32,7 +32,7 @@
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
             >Inbox</RouterLink
         >
-        <DropdownAvatar class="mr-4" avatar-url="" initials="JM">
+        <DropdownAvatar class="mr-4" avatar-url="" :initials="initialsAvatar">
             <RouterLink
                 :to="{ path: '/profile' }"
                 class="block px-4 py-2 hover:bg-gray-100"
@@ -47,14 +47,37 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import DropdownAvatar from "@/components/base/DropdownAvatar.vue";
+import { useUserStore } from "@/stores/userStore";
+import { computed } from "vue";
 
 const router = useRouter();
 const returnHome = () => {
-    router.push({ path: "/" });
+    if (router.currentRoute.value.name === "main") {
+        router.go(0);
+        return;
+    }
+    router.push({ name: "main" });
 };
 
 const logout = () => {
+    sessionStorage.clear();
     // Do something before return home
-    returnHome();
+    router.go(0);
 };
+
+const userStore = useUserStore();
+
+const user = userStore.userComputed;
+const initialsAvatar = computed(() => {
+    if (
+        user.value?.firstName.charAt(0).toUpperCase() &&
+        user.value?.lastName.charAt(0).toUpperCase()
+    ) {
+        return (
+            user.value?.firstName.charAt(0).toUpperCase() +
+            user.value?.lastName.charAt(0).toUpperCase()
+        );
+    }
+    return "";
+});
 </script>

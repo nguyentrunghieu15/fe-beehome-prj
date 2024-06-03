@@ -27,12 +27,16 @@
                     >find customers</v-btn
                 >
             </div>
-            <div>
+            <div class="flex">
                 <v-text-field
                     placeholder="What's on to-do list?"
-                    append-icon="mdi-magnify"
                     variant="solo"
                 >
+                </v-text-field>
+                <v-text-field placeholder="Zipcode" variant="solo" :width="1">
+                    <template v-slot:append>
+                        <v-icon icon="mdi-magnify"></v-icon>
+                    </template>
                 </v-text-field>
             </div>
             <p class="text-slate-400">

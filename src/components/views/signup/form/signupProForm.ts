@@ -1,5 +1,4 @@
-import userService from "@/api/user";
-import { useUserStore } from "@/stores/userStore";
+import authService from "@/api/auth";
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 
@@ -7,28 +6,26 @@ export default function () {
     const schema = yup.object({
         firstName: yup.string().required("First name is required"),
         lastName: yup.string().required("Last name is required"),
-        phone: yup
+        email: yup
             .string()
-            .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits")
-            .required("Phone number is required"),
-        // timeZone: yup.string().required("Time zone is required"),
+            .email("Invalid email format")
+            .required("Email is required"),
+        password: yup
+            .string()
+            .min(8, "Password must be at least 8 characters")
+            .required("Password is required"),
     });
 
-    const {
-        handleSubmit,
-        errors,
-        isValidating,
-        setFieldValue,
-        defineField,
-        resetForm,
-    } = useForm({
-        validationSchema: schema,
-    });
+    const { handleSubmit, errors, isValidating, defineField, resetForm } =
+        useForm({
+            validationSchema: schema,
+        });
 
     const onSubmit = handleSubmit(async (data) => {
-        const userStore = useUserStore();
         // Handle form submission logic here (e.g., sending signup data to server)
-        return userService.updateUser(userStore.userComputed.value?.id || "", {
+        return authService.signup({
+            email: data["email"],
+            password: data["password"],
             firstName: data["firstName"],
             lastName: data["lastName"],
             phone: data["phone"],
@@ -37,8 +34,8 @@ export default function () {
 
     const [firstName, firstNameAttrs] = defineField("firstName");
     const [lastName, lastNameAttrs] = defineField("lastName");
-    const [phone, phoneAttrs] = defineField("phone");
-    const [timeZone, timeZoneAttrs] = defineField("timeZone");
+    const [email, emailAttrs] = defineField("email");
+    const [password, passwordAttrs] = defineField("password");
 
     return {
         onSubmit,
@@ -46,13 +43,12 @@ export default function () {
         firstNameAttrs,
         lastName,
         lastNameAttrs,
-        phone,
-        phoneAttrs,
-        timeZone,
-        timeZoneAttrs,
+        email,
+        emailAttrs,
+        password,
+        passwordAttrs,
         errors,
         isValidating,
         resetForm,
-        setFieldValue,
     };
 }

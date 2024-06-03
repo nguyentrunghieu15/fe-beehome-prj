@@ -37,6 +37,7 @@
                 label="Email:"
                 type="text"
                 class="mb-6"
+                :model-value="user?.email"
                 :is-disable="true"
             ></InputField>
             <InputField
@@ -51,10 +52,11 @@
             <InputField
                 :is-required="false"
                 label="Timezone:"
-                v-model:model-value="updateForm.phone.value"
+                model-value="UTC +7.00"
                 type="text"
                 class="mb-6 w-1/2"
-                :errors="updateForm.errors.value.phone"
+                :errors="updateForm.errors.value.timeZone"
+                :is-disable="true"
             ></InputField>
             <div class="flex justify-end">
                 <button
@@ -77,15 +79,32 @@
 import InputField from "@/components/base/InputField.vue";
 import { onMounted } from "vue";
 import useUpdateForm from "../form/updateForm";
-import router from "@/router";
+import { useUserStore } from "@/stores/userStore";
+import { useRouter } from "vue-router";
 
 const updateForm = useUpdateForm();
+const userStore = useUserStore();
+const user = userStore.userComputed;
+const router = useRouter();
+
+function setFormValue() {
+    updateForm.setFieldValue("firstName", user.value?.firstName);
+    updateForm.setFieldValue("lastName", user.value?.lastName);
+    updateForm.setFieldValue("phone", user.value?.phone);
+}
 
 onMounted(() => {
     updateForm.resetForm();
+    setFormValue();
 });
 
 function submit() {
-    updateForm.onSubmit();
+    updateForm.onSubmit().then((ok) => {
+        if (ok != undefined) {
+            userStore.updateUser().then(() => {
+                setFormValue();
+            });
+        }
+    });
 }
 </script>

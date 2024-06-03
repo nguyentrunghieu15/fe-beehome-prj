@@ -30,9 +30,10 @@ export class AuthInterceptor implements IInterceptorConfig {
     ): InternalAxiosRequestConfig {
         // Check if the access token is available before adding the header
         const accessToken = sessionStorage.getItem("ACCESS_TOKEN");
+        const typeToken = sessionStorage.getItem("TYPE_TOKEN");
         if (accessToken) {
             config.headers = config.headers || {}; // Ensure headers exist
-            config.headers.Authorization = `Bearer ${accessToken}`;
+            config.headers.Authorization = `${typeToken} ${accessToken}`;
         }
         return config;
     }

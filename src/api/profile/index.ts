@@ -6,6 +6,7 @@ import type {
     ChangeEmailRequest,
     ChangeNameRequest,
 } from "./interfaces";
+import { AuthInterceptor, ErrorInterceptor } from "../user/interceptor";
 
 export class ProfileService extends BaseService {
     constructor(baseURL: string) {
@@ -38,9 +39,16 @@ export class ProfileService extends BaseService {
         );
         return response.data;
     }
+
+    public async deactiveAccount(): Promise<void> {
+        const response = await this.axiosInstance.delete<void>("");
+        return response.data;
+    }
 }
 
 const profileService = new ProfileService(
     "http://localhost:3000/api/v1/profile"
 );
+profileService.addInterceptor("error", new ErrorInterceptor());
+profileService.addInterceptor("auth", new AuthInterceptor());
 export default profileService;

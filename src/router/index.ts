@@ -15,6 +15,7 @@ import { NavigationComponent, useMainStore } from "@/stores/mainStore";
 import DeleteAccount from "@/components/views/profile/components/DeleteAccount.vue";
 import InstantResults from "@/components/views/instant-results/InstantResults.vue";
 import ProfileProvider from "@/components/views/profileprovider/ProfileProvider.vue";
+import SignUpProvider from "@/components/views/signup/SignUpProvider.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -51,6 +52,7 @@ const routes: RouteRecordRaw[] = [
                         component: ProfileInfor,
                         meta: {
                             nav: NavigationComponent.SEARCH_NAV,
+                            requiredAuth: true,
                         },
                     },
                     {
@@ -59,6 +61,7 @@ const routes: RouteRecordRaw[] = [
                         name: "account-settings",
                         meta: {
                             nav: NavigationComponent.MAIN_NAV,
+                            requiredAuth: true,
                         },
                     },
                     {
@@ -67,6 +70,7 @@ const routes: RouteRecordRaw[] = [
                         name: "delete-account",
                         meta: {
                             nav: NavigationComponent.MAIN_NAV,
+                            requiredAuth: true,
                         },
                     },
                 ],
@@ -80,6 +84,11 @@ const routes: RouteRecordRaw[] = [
                 path: "/pro-profile",
                 component: ProfileProvider,
                 name: "pro-provider",
+            },
+            {
+                path: "/signup-pro",
+                component: SignUpProvider,
+                name: "signup-pro",
             },
         ],
     },
@@ -102,6 +111,9 @@ function isLogin(): boolean {
 
 router.beforeEach((to, from) => {
     // instead of having to check every route record with
+    if (to.meta?.requiredAuth && !isLogin()) {
+        return { name: "main" };
+    }
     // to.matched.some(record => record.meta.requiresAuth)
     const mainStore = useMainStore();
     if (to.meta?.nav !== undefined) {

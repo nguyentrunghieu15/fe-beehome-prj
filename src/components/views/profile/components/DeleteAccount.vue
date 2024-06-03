@@ -53,7 +53,8 @@
                     v-model="isComfirm"
                 />
                 <span class="text-black"
-                    >I confirm I want to deactivate Hiro Nguyen's account</span
+                    >I confirm I want to deactivate {{ user?.firstName }}
+                    {{ user?.lastName }}'s account</span
                 >
             </div>
             <div class="flex">
@@ -76,11 +77,21 @@
     </div>
 </template>
 <script setup lang="ts">
+import profileService from "@/api/profile";
 import InputField from "@/components/base/InputField.vue";
+import { useUserStore } from "@/stores/userStore";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const userStore = useUserStore();
+const user = userStore.userComputed;
+const router = useRouter();
 
 const isComfirm = ref<boolean>(true);
 const onClick = () => {
-    console.log("YES");
+    profileService.deactiveAccount().then(() => {
+        sessionStorage.clear();
+        router.go(0);
+    });
 };
 </script>
