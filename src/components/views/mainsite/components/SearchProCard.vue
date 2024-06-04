@@ -31,13 +31,16 @@
                 <v-text-field
                     placeholder="What's on to-do list?"
                     variant="solo"
-                >
-                </v-text-field>
-                <v-text-field placeholder="Zipcode" variant="solo" :width="1">
-                    <template v-slot:append>
-                        <v-icon icon="mdi-magnify"></v-icon>
-                    </template>
-                </v-text-field>
+                />
+                <div class="w-24">
+                    <v-text-field placeholder="Zipcode" variant="solo" />
+                </div>
+                <v-btn
+                    size="large"
+                    :rounded="false"
+                    icon="mdi-magnify"
+                    color="blue-lighten-1"
+                />
             </div>
             <p class="text-slate-400">
                 <span class="">Try searching for a </span>

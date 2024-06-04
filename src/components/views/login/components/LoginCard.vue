@@ -41,6 +41,7 @@ import InputField from "@/components/base/InputField.vue";
 import useForm from "../form/loginForm";
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
+import providerService from "@/api/provider";
 
 const form = useForm();
 const router = useRouter();
@@ -50,7 +51,10 @@ onMounted(() => {
 });
 
 const submit = () => {
-    form.onSubmit().then(() => {
+    form.onSubmit().then(async () => {
+        try {
+            await providerService.joinAsProvider();
+        } catch (error) {}
         router.push({ name: "main" });
     });
 };

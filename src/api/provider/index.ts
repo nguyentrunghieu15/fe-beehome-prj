@@ -12,8 +12,14 @@ import type {
     SignUpProRequest,
     FindProByIdResponse,
     ProServiceUpdateProBody,
+    ProviderProfileResponse,
 } from "./interfaces";
-import { AuthInterceptor, ErrorInterceptor } from "../user/interceptor";
+import { AuthInterceptor } from "../user/interceptor";
+import {
+    AuthProviderInterceptor,
+    ErrorInterceptor,
+    JoinAsProviderInterceptor,
+} from "./interceptors";
 
 export class ProviderService extends BaseService {
     constructor(baseURL: string) {
@@ -43,8 +49,8 @@ export class ProviderService extends BaseService {
     }
 
     public async joinAsProvider(): Promise<JoinAsProviderResponse> {
-        const response = await this.axiosInstance.get<JoinAsProviderResponse>(
-            "/join/user"
+        const response = await this.axiosInstance.post<JoinAsProviderResponse>(
+            ""
         );
         return response.data;
     }
@@ -85,17 +91,30 @@ export class ProviderService extends BaseService {
         body: ProServiceUpdateProBody
     ): Promise<ProviderInfo> {
         const response = await this.axiosInstance.put<ProviderInfo>(
-            `/api/v1/providers/${id}`,
+            `/${id}`,
             body
+        );
+        return response.data;
+    }
+
+    // New method to get provider profile of user logged in
+    public async getProviderProfile(): Promise<ProviderProfileResponse> {
+        const response = await this.axiosInstance.get<ProviderProfileResponse>(
+            "/owner/profile"
         );
         return response.data;
     }
 }
 
 const providerService = new ProviderService(
-    "http://localhost:3000/api/v1/providers"
+    "http://localhost:3003/api/v1/providers"
 );
 
 providerService.addInterceptor("auth", new AuthInterceptor());
 providerService.addInterceptor("error", new ErrorInterceptor());
+providerService.addInterceptor("auth-provider", new AuthProviderInterceptor());
+providerService.addInterceptor(
+    "join-provider",
+    new JoinAsProviderInterceptor()
+);
 export default providerService;

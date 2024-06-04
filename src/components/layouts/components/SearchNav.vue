@@ -32,7 +32,7 @@
                 @click="onClickAsPro"
                 class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer shrink-0"
             >
-                {{ provider ? "Join up as a pro" : "Sign up as a pro" }}
+                {{ isProvider ? "Join up as a pro" : "Sign up as a pro" }}
             </button>
         </div>
         <a
@@ -93,13 +93,17 @@ const initialsAvatar = computed(() => {
     return "";
 });
 
-const providerStore = useProviderStore();
-const provider = providerStore.providerComputed;
+const isProvider = ref(false);
 
 function onClickAsPro() {
-    if (provider.value) {
+    if (sessionStorage.getItem("PROVIDER_TOKEN")) {
+        router.push({ name: "project-pro" });
     } else {
         router.push({ name: "signup-pro" });
     }
 }
+
+onMounted(() => {
+    isProvider.value = sessionStorage.getItem("PROVIDER_TOKEN") !== null;
+});
 </script>

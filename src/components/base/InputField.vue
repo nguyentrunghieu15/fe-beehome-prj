@@ -37,4 +37,7 @@ const props = defineProps<{
 }>();
 
 const modelValue = defineModel();
+const emit = defineEmits<{
+    enter: [];
+}>();
 </script>

@@ -28,7 +28,6 @@
                 rounded="0"
                 size="x-large"
                 block
-                @click="$router.push({ name: 'delete-account' })"
                 >Deactive Provider</v-btn
             >
         </div>

@@ -9,7 +9,7 @@
         <button class="bg-sky-500 text-white font-bold px-6 py-2 rounded mb-4">
             Upload Photo
         </button>
-        <p class="text-slate-600">it's just Stuff!</p>
+        <p class="text-slate-600">{{ provider?.name }}</p>
         <div class="grid grid-cols-2 divide-x">
             <div class="p-3 flex flex-column items-center">
                 <p class="text-xl font-bold">0</p>
@@ -24,6 +24,7 @@
 </template>
 <script setup lang="ts">
 import Avatar from "@/components/base/Avatar.vue";
+import { useProviderStore } from "@/stores/providerStore";
 import { useUserStore } from "@/stores/userStore";
 import { computed } from "vue";
 
@@ -42,4 +43,7 @@ const initialsAvatar = computed(() => {
     }
     return "";
 });
+
+const providerStore = useProviderStore();
+const provider = providerStore.providerComputed;
 </script>

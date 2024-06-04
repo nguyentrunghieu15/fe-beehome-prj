@@ -71,8 +71,12 @@ export interface FindProByIdResponse {
 }
 
 export interface ProServiceUpdateProBody {
-    name: string;
-    introduction: string;
-    years: number;
-    postalCode: string;
+    name?: string;
+    introduction?: string;
+    years?: number;
+    postalCode?: string;
+}
+
+export interface ProviderProfileResponse {
+    provider: ProviderInfo;
 }

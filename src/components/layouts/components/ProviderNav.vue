@@ -50,9 +50,8 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import DropdownAvatar from "@/components/base/DropdownAvatar.vue";
-import { computed, onMounted, ref } from "vue";
+import { computed } from "vue";
 import { useUserStore } from "@/stores/userStore";
-import { useProviderStore } from "@/stores/providerStore";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -79,13 +78,7 @@ const initialsAvatar = computed(() => {
     return "";
 });
 
-const providerStore = useProviderStore();
-const provider = providerStore.providerComputed;
-
 function onClickAsCustomer() {
-    if (provider.value) {
-    } else {
-        router.push({ name: "signup-pro" });
-    }
+    router.push({ name: "main" });
 }
 </script>
