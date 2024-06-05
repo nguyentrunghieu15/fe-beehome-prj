@@ -21,9 +21,10 @@
                 {{ isProvider ? "Join as a pro" : "Sign up as a pro" }}
             </button>
         </div>
-        <a
+        <RouterLink
+            :to="{ name: 'cus-project' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Project</a
+            >Project</RouterLink
         >
         <RouterLink
             :to="{ name: 'error' }"

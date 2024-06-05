@@ -33,7 +33,7 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 const curentNavItem = ref(0);
-const navItems = ref(["Request", "Started", "Finished", "Reviews"]);
+const navItems = ref(["Pendding", "Started", "Finished", "Reviews"]);
 const router = useRouter();
 
 function onClickNavItem(idx: number) {
@@ -41,16 +41,16 @@ function onClickNavItem(idx: number) {
     curentNavItem.value = idx;
     switch (idx) {
         case 0:
-            router.push({ name: "pro-request" });
+            router.push({ name: "cus-pendding" });
             break;
         case 1:
-            router.push({ name: "pro-started" });
+            router.push({ name: "cus-started" });
             break;
         case 2:
-            router.push({ name: "pro-finished" });
+            router.push({ name: "cus-finished" });
             break;
         case 3:
-            router.push({ name: "pro-reviews" });
+            router.push({ name: "cus-reviews" });
             break;
         default:
             break;

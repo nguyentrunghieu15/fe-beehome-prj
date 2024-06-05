@@ -21,6 +21,15 @@ import ViewProvider from "@/components/views/reviews-pro/ViewProvider.vue";
 import ProProfilePage from "@/components/views/provider/ProProfilePage.vue";
 import ProProfile from "@/components/views/provider/components/ProProfile.vue";
 import ProviderSettings from "@/components/views/provider/components/ProviderSettings.vue";
+import RequestProject from "@/components/views/provider/components/RequestProject.vue";
+import StartedProject from "@/components/views/provider/components/StartedProject.vue";
+import FinishedProject from "@/components/views/provider/components/FinishedProject.vue";
+import ReviewsProject from "@/components/views/provider/components/ReviewsProject.vue";
+import CustomerProject from "@/components/views/customer-project/CustomerProject.vue";
+import PenddingProjectCus from "@/components/views/customer-project/components/PenddingProjectCus.vue";
+import StartedProjectCus from "@/components/views/customer-project/components/StartedProjectCus.vue";
+import FinishedProjectCus from "@/components/views/customer-project/components/FinishedProjectCus.vue";
+import ReviewsProjectCus from "@/components/views/customer-project/components/ReviewsProjectCus.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -102,6 +111,53 @@ const routes: RouteRecordRaw[] = [
                     requiredAuth: true,
                 },
             },
+            {
+                path: "project",
+                component: CustomerProject,
+                children: [
+                    {
+                        path: "",
+                        redirect: { name: "cus-pendding" },
+                        name: "cus-project",
+                    },
+                    {
+                        path: "pendding",
+                        component: PenddingProjectCus,
+                        name: "cus-pendding",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.SEARCH_NAV,
+                        },
+                    },
+                    {
+                        path: "started",
+                        component: StartedProjectCus,
+                        name: "cus-started",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.SEARCH_NAV,
+                        },
+                    },
+                    {
+                        path: "finished",
+                        component: FinishedProjectCus,
+                        name: "cus-finished",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.SEARCH_NAV,
+                        },
+                    },
+                    {
+                        path: "reviews",
+                        component: ReviewsProjectCus,
+                        name: "cus-reviews",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.SEARCH_NAV,
+                        },
+                    },
+                ],
+            },
         ],
     },
     {
@@ -121,6 +177,48 @@ const routes: RouteRecordRaw[] = [
                     requiredAuth: true,
                     nav: NavigationComponent.PROVIDER_NAV,
                 },
+                children: [
+                    {
+                        path: "",
+                        redirect: { name: "pro-request" },
+                    },
+                    {
+                        path: "request",
+                        component: RequestProject,
+                        name: "pro-request",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.PROVIDER_NAV,
+                        },
+                    },
+                    {
+                        path: "started",
+                        component: StartedProject,
+                        name: "pro-started",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.PROVIDER_NAV,
+                        },
+                    },
+                    {
+                        path: "finished",
+                        component: FinishedProject,
+                        name: "pro-finished",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.PROVIDER_NAV,
+                        },
+                    },
+                    {
+                        path: "reviews",
+                        component: ReviewsProject,
+                        name: "pro-reviews",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.PROVIDER_NAV,
+                        },
+                    },
+                ],
             },
             {
                 path: "profile",

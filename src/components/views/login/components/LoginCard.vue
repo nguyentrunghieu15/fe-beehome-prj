@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[32rem] rounded-lg p-6 bg-white">
+    <div class="w-[32rem] rounded-lg p-6 bg-white border-2 drop-shadow-md">
         <InputField
             :is-required="true"
             label="Email:"
