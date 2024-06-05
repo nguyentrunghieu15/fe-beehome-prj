@@ -1,6 +1,5 @@
-import authService from "@/api/auth";
 import providerService from "@/api/provider";
-import type { SignUpProRequest } from "@/api/provider/interfaces";
+import type { ProServiceUpdateProBody } from "@/api/provider/interfaces";
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 
@@ -27,10 +26,15 @@ export default function () {
         validationSchema: schema,
     });
 
-    const onSubmit = handleSubmit(async (data) => {
-        // Handle form submission logic here (e.g., sending signup data to server)
-        return providerService.signUpAsPro(data as SignUpProRequest);
-    });
+    const onSubmit = (id: string) => {
+        return handleSubmit(async (data) => {
+            // Handle form submission logic here (e.g., sending signup data to server)
+            return providerService.updatePro(
+                id,
+                data as ProServiceUpdateProBody
+            );
+        })();
+    };
 
     const [name, nameAttrs] = defineField("name");
     const [years, yearsAttrs] = defineField("years");

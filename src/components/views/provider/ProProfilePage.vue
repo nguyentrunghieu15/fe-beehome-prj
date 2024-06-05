@@ -1,8 +1,11 @@
 <template>
     <div>
-        <Transition name="slide-fade">
-            <RouterView />
-        </Transition>
+        <router-view v-slot="{ Component }">
+            <transition name="slide-fade">
+                <component :is="Component" />
+            </transition>
+        </router-view>
+
         <InforSection></InforSection>
         <Footer></Footer>
     </div>

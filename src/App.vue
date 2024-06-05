@@ -1,15 +1,17 @@
 <template>
-    <RouterView />
-    <ul class="fixed top-16 right-0">
-        <li v-for="nofi in nofitications">
-            <NofiticationItem
-                :content="nofi?.content"
-                :title="nofi?.title"
-                :type-notification="nofi?.typeNotification"
-                class="my-2 mx-2"
-            ></NofiticationItem>
-        </li>
-    </ul>
+    <div>
+        <RouterView />
+        <ul class="fixed top-16 right-0">
+            <li v-for="nofi in nofitications">
+                <NofiticationItem
+                    :content="nofi?.content"
+                    :title="nofi?.title"
+                    :type-notification="nofi?.typeNotification"
+                    class="my-2 mx-2"
+                ></NofiticationItem>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script setup lang="ts">

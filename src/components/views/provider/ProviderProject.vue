@@ -1,1 +1,1 @@
-<template>ProjectProvider</template>
+<template><div>ProjectProvider</div></template>

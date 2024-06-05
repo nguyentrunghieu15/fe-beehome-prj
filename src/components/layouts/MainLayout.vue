@@ -1,10 +1,14 @@
 <template>
-    <nav class="h-16 border-b-[1px] border-b-slate-300">
-        <component :is="matchComponent"></component>
-    </nav>
-    <Transition name="slide-fade">
-        <RouterView />
-    </Transition>
+    <div>
+        <nav class="h-16 border-b-[1px] border-b-slate-300">
+            <component :is="matchComponent"></component>
+        </nav>
+        <router-view v-slot="{ Component }">
+            <transition name="slide-fade">
+                <component :is="Component" />
+            </transition>
+        </router-view>
+    </div>
 </template>
 
 <script setup lang="ts">

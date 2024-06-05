@@ -12,10 +12,10 @@
             <InputField
                 :is-required="true"
                 label="Year:"
-                v-model:model-value="form.year.value"
+                v-model:model-value="form.years.value"
                 type="number"
                 class="mb-6"
-                :errors="form.errors.value.year"
+                :errors="form.errors.value.years"
             ></InputField>
         </div>
         <div>
@@ -65,11 +65,10 @@ import InputField from "@/components/base/InputField.vue";
 import useForm from "../form/signupProForm";
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useMainStore } from "@/stores/mainStore";
+import providerService from "@/api/provider";
 
 const form = useForm();
 const router = useRouter();
-const mainStore = useMainStore();
 
 onMounted(() => {
     form.resetForm();
@@ -77,8 +76,11 @@ onMounted(() => {
 
 const submit = async () => {
     if ((await form.validate()).valid) {
-        form.onSubmit().then(() => {
-            router.push({ name: "main" });
+        form.onSubmit().then(async () => {
+            try {
+                await providerService.joinAsProvider();
+                router.push({ name: "main" });
+            } catch (error) {}
         });
     }
 };

@@ -1,3 +1,5 @@
+import type { Service } from "../service/interfaces";
+
 export interface FindProsResponse {
     providers: ProviderInfo[];
 }
@@ -33,10 +35,6 @@ export interface PostalCode {
 
 export interface AddPaymentMethodProRequest {
     name: string;
-}
-
-export interface AddServiceProRequest {
-    serviceId: string;
 }
 
 export interface AddSocialMediaProRequest {
@@ -79,4 +77,20 @@ export interface ProServiceUpdateProBody {
 
 export interface ProviderProfileResponse {
     provider: ProviderInfo;
+}
+
+export interface AddServiceForProRequest {
+    servicesId: string[];
+}
+
+export interface GetAllServiceOfProviderRequest {
+    id: string;
+}
+
+export interface GetAllServiceOfProviderResponse {
+    services: Service[];
+}
+
+export interface DeleteServiceForProRequest {
+    servicesId: string[];
 }

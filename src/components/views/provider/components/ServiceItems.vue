@@ -5,9 +5,9 @@
             @mouseenter="isHover = !isHover"
             @mouseleave="isHover = !isHover"
         >
-            <p class="mr-2 font-bold">{{ name }}</p>
+            <p class="font-bold px-1">{{ name }}</p>
             <div
-                class="hover:cursor-pointer hover:text-red-600"
+                class="hover:cursor-pointer hover:text-red-600 mx-1"
                 :class="{
                     hidden: !isHover,
                     block: isHover,

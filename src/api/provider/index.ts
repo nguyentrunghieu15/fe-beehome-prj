@@ -2,7 +2,6 @@
 import { BaseService } from "@/plugins/axios";
 import type {
     AddPaymentMethodProRequest,
-    AddServiceProRequest,
     AddSocialMediaProRequest,
     FindProsResponse,
     JoinAsProviderResponse,
@@ -13,6 +12,10 @@ import type {
     FindProByIdResponse,
     ProServiceUpdateProBody,
     ProviderProfileResponse,
+    AddServiceForProRequest,
+    GetAllServiceOfProviderRequest,
+    GetAllServiceOfProviderResponse,
+    DeleteServiceForProRequest,
 } from "./interfaces";
 import { AuthInterceptor } from "../user/interceptor";
 import {
@@ -31,14 +34,18 @@ export class ProviderService extends BaseService {
         return response.data;
     }
 
-    public async addPaymentMethodForPro(paymentMethodData: any): Promise<void> {
+    public async addPaymentMethodForPro(
+        paymentMethodData: AddPaymentMethodProRequest
+    ): Promise<void> {
         await this.axiosInstance.post<void>(
             "/add-payment-method",
             paymentMethodData
         );
     }
 
-    public async addServiceForPro(serviceData: any): Promise<void> {
+    public async addServiceForPro(
+        serviceData: AddServiceForProRequest
+    ): Promise<void> {
         await this.axiosInstance.post<void>("/add-service", serviceData);
     }
 
@@ -103,6 +110,22 @@ export class ProviderService extends BaseService {
             "/owner/profile"
         );
         return response.data;
+    }
+
+    public async getAllServicesOfProvider(
+        data: GetAllServiceOfProviderRequest
+    ): Promise<GetAllServiceOfProviderResponse> {
+        const response =
+            await this.axiosInstance.get<GetAllServiceOfProviderResponse>(
+                `/${data.id}/services`
+            );
+        return response.data;
+    }
+
+    public async deleteServiceForPro(
+        serviceData: DeleteServiceForProRequest
+    ): Promise<void> {
+        await this.axiosInstance.post<void>("/delete-service", serviceData);
     }
 }
 
