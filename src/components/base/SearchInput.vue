@@ -9,11 +9,11 @@
         <input
             type="text"
             v-model="term"
-            :class="{
-                'text-gray-400': props.isDisable,
-                'text-gray-900': !props.isDisable,
-            }"
-            class="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
+            :disabled="isDisable"
+            :class="[
+                props.isDisable ? 'text-gray-400' : 'text-gray-900',
+                props.customStyle ? customStyle : defaultStyle,
+            ]"
             :placeholder="props.placeholder"
             @input="onChangeInput"
             @keydown.up="navigateSuggestions('up')"
@@ -45,9 +45,14 @@ const props = defineProps<{
     label?: string;
     isRequired?: boolean;
     isDisable?: boolean;
+    customStyle?: string;
 }>();
 
-const term = ref("");
+const defaultStyle = ref(
+    "border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[10px]"
+);
+
+const term = defineModel<string>("value");
 const isShowSugesstion = ref(false);
 const emit = defineEmits<{
     changeTerm: [];
@@ -69,7 +74,7 @@ function onChangeInput() {
 
     if (term.value) {
         data = setTimeout(() => {
-            emit("submitTerm", term.value);
+            emit("submitTerm", term.value || "");
             isShowSugesstion.value = true;
         }, 500);
     }
@@ -102,10 +107,6 @@ function onEnterActiveSuggestion() {
     position: relative;
 }
 
-.search-input input {
-    padding: 10px;
-    width: 100%;
-}
 .suggestions {
     position: absolute;
     top: 100%;

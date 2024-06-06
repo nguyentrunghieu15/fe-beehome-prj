@@ -28,18 +28,28 @@
                 >
             </div>
             <div class="flex">
-                <v-text-field
-                    placeholder="What's on to-do list?"
+                <v-autocomplete
+                    base-color="white"
+                    item-title="name"
+                    item-value="name"
                     variant="solo"
-                />
+                    v-model="todo"
+                    :items="states"
+                    placeholder="What's on to-do list?"
+                ></v-autocomplete>
                 <div class="w-24">
-                    <v-text-field placeholder="Zipcode" variant="solo" />
+                    <v-text-field
+                        placeholder="Zipcode"
+                        variant="solo"
+                        v-model:model-value="zipcode"
+                    />
                 </div>
                 <v-btn
                     size="large"
                     :rounded="false"
                     icon="mdi-magnify"
                     color="blue-lighten-1"
+                    @click="onClickSearch"
                 />
             </div>
             <p class="text-slate-400">
@@ -56,4 +66,46 @@
         </div>
     </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import groupServiceManagerService from "@/api/group-services";
+import serviceManagerService from "@/api/service";
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+
+interface Items {
+    name: string;
+    id: string;
+}
+const states = ref<Array<Items>>([]);
+
+const todo = ref("");
+const zipcode = ref("");
+
+onMounted(() => {
+    serviceManagerService.listServices({}).then((res) => {
+        states.value = res.services.map((e) => {
+            return { name: e.name, id: e.id };
+        });
+    });
+    groupServiceManagerService.listGroupServices({}).then((res) => {
+        states.value = states.value.concat(
+            res.groupServices.map((e) => {
+                return { name: e.name, id: e.id };
+            })
+        );
+    });
+});
+
+const router = useRouter();
+
+function onClickSearch() {
+    if (!todo.value || !zipcode.value) return;
+    router.push({
+        name: "view-results",
+        query: {
+            name: todo.value,
+            zipcode: zipcode.value,
+        },
+    });
+}
+</script>

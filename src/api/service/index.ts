@@ -1,8 +1,9 @@
 import { BaseService } from "@/plugins/axios";
 
-import { AuthInterceptor, ErrorInterceptor } from "../user/interceptor";
+import { ErrorInterceptor } from "../user/interceptor";
 import type {
     CreateServiceRequest,
+    ListServicesRequest,
     ListServicesResponse,
     Service,
     ServiceManagerServiceUpdateServiceBody,
@@ -15,9 +16,23 @@ export class ServiceManagerService extends BaseService {
         // this.addInterceptor("auth", new AuthInterceptor());
     }
 
-    public async listServices(name?: string): Promise<ListServicesResponse> {
+    public async listServices(
+        paramsData: ListServicesRequest
+    ): Promise<ListServicesResponse> {
         const response = await this.axiosInstance.get<ListServicesResponse>(
             "",
+            {
+                params: paramsData,
+            }
+        );
+        return response.data;
+    }
+
+    public async fulltextSearchServices(
+        name?: string
+    ): Promise<ListServicesResponse> {
+        const response = await this.axiosInstance.get<ListServicesResponse>(
+            "/fulltext/search",
             {
                 params: {
                     name,

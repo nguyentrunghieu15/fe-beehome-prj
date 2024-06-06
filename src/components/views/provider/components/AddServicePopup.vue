@@ -68,7 +68,7 @@ function change() {
 }
 
 function onSubmitTerm(value: string) {
-    serviceManagerService.listServices(value).then((services) => {
+    serviceManagerService.fulltextSearchServices(value).then((services) => {
         listSuggestion.value = services.services.map((e) => {
             return {
                 id: e.id,

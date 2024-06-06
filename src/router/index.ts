@@ -172,7 +172,6 @@ const routes: RouteRecordRaw[] = [
             {
                 path: "",
                 component: ProviderProject,
-                name: "project-pro",
                 meta: {
                     requiredAuth: true,
                     nav: NavigationComponent.PROVIDER_NAV,
@@ -180,6 +179,7 @@ const routes: RouteRecordRaw[] = [
                 children: [
                     {
                         path: "",
+                        name: "project-pro",
                         redirect: { name: "pro-request" },
                     },
                     {
