@@ -1,4 +1,4 @@
-import type { Pagination, TypeSort } from "../service/interfaces";
+import type { Pagination, Service, TypeSort } from "../service/interfaces";
 
 // Define the GroupService interface
 export interface GroupService {
@@ -11,6 +11,7 @@ export interface GroupService {
     deletedAt: string;
     name: string;
     detail: string;
+    services: Service[];
 }
 
 // Define the CreateGroupServiceRequest interface

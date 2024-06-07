@@ -5,11 +5,11 @@
             <div class="space-y-0.5 text-gray-600">
                 <div>
                     <v-icon class="mr-2" icon="mdi-trophy-outline"></v-icon>
-                    <span>Hired {{ hiredTime }} times</span>
+                    <span>Hired {{ props.hiredTime }} times</span>
                 </div>
                 <div>
                     <v-icon class="mr-2" icon="mdi-map-marker-outline"></v-icon>
-                    <span>{{ location }}</span>
+                    <span>{{ props.location }}</span>
                 </div>
                 <div>
                     <v-icon class="mr-2" icon="mdi-account-check"></v-icon>
@@ -20,7 +20,7 @@
                         class="mr-2"
                         icon="mdi-clock-time-eight-outline"
                     ></v-icon>
-                    <span>{{ yearExp }} years in business</span>
+                    <span>{{ props.yearExp }} years in business</span>
                 </div>
                 <div>
                     <v-icon
@@ -36,7 +36,7 @@
             <div class="space-y-0.5 text-gray-600">
                 <p>
                     This pro accepts payments via
-                    {{ paymentMethods.join(", ") }}.
+                    {{ props.paymentMethods.join(", ") }}.
                 </p>
             </div>
         </div>
@@ -45,9 +45,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const hiredTime = ref(220);
-const location = ref("Serves Vail, CO");
-const yearExp = ref(13);
+const props = defineProps<{
+    hiredTime: number;
+    location: string;
+    yearExp: number;
+    paymentMethods: string[];
+}>();
+
 const employee = ref(6);
-const paymentMethods = ref(["Cash", "Check", "Stripe", "Venmo"]);
 </script>

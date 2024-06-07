@@ -8,8 +8,8 @@
         <div class="block">
             <RatingCard
                 :max-rating="5"
-                :num-votes="62"
-                :rating="4.9"
+                :num-votes="totalRating"
+                :rating="avgRating"
             ></RatingCard>
             <div class="flex flex-col flex-col-reverse">
                 <div
@@ -22,9 +22,13 @@
                     </v-icon>
                     <ProgressBar
                         color="bg-blue-500"
-                        :progress="75"
+                        :progress="counterRate[i-1] / totalRating"
                     ></ProgressBar>
-                    <span>75%</span>
+                    <span
+                        >{{
+                            ((100 * counterRate[i-1]) / totalRating)
+                        }}%</span
+                    >
                 </div>
             </div>
         </div>
@@ -33,4 +37,10 @@
 <script setup lang="ts">
 import ProgressBar from "@/components/base/ProgressBar.vue";
 import RatingCard from "@/components/base/RatingCard.vue";
+
+const prop = defineProps<{
+    totalRating: number;
+    avgRating: number;
+    counterRate: number[];
+}>();
 </script>

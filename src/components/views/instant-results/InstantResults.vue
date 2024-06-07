@@ -18,16 +18,4 @@ import InforSection from "../mainsite/components/InforSection.vue";
 import Footer from "@/components/base/Footer.vue";
 import Filters from "./components/Filters.vue";
 import ListProviderCard from "./components/ListProviderCard.vue";
-import { useRouter } from "vue-router";
-import { onMounted } from "vue";
-
-const router = useRouter();
-interface SearchQuery {
-    name: string;
-    zipcode: string;
-}
-
-onMounted(() => {
-    const query = router.currentRoute.value.query as any as SearchQuery;
-});
 </script>

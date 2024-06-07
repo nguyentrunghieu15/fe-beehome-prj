@@ -1,5 +1,6 @@
 import axios, { type AxiosInstance } from "axios";
 import type { IIndentifyInterceptor, IInterceptorConfig } from "./interfaces";
+import _ from "lodash";
 
 export class BaseService {
     public axiosInstance: AxiosInstance;
@@ -10,6 +11,11 @@ export class BaseService {
             headers: headers || {
                 "Content-Type": "application/json",
                 // Add other default headers here if needed
+            },
+            paramsSerializer: function (params) {
+                const flatedParam = flattenObject(params);
+                const urlParam = new URLSearchParams(flatedParam);
+                return urlParam.toString();
             },
         });
     }
@@ -67,4 +73,18 @@ export class BaseService {
         this.axiosInstance.interceptors.request.eject(interceptorId);
         this.axiosInstance.interceptors.response.eject(interceptorId);
     }
+}
+
+function flattenObject(obj: any, prefix = "") {
+    const result: any = {};
+    for (const key in obj) {
+        const value = obj[key];
+        const newPrefix = prefix ? `${prefix}.${key}` : key;
+        if (typeof value === "object" && value !== null) {
+            Object.assign(result, flattenObject(value, newPrefix));
+        } else {
+            result[newPrefix] = value;
+        }
+    }
+    return result;
 }

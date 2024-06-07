@@ -8,11 +8,11 @@
         ></Avatar>
         <div class="flex flex-wrap justify-between lg:w-[45rem]">
             <div class="w-[32rem] flex flex-col space-y-2">
-                <p class="text-lg font-bold">Knockout Plumbing & Repipe Inc</p>
+                <p class="text-lg font-bold">{{ name }}</p>
                 <RatingCard
                     :maxRating="5"
-                    :numVotes="67"
-                    :rating="4.6"
+                    :numVotes="numRating"
+                    :rating="rating"
                 ></RatingCard>
                 <div class="flex flex-wrap">
                     <Achievement
@@ -23,11 +23,11 @@
                 <div class="text-gray-500 text-base">
                     <div>
                         <v-icon icon="mdi-trophy-variant-outline"></v-icon>
-                        <span>456 hires on BeeHome</span>
+                        <span>{{ numHires }} hires on BeeHome</span>
                     </div>
                     <div>
                         <v-icon icon="mdi-map-marker-radius-outline"></v-icon>
-                        <span>Ha noi, Vietnam</span>
+                        <span>Near {{ address }}</span>
                     </div>
                 </div>
                 <div class="flex items-center space-x-1 text-gray-500">
@@ -35,13 +35,12 @@
                     <p>Online now - response about 4 min</p>
                 </div>
                 <p class="text-gray-500">
-                    <span>Raphael N. says, "</span
-                    ><span
-                        >We purchased a new home and we wanted a plumber to come
-                        out for a few things and to do a general
-                        inspection."</span
+                    <span>Introduce: "</span
+                    ><span>{{ introduce.slice(0, 255) }}"</span
                     ><span class="justify-self-end"
-                        >...<button class="text-sky-500">See more</button></span
+                        >...<button class="text-sky-500" @click="emit('more')">
+                            See more
+                        </button></span
                     >
                 </p>
             </div>
@@ -53,6 +52,7 @@
                     size="small"
                     variants="elevated"
                     block
+                    @click="emit('view')"
                     >View Profile</v-btn
                 >
             </div>
@@ -63,4 +63,17 @@
 import Avatar from "@/components/base/Avatar.vue";
 import Achievement from "@/components/base/Achievement.vue";
 import RatingCard from "@/components/base/RatingCard.vue";
+
+const props = defineProps<{
+    name: string;
+    numRating: number;
+    rating: number;
+    numHires: number;
+    address: string;
+    introduce: string;
+}>();
+const emit = defineEmits<{
+    more: [];
+    view: [];
+}>();
 </script>

@@ -8,7 +8,7 @@
                 class="w-36 h-36"
             ></Avatar>
             <div class="flex-col pl-4">
-                <p class="font-bold text-2xl">it's just Stuff!</p>
+                <p class="font-bold text-2xl">{{ provider?.name }}</p>
                 <RatingCard
                     :max-rating="5"
                     :num-votes="67"
@@ -22,29 +22,38 @@
                 <span v-html="prepareIntro"></span>
             </p>
             <p
-                v-if="intro.length > maxContentIntro"
+                v-if="provider?.introduction.length ?? 0 > maxContentIntro"
                 class="text-none text-sky-500 hover:cursor-pointer hover:underline"
                 variant="text"
                 color="blue-lighten-1"
                 @click="isShowAll = !isShowAll"
             >
-                {{ isShowAll ? "Show all" : "Show less" }}
+                {{ !isShowAll ? "Show all" : "Show less" }}
             </p>
         </div>
         <div class="grid grid-cols-2 gap-2 pb-6">
-            <OverviewCard></OverviewCard>
+            <OverviewCard
+                :year-exp="provider?.years || 0"
+                :hired-time="provider?.numHires ?? 0"
+                :location="provider?.postalCode.place || ''"
+                :payment-methods="
+                    provider?.paymentMethod.map((e) => e.name) || []
+                "
+            ></OverviewCard>
             <div>
                 <div>
                     <div class="font-bold mb-2">Social media</div>
                     <div class="space-y-0.5">
                         <a
                             class="text-sky-500 mr-2 font-bold"
-                            v-for="(e, index) in socialMedia"
+                            v-for="(e, index) in provider?.socialMedias"
                             :key="index"
                             :href="e.link"
                             >{{ e.name
                             }}{{
-                                index != socialMedia.length - 1 ? "," : ""
+                                index != provider?.socialMedias?.length ?? 0 - 1
+                                    ? ","
+                                    : ""
                             }}</a
                         >
                     </div>
@@ -72,25 +81,49 @@
 <script setup lang="ts">
 import Avatar from "@/components/base/Avatar.vue";
 import RatingCard from "@/components/base/RatingCard.vue";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import OverviewCard from "./OverviewCard.vue";
-import type { ISocialMediaElement } from "../constants/interfaces";
+import { useRoute } from "vue-router";
+import type { ProviderInfo } from "@/api/provider/interfaces";
+import providerService from "@/api/provider";
 
+const route = useRoute();
 const maxContentIntro = 455;
 const isShowAll = ref(false);
 
-const intro = ref("");
+const providerName = defineModel<string>();
+const emit = defineEmits<{
+    "update:provider-name": [value: string];
+}>();
 
 const prepareIntro = computed(() => {
-    let paragrah = intro.value;
-    if (isShowAll.value) {
+    let paragrah = provider.value?.introduction || "";
+    if (!isShowAll.value) {
         paragrah = paragrah.slice(0, maxContentIntro);
     }
     return paragrah.replace(/\n/g, "<br>");
 });
 
-const socialMedia = ref<ISocialMediaElement[]>([
-    { link: "facebook.com", name: "Facebook" },
-    { link: "google.com", name: "Gmail" },
-]);
+const provider = ref<ProviderInfo>();
+
+function loadData() {
+    const providerId = route.query.id?.toString();
+    if (providerId) {
+        providerService.findProById(providerId).then((v) => {
+            provider.value = v.provider;
+            emit("update:provider-name", v.provider.name);
+        });
+    }
+}
+
+onMounted(() => {
+    loadData();
+});
+
+watch(
+    () => route.query.id,
+    (newValue, oldValue) => {
+        loadData();
+    }
+);
 </script>

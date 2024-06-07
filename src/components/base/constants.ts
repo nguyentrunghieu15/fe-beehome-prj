@@ -1,5 +1,5 @@
 export interface SingleSelectedItem {
-    id: number;
+    id: string;
     label: string;
     value: any;
 }

@@ -26,6 +26,7 @@
                 class="w-24 border focus:text-gray-900 border-gray-300 text-gray-400 text-sm focus:ring-blue-500 focus:border-blue-500 block dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Zipcode"
                 v-model="zipcode"
+                @keyup.enter="onClickSearch"
             />
             <v-btn
                 class="m-0"
@@ -146,7 +147,7 @@ function onSelectItem(v: ISuggestion) {
 
 function onClickSearch() {
     if (!todo.value || !zipcode.value) return;
-    router.push({
+    router.replace({
         name: "view-results",
         query: {
             name: todo.value,

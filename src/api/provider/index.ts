@@ -16,6 +16,8 @@ import type {
     GetAllServiceOfProviderRequest,
     GetAllServiceOfProviderResponse,
     DeleteServiceForProRequest,
+    FindProsRequest,
+    GetAllReviewOfProviderResponse,
 } from "./interfaces";
 import { AuthInterceptor } from "../user/interceptor";
 import {
@@ -29,8 +31,12 @@ export class ProviderService extends BaseService {
         super(baseURL);
     }
 
-    public async findProviders(): Promise<FindProsResponse> {
-        const response = await this.axiosInstance.get<FindProsResponse>("");
+    public async findProviders(
+        req: FindProsRequest
+    ): Promise<FindProsResponse> {
+        const response = await this.axiosInstance.get<FindProsResponse>("", {
+            params: req,
+        });
         return response.data;
     }
 
@@ -118,6 +124,16 @@ export class ProviderService extends BaseService {
         const response =
             await this.axiosInstance.get<GetAllServiceOfProviderResponse>(
                 `/${data.id}/services`
+            );
+        return response.data;
+    }
+
+    public async getAllReviewsOfProvider(
+        id: string
+    ): Promise<GetAllReviewOfProviderResponse> {
+        const response =
+            await this.axiosInstance.get<GetAllReviewOfProviderResponse>(
+                `/${id}/reviews`
             );
         return response.data;
     }

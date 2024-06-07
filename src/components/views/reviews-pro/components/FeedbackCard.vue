@@ -9,26 +9,24 @@
             ></Avatar>
             <div class="w-full">
                 <div class="w-full flex justify-between">
-                    <p class="font-bold">Adrian B.</p>
-                    <p class="text-gray-600 text-sm">Sep 25, 2023.</p>
+                    <p class="font-bold">Anonymous</p>
+                    <p class="text-gray-600 text-sm">{{ day }}</p>
                 </div>
                 <RatingCard
                     :max-rating="5"
-                    :num-votes="1"
-                    :rating="5"
+                    :num-votes="totalRating"
+                    :rating="avgRating"
                 ></RatingCard>
             </div>
         </div>
         <div class="text-gray-900">
             <p>
-                Incredibly organized, resourceful, and professional. Right on
-                time and did a better job than I even imagined was possible.
-                Super highly recommended for packing, organizing, etc. needs!
+                {{ comment }}
             </p>
             <p>Details: Packing • 2 rooms • Packing supplies</p>
         </div>
         <div class="mt-4 p-4 bg-gray-50">
-            <p class="font-bold">it's just Stuff!'s reply</p>
+            <p class="font-bold">{{ propName }} reply</p>
             <p>
                 Thanks for the kind words Adrian. We are always so grateful to
                 have clients express their appreciation for the way we show up
@@ -40,4 +38,11 @@
 <script setup lang="ts">
 import Avatar from "@/components/base/Avatar.vue";
 import RatingCard from "@/components/base/RatingCard.vue";
+const props = defineProps<{
+    totalRating: number;
+    avgRating: number;
+    comment: string;
+    day: string;
+    propName: string;
+}>();
 </script>
