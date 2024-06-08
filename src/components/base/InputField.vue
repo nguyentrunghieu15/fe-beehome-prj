@@ -1,6 +1,8 @@
 <template>
     <div class="mb-4">
-        <label class="block mb-2 text-sm font-bold text-gray-900"
+        <label
+            v-if="label.length"
+            class="block mb-2 text-sm font-bold text-gray-900"
             >{{ props.label }}
             <span v-if="isRequired" class="text-red-800">*</span></label
         >
@@ -15,6 +17,7 @@
             class="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full"
             :placeholder="props.placeHolder"
             :disabled="props.isDisable"
+            @keyup.enter="emit('enter')"
         />
         <p
             v-if="props.errors"

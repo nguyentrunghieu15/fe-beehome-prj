@@ -22,11 +22,15 @@
                     </v-icon>
                     <ProgressBar
                         color="bg-blue-500"
-                        :progress="counterRate[i-1] / totalRating"
+                        :progress="
+                            totalRating ? counterRate[i - 1] / totalRating : 0
+                        "
                     ></ProgressBar>
                     <span
                         >{{
-                            ((100 * counterRate[i-1]) / totalRating)
+                            totalRating
+                                ? (100 * counterRate[i - 1]) / totalRating
+                                : 0
                         }}%</span
                     >
                 </div>

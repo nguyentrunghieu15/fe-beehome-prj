@@ -18,6 +18,7 @@ import type {
     DeleteServiceForProRequest,
     FindProsRequest,
     GetAllReviewOfProviderResponse,
+    UpdateSocialMediaProRequest,
 } from "./interfaces";
 import { AuthInterceptor } from "../user/interceptor";
 import {
@@ -142,6 +143,19 @@ export class ProviderService extends BaseService {
         serviceData: DeleteServiceForProRequest
     ): Promise<void> {
         await this.axiosInstance.post<void>("/delete-service", serviceData);
+    }
+
+    public async updateSocialMediaForPro(
+        requestData: UpdateSocialMediaProRequest
+    ): Promise<void> {
+        await this.axiosInstance.post<void>(
+            "/update-social-media",
+            requestData
+        );
+    }
+
+    public async deleteSocialMediaForPro(id: string): Promise<void> {
+        await this.axiosInstance.post<void>("/delete-social-media");
     }
 }
 

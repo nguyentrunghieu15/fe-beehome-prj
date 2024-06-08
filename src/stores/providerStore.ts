@@ -28,6 +28,8 @@ export const useProviderStore = defineStore("provider", () => {
         return servicesOfProvice;
     });
 
+    const socialMediaProvider = computed(() => provider.value?.socialMedias);
+
     function fetchProvider() {
         // do sum thing to fetch
         if (sessionStorage.getItem("PROVIDER_TOKEN")) {
@@ -63,5 +65,6 @@ export const useProviderStore = defineStore("provider", () => {
         servicesOfProviceComputed,
         setServiceOfProvider,
         fetchServiceOfProvider,
+        socialMediaProvider,
     };
 });

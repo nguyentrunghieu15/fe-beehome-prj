@@ -66,7 +66,7 @@
                 <div class="w-[64rem] mt-6 mb-2">
                     <p class="font-semibold text-3xl">Services</p>
                 </div>
-                <div class="w-[64rem] p-6 flex flex-wrap">
+                <div class="w-[64rem] p-2 flex flex-wrap">
                     <ServiceItems
                         v-for="s in services"
                         :name="s.name"
@@ -82,6 +82,69 @@
                         color="blue-lighten-1"
                         size="large"
                         @click="isShowAddServicePopup = true"
+                        >Add</v-btn
+                    >
+                </div>
+            </div>
+            <div>
+                <div class="w-[64rem] mt-6 mb-2">
+                    <p class="font-semibold text-3xl">Social Media</p>
+                </div>
+                <div class="w-[64rem] px-6 pb-6 flex flex-wrap">
+                    <ul class="px-6 list-disc">
+                        <li
+                            v-for="media in provider?.socialMedias"
+                            :key="media.id"
+                        >
+                            <SocialMediaItems
+                                class="w-96"
+                                :name="media.name"
+                                :link="media.link"
+                                :id="media.id"
+                                @remove="deleteSocialMedia"
+                                @edit="updateSocialMedia"
+                            >
+                            </SocialMediaItems>
+                        </li>
+                    </ul>
+                </div>
+                <div class="px-6">
+                    <div
+                        v-if="isShowAddSocialMedia"
+                        class="w-96 grid grid-cols-4 gap-2"
+                    >
+                        <InputField
+                            :is-required="true"
+                            label=""
+                            place-holder="Name"
+                            v-model:model-value="addSocialMediaForm.name.value"
+                            :errors="addSocialMediaForm.errors.value.name"
+                            @enter="onAddMedia"
+                        ></InputField>
+                        <InputField
+                            class="col-span-3"
+                            :is-required="true"
+                            label=""
+                            place-holder="Link"
+                            v-model:model-value="addSocialMediaForm.link.value"
+                            :errors="addSocialMediaForm.errors.value.link"
+                            @enter="onAddMedia"
+                        ></InputField>
+                    </div>
+                    <v-btn
+                        class="text-none ju"
+                        rounded
+                        color="blue-lighten-1"
+                        size="large"
+                        @click="
+                            () => {
+                                if (isShowAddSocialMedia) {
+                                    onAddMedia();
+                                } else {
+                                    isShowAddSocialMedia = true;
+                                }
+                            }
+                        "
                         >Add</v-btn
                     >
                 </div>
@@ -102,6 +165,8 @@ import { computed, onMounted, onUpdated, ref, watch } from "vue";
 import providerService from "@/api/provider";
 import AddServicePopup from "./AddServicePopup.vue";
 import useUpdateProviderForm from "../form/updateProviderForm";
+import SocialMediaItems from "./SocialMediaItems.vue";
+import useAddSocialMediaForm from "../form/addSocialMediaForm";
 
 const providerStore = useProviderStore();
 const provider = providerStore.providerComputed;
@@ -110,6 +175,7 @@ const services = providerStore.servicesOfProviceComputed;
 const form = useUpdateProviderForm();
 
 const isShowAddServicePopup = ref(false);
+const isShowAddSocialMedia = ref(false);
 
 watch(provider, (newVal, oldVal) => {
     form.setFieldValue("name", newVal?.name);
@@ -147,5 +213,37 @@ function onClickRemoveService(id: string) {
     providerService.deleteServiceForPro({ servicesId: [id] }).then(() => {
         providerStore.fetchProvider();
     });
+}
+
+const addSocialMediaForm = useAddSocialMediaForm();
+async function onAddMedia() {
+    if (addSocialMediaForm.isValidating.value) return;
+    try {
+        if (
+            !(
+                Object.keys(addSocialMediaForm.errors.value).length === 0 &&
+                addSocialMediaForm.errors.value.constructor === Object
+            ) ||
+            !addSocialMediaForm.link.value.length
+        )
+            return;
+        await addSocialMediaForm.onSubmit(provider.value?.id ?? "");
+        await providerStore.fetchProvider();
+        isShowAddSocialMedia.value = false;
+    } catch (error) {}
+}
+
+async function updateSocialMedia(id: string, value: string) {
+    try {
+        await providerService.updateSocialMediaForPro({ id: id, link: value });
+        await providerStore.fetchProvider();
+    } catch (error) {}
+}
+
+async function deleteSocialMedia(id: string) {
+    try {
+        await providerService.deleteSocialMediaForPro(id);
+        await providerStore.fetchProvider();
+    } catch (error) {}
 }
 </script>

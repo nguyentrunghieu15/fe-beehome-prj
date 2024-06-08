@@ -41,6 +41,12 @@ export interface AddSocialMediaProRequest {
     link: string;
 }
 
+export interface UpdateSocialMediaProRequest {
+    id: string;
+    name?: string;
+    link?: string;
+}
+
 export interface JoinAsProviderResponse {
     providerToken: string;
 }

@@ -53,7 +53,7 @@ function loadReview() {
             sumRate = sumRate + element.rating;
             counterRate.value[element.rating - 1]++;
         });
-        avgRating.value = sumRate / totalRating.value;
+        avgRating.value = totalRating.value ? sumRate / totalRating.value : 0;
     });
 }
 

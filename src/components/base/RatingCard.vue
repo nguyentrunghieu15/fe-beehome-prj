@@ -46,7 +46,7 @@ const level = computed(() => {
         case "1":
             return "Poor";
         default:
-            return "Verry Poor";
+            return "Unchecked";
     }
 });
 </script>
