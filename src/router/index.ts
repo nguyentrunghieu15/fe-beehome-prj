@@ -275,14 +275,14 @@ router.beforeEach((to, from) => {
     }
     // to.matched.some(record => record.meta.requiresAuth)
     const mainStore = useMainStore();
-    if (to.meta?.nav !== undefined) {
-        mainStore.setNavigation(to.meta?.nav as NavigationComponent);
-    } else {
-        if (isLogin()) {
-            mainStore.setNavigation(NavigationComponent.MAIN_NAV);
+    if (isLogin()) {
+        if (to.meta?.nav !== undefined) {
+            mainStore.setNavigation(to.meta?.nav as NavigationComponent);
         } else {
-            mainStore.setNavigation(NavigationComponent.VISIT_NAV);
+            mainStore.setNavigation(NavigationComponent.MAIN_NAV);
         }
+    } else {
+        mainStore.setNavigation(NavigationComponent.VISIT_NAV);
     }
 });
 

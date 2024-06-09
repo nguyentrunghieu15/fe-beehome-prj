@@ -8,7 +8,7 @@
                     :provider="provider"
                     :avg-rating="avgRating"
                     :total-rating="totalRating"
-                    @request="isShowRequestPopup = !isShowRequestPopup"
+                    @request="onClickMakeRequest"
                 ></AboutCard>
                 <ReviewsCard
                     :avg-rating="avgRating"
@@ -42,13 +42,15 @@ import ReviewsCard from "./components/ReviewsCard.vue";
 import ContactCard from "./components/ContactCard.vue";
 import FeedbackCard from "./components/FeedbackCard.vue";
 import { onMounted, ref, watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import providerService from "@/api/provider";
 import type { ProviderInfo, Review } from "@/api/provider/interfaces";
 import MakeRequestPopup from "./components/MakeRequestPopup.vue";
 import { useProviderStore } from "@/stores/providerStore";
 import type { Items } from "./constants/interfaces";
 const route = useRoute();
+
+const router = useRouter();
 
 const totalRating = ref(0);
 const avgRating = ref(0);
@@ -110,4 +112,12 @@ onMounted(() => {
 });
 
 const isShowRequestPopup = ref(false);
+
+const onClickMakeRequest = () => {
+    if (!sessionStorage.getItem("ACCESS_TOKEN")) {
+        router.replace({ name: "login" });
+        return;
+    }
+    isShowRequestPopup.value = !isShowRequestPopup.value;
+};
 </script>
