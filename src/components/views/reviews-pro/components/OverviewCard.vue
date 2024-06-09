@@ -46,7 +46,7 @@
 import { ref } from "vue";
 
 const props = defineProps<{
-    hiredTime: number;
+    hiredTime?: number;
     location: string;
     yearExp: number;
     paymentMethods: string[];

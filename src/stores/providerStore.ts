@@ -1,3 +1,5 @@
+import hireService from "@/api/hire";
+import type { Hire, HireInfor } from "@/api/hire/interfaces";
 import profileService from "@/api/profile";
 import providerService from "@/api/provider";
 import type { ProviderInfo } from "@/api/provider/interfaces";
@@ -9,8 +11,9 @@ export const useProviderStore = defineStore("provider", () => {
     const provider = ref<ProviderInfo>();
     const needFetchProvider = ref<Boolean>(true);
     const needFetchService = ref<Boolean>(true);
+    const needFetchHire = ref<Boolean>(true);
 
-    const servicesOfProvice = ref<Array<Service>>([]);
+    const servicesOfProvider = ref<Array<Service>>([]);
 
     const providerComputed = computed(() => {
         if (needFetchProvider.value) {
@@ -20,12 +23,22 @@ export const useProviderStore = defineStore("provider", () => {
         return provider;
     });
 
+    const hiresOfProvider = ref<HireInfor[]>([]);
+
+    const hiresOfProviderComputed = computed(() => {
+        if (needFetchHire.value) {
+            fetchHireOfProvider();
+            needFetchHire.value = false;
+        }
+        return hiresOfProvider;
+    });
+
     const servicesOfProviceComputed = computed(() => {
         if (needFetchService.value) {
             fetchServiceOfProvider();
             needFetchService.value = false;
         }
-        return servicesOfProvice;
+        return servicesOfProvider;
     });
 
     const socialMediaProvider = computed(() => provider.value?.socialMedias);
@@ -36,6 +49,7 @@ export const useProviderStore = defineStore("provider", () => {
             providerService.getProviderProfile().then((data) => {
                 setProvider(data.provider);
                 fetchServiceOfProvider();
+                fetchHireOfProvider();
             });
         }
     }
@@ -50,8 +64,22 @@ export const useProviderStore = defineStore("provider", () => {
         }
     }
 
+    function fetchHireOfProvider() {
+        if (provider.value) {
+            hireService
+                .findAllHires({ providerId: provider.value.id })
+                .then((data) => {
+                    setHireOfProvider(data.hires);
+                });
+        }
+    }
+
     function setServiceOfProvider(value: Service[]) {
-        servicesOfProvice.value = value;
+        servicesOfProvider.value = value;
+    }
+
+    function setHireOfProvider(value: HireInfor[]) {
+        hiresOfProvider.value = value;
     }
 
     function setProvider(value: ProviderInfo) {
@@ -66,5 +94,7 @@ export const useProviderStore = defineStore("provider", () => {
         setServiceOfProvider,
         fetchServiceOfProvider,
         socialMediaProvider,
+        hiresOfProviderComputed,
+        fetchHireOfProvider,
     };
 });

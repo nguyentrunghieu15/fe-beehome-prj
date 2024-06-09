@@ -151,8 +151,7 @@
             </div>
         </div>
         <AddServicePopup
-            :show="isShowAddServicePopup"
-            @close="isShowAddServicePopup = false"
+            v-model:model-value="isShowAddServicePopup"
         ></AddServicePopup>
     </div>
 </template>

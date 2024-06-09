@@ -30,10 +30,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 const curentNavItem = ref(0);
-const navItems = ref(["Request", "Started", "Finished", "Reviews"]);
+const navItems = ref(["Request", "Starting", "Finished", "Reviews"]);
 const router = useRouter();
 
 function onClickNavItem(idx: number) {
@@ -56,6 +56,29 @@ function onClickNavItem(idx: number) {
             break;
     }
 }
+
+const route = useRoute();
+watch(
+    () => route.name,
+    () => {
+        switch (route.name) {
+            case "pro-request":
+                curentNavItem.value = 0;
+                break;
+            case "pro-request":
+                curentNavItem.value = 1;
+                break;
+            case "pro-request":
+                curentNavItem.value = 2;
+                break;
+            case "pro-request":
+                curentNavItem.value = 3;
+                break;
+            default:
+                break;
+        }
+    }
+);
 </script>
 
 <style scoped>

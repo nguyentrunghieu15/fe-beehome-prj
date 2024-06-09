@@ -11,8 +11,8 @@
                 <p class="font-bold text-2xl">{{ provider?.name }}</p>
                 <RatingCard
                     :max-rating="5"
-                    :num-votes="67"
-                    :rating="5"
+                    :num-votes="totalRating"
+                    :rating="avgRating"
                 ></RatingCard>
             </div>
         </div>
@@ -60,7 +60,10 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-between pb-6">
+        <div
+            class="flex justify-between pb-6"
+            v-if="currentProvider?.id !== route.query.id"
+        >
             <v-btn
                 class="w-2/5"
                 size="x-large"
@@ -73,6 +76,7 @@
                 size="x-large"
                 color="blue-lighten-1"
                 prepend-icon="mdi-book-arrow-left-outline"
+                @click="emit('request')"
                 >Make a request</v-btn
             >
         </div>
@@ -86,44 +90,29 @@ import OverviewCard from "./OverviewCard.vue";
 import { useRoute } from "vue-router";
 import type { ProviderInfo } from "@/api/provider/interfaces";
 import providerService from "@/api/provider";
+import { useProviderStore } from "@/stores/providerStore";
+const props = defineProps<{
+    totalRating: number;
+    avgRating: number;
+    provider: ProviderInfo | undefined;
+}>();
 
 const route = useRoute();
 const maxContentIntro = 455;
 const isShowAll = ref(false);
 
-const providerName = defineModel<string>();
 const emit = defineEmits<{
-    "update:provider-name": [value: string];
+    request: [];
 }>();
 
 const prepareIntro = computed(() => {
-    let paragrah = provider.value?.introduction || "";
+    let paragrah = props.provider?.introduction || "";
     if (!isShowAll.value) {
         paragrah = paragrah.slice(0, maxContentIntro);
     }
     return paragrah.replace(/\n/g, "<br>");
 });
 
-const provider = ref<ProviderInfo>();
-
-function loadData() {
-    const providerId = route.query.id?.toString();
-    if (providerId) {
-        providerService.findProById(providerId).then((v) => {
-            provider.value = v.provider;
-            emit("update:provider-name", v.provider.name);
-        });
-    }
-}
-
-onMounted(() => {
-    loadData();
-});
-
-watch(
-    () => route.query.id,
-    (newValue, oldValue) => {
-        loadData();
-    }
-);
+const providerStore = useProviderStore();
+const currentProvider = providerStore.providerComputed;
 </script>

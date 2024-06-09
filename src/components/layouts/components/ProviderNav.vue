@@ -21,12 +21,13 @@
                 Join as customers
             </button>
         </div>
-        <a
+        <RouterLink
+            :to="{ name: 'calendar' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Schedule</a
+            >Schedule</RouterLink
         >
         <RouterLink
-            :to="{ name: 'error' }"
+            :to="{ name: '' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
             >Inbox</RouterLink
         >

@@ -1,10 +1,14 @@
 // HireService.ts
 import { BaseService } from "@/plugins/axios";
 import type {
+    CreateHireRequest,
     CreateHireResponse,
     FindAllHireResponse,
+    FindAllHiresRequest,
     UpdateStatusHireResponse,
 } from "./interfaces";
+import { AuthInterceptor } from "../user/interceptor";
+import { ErrorInterceptor } from "../provider/interceptors";
 
 export class HireService extends BaseService {
     constructor(baseURL: string) {
@@ -12,17 +16,19 @@ export class HireService extends BaseService {
     }
 
     public async findAllHires(
-        userId?: string,
-        providerId?: string,
-        status?: string
+        data: FindAllHiresRequest
     ): Promise<FindAllHireResponse> {
         const response = await this.axiosInstance.get<FindAllHireResponse>("", {
-            params: { userId, providerId, status },
+            params: data,
         });
         return response.data;
     }
 
-    public async createHire(hireData: any): Promise<CreateHireResponse> {
+    public async createHire(
+        hireData: CreateHireRequest
+    ): Promise<CreateHireResponse> {
+        hireData.workTimeFrom = new Date(hireData.workTimeFrom).toISOString();
+        hireData.workTimeTo = new Date(hireData.workTimeTo).toISOString();
         const response = await this.axiosInstance.post<CreateHireResponse>(
             "",
             hireData
@@ -41,10 +47,7 @@ export class HireService extends BaseService {
         const response =
             await this.axiosInstance.patch<UpdateStatusHireResponse>(
                 `/${hireId}`,
-                null,
-                {
-                    params: { newStatus },
-                }
+                { newStatus }
             );
         return response.data;
     }
@@ -52,5 +55,7 @@ export class HireService extends BaseService {
     // Add other methods as needed
 }
 
-const hireService = new HireService("http://localhost:3000/api/v1/hires");
+const hireService = new HireService("http://localhost:3003/api/v1/hires");
+hireService.addInterceptor("auth", new AuthInterceptor());
+hireService.addInterceptor("error", new ErrorInterceptor());
 export default hireService;

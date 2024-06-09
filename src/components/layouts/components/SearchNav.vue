@@ -15,11 +15,11 @@
             <SearchInput
                 :suggestions="listSuggestion"
                 placeholder="What's on to-do list?"
-                custom-style="ml-4 w-96 border focus:text-gray-900 border-gray-300 text-gray-400 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                custom-style="ml-4 w-96 border text-gray-900 border-gray-300  text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block "
                 @change-term="change"
                 @submit-term="onSubmitTerm"
                 @select-suggestion="onSelectItem"
-                v-model:value="todo"
+                v-model:model-value="todo"
             ></SearchInput>
             <input
                 type="text"
@@ -52,12 +52,12 @@
             >Project</RouterLink
         >
         <RouterLink
-            :to="{ name: 'error' }"
+            :to="{ name: '' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
             >Team</RouterLink
         >
         <RouterLink
-            :to="{ name: 'error' }"
+            :to="{ name: '' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
             >Inbox</RouterLink
         >

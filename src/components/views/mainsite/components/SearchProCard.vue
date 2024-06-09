@@ -36,12 +36,14 @@
                     v-model="todo"
                     :items="states"
                     placeholder="What's on to-do list?"
+                    @keypress.enter="onClickSearch"
                 ></v-autocomplete>
                 <div class="w-24">
                     <v-text-field
                         placeholder="Zipcode"
                         variant="solo"
                         v-model:model-value="zipcode"
+                        @keypress.enter="onClickSearch"
                     />
                 </div>
                 <v-btn

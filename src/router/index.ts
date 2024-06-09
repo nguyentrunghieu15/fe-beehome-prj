@@ -30,6 +30,7 @@ import PenddingProjectCus from "@/components/views/customer-project/components/P
 import StartedProjectCus from "@/components/views/customer-project/components/StartedProjectCus.vue";
 import FinishedProjectCus from "@/components/views/customer-project/components/FinishedProjectCus.vue";
 import ReviewsProjectCus from "@/components/views/customer-project/components/ReviewsProjectCus.vue";
+import ProSchedule from "@/components/views/provider/ProSchedule.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -243,6 +244,15 @@ const routes: RouteRecordRaw[] = [
                         },
                     },
                 ],
+            },
+            {
+                path: "calendar",
+                component: ProSchedule,
+                name: "calendar",
+                meta: {
+                    requiredAuth: true,
+                    nav: NavigationComponent.PROVIDER_NAV,
+                },
             },
         ],
     },

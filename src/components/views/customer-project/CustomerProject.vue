@@ -30,7 +30,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useUserStore } from "@/stores/userStore";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 const curentNavItem = ref(0);
 const navItems = ref(["Pendding", "Started", "Finished", "Reviews"]);

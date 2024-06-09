@@ -1,10 +1,11 @@
 <template>
-    <div v-if="show">
+    <div v-if="modelValue">
         <div
             class="dialog-overlay"
             @click="
                 () => {
                     emit('close');
+                    emit('update:modelValue', false);
                 }
             "
         ></div>
@@ -21,6 +22,7 @@
                     @click="
                         () => {
                             emit('close');
+                            emit('update:modelValue', false);
                         }
                     "
                 ></v-btn>
@@ -36,10 +38,12 @@
 <script setup lang="ts">
 const props = defineProps<{
     label: string;
-    show: boolean;
 }>();
 
+const modelValue = defineModel<boolean>();
+
 const emit = defineEmits<{
+    "update:modelValue": [value: boolean];
     close: [];
 }>();
 </script>

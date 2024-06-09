@@ -1,9 +1,10 @@
 <template>
     <div>
         <Dialog
-            :show="show"
+            v-model:model-value="modelValue"
             @close="
                 () => {
+                    emit('update:modelValue', false);
                     emit('close');
                     listServiceSelected = [];
                 }
@@ -52,12 +53,11 @@ import { useProviderStore } from "@/stores/providerStore";
 
 const providerStore = useProviderStore();
 
-const props = defineProps<{
-    show: boolean;
-}>();
+const modelValue = defineModel<boolean>();
 
 const emit = defineEmits<{
     close: [];
+    "update:modelValue": [value: boolean];
 }>();
 
 const listSuggestion = ref<Array<ISuggestion>>([]);
@@ -106,6 +106,7 @@ function onClickSave() {
             });
     }
     listServiceSelected.value = [];
+    emit("update:modelValue", false);
     emit("close");
 }
 </script>

@@ -8,7 +8,7 @@
         >
         <input
             type="text"
-            v-model="term"
+            v-model="modelValue"
             :disabled="isDisable"
             :class="[
                 props.isDisable ? 'text-gray-400' : 'text-gray-900',
@@ -52,7 +52,7 @@ const defaultStyle = ref(
     "border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-[10px]"
 );
 
-const term = defineModel<string>("value");
+const modelValue = defineModel<string>();
 const isShowSugesstion = ref(false);
 const emit = defineEmits<{
     changeTerm: [];
@@ -72,9 +72,9 @@ function onChangeInput() {
         clearTimeout(data);
     }
 
-    if (term.value) {
+    if (modelValue.value) {
         data = setTimeout(() => {
-            emit("submitTerm", term.value || "");
+            emit("submitTerm", modelValue.value || "");
             isShowSugesstion.value = true;
         }, 500);
     }

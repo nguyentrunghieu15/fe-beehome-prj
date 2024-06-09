@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="h-full w-full">
         <RouterView />
         <ul class="fixed top-16 right-0">
             <li v-for="nofi in nofitications">
