@@ -31,6 +31,8 @@ import StartedProjectCus from "@/components/views/customer-project/components/St
 import FinishedProjectCus from "@/components/views/customer-project/components/FinishedProjectCus.vue";
 import ReviewsProjectCus from "@/components/views/customer-project/components/ReviewsProjectCus.vue";
 import ProSchedule from "@/components/views/provider/ProSchedule.vue";
+import SidebarLayout from "@/components/layouts/SidebarLayout.vue";
+import Dashboard from "@/components/views/dashboard/Dashboard.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -253,6 +255,23 @@ const routes: RouteRecordRaw[] = [
                     requiredAuth: true,
                     nav: NavigationComponent.PROVIDER_NAV,
                 },
+            },
+        ],
+    },
+    {
+        path: "/admin",
+        component: SidebarLayout,
+        name: "admin",
+        // meta: {
+        //     requiredAuth: true,
+        //     nav: NavigationComponent.PROVIDER_NAV,
+        // },
+        redirect: "/admin/dashboard",
+        children: [
+            {
+                path: "dashboard",
+                name: "dashboard",
+                component: Dashboard,
             },
         ],
     },
