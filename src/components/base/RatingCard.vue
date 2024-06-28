@@ -3,7 +3,7 @@
         <div
             class="flex items-center space-x-0.5 text-gray-500 text-sm font-bold"
         >
-            <div class="pt-1">{{ level }} {{ props.rating }}</div>
+            <div class="pt-1">{{ level }} {{ props.rating.toFixed(2) }}</div>
             <span
                 v-for="n in props.maxRating"
                 :key="'' + n"

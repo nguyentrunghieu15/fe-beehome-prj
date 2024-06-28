@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex divide-x border-b-2">
-            <div class="hidden lg:block w-64">
+            <div class="hidden lg:block w-80">
                 <Filters class="p-8 w-full"></Filters>
             </div>
             <div class="w-full h-screen flex justify-center">

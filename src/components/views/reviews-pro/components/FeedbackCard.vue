@@ -9,7 +9,7 @@
             ></Avatar>
             <div class="w-full">
                 <div class="w-full flex justify-between">
-                    <p class="font-bold">Anonymous</p>
+                    <p class="font-bold">{{ userName }}</p>
                     <p class="text-gray-600 text-sm">{{ day }}</p>
                 </div>
                 <RatingCard
@@ -23,14 +23,12 @@
             <p>
                 {{ comment }}
             </p>
-            <p>Details: Packing • 2 rooms • Packing supplies</p>
+            <p v-if="serviceName">Details: {{ serviceName }}</p>
         </div>
-        <div class="mt-4 p-4 bg-gray-50">
+        <div class="mt-4 p-4 bg-gray-50" v-if="reply">
             <p class="font-bold">{{ propName }} reply</p>
             <p>
-                Thanks for the kind words Adrian. We are always so grateful to
-                have clients express their appreciation for the way we show up
-                to every job. Hope all is well, Beth @ It's Just Stuff
+                {{ reply }}
             </p>
         </div>
     </div>
@@ -44,5 +42,8 @@ const props = defineProps<{
     comment: string;
     day: string;
     propName: string;
+    userName: string;
+    reply?: string;
+    serviceName?: string;
 }>();
 </script>

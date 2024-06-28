@@ -114,6 +114,8 @@ export interface Review {
     reply: string;
     serviceId: string;
     note?: string;
+    userName: string;
+    service: Service;
 }
 
 export interface GetAllReviewOfProviderResponse {

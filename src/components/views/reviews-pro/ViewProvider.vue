@@ -1,7 +1,7 @@
 <template>
     <div>
         <div
-            class="flex lg:mx-24 xl:mx-64 2xl:mx-[30rem] min-[0px]:px-8 md:px-0"
+            class="flex lg:mx-24 xl:mx-64 2xl:mx-[24rem] min-[0px]:px-8 md:px-0"
         >
             <div class="max-w-2xl divide-y">
                 <AboutCard
@@ -23,6 +23,9 @@
                     :day="r.createdAt"
                     :prop-name="provider?.name || ''"
                     :total-rating="1"
+                    :user-name="r.userName"
+                    :reply="r.reply"
+                    :service-name="r.service?.name"
                 ></FeedbackCard>
             </div>
             <div v-if="currentProvider?.id !== route.query.id">
@@ -82,17 +85,6 @@ function loadData() {
     }
 }
 
-onMounted(() => {
-    loadData();
-});
-
-watch(
-    () => route.query.id,
-    (newValue, oldValue) => {
-        loadData();
-    }
-);
-
 function loadReview() {
     const providerId = route.query.id?.toString() ?? "";
     providerService.getAllReviewsOfProvider(providerId).then((e) => {
@@ -108,8 +100,16 @@ function loadReview() {
 }
 
 onMounted(() => {
+    loadData();
     loadReview();
 });
+
+watch(
+    () => route.query.id,
+    (newValue, oldValue) => {
+        loadData();
+    }
+);
 
 const isShowRequestPopup = ref(false);
 

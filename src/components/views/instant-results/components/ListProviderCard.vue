@@ -26,7 +26,7 @@
 </template>
 <script setup lang="ts">
 import ProviderCard from "./ProviderCard.vue";
-import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { onMounted, ref, watch } from "vue";
 import providerService from "@/api/provider";
 import type { ProviderViewInfo } from "@/api/provider/interfaces";

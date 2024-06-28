@@ -28,9 +28,9 @@
                     ></ProgressBar>
                     <span
                         >{{
-                            totalRating
+                           ( totalRating
                                 ? (100 * counterRate[i - 1]) / totalRating
-                                : 0
+                                : 0).toFixed(2)
                         }}%</span
                     >
                 </div>
