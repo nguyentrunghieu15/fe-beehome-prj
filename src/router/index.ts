@@ -273,6 +273,16 @@ const routes: RouteRecordRaw[] = [
                 name: "dashboard",
                 component: Dashboard,
             },
+            {
+                path: "users",
+                name: "users",
+                component: Dashboard,
+            },
+            {
+                path: "services",
+                name: "services",
+                component: Dashboard,
+            },
         ],
     },
 ];

@@ -7,9 +7,6 @@ import AppHeaderDropdownAccnt from "@/components/base/AppHeaderDropdownAccnt.vue
 import { useSidebarStore } from "@/stores/sidebar.js";
 
 const headerClassNames = ref("mb-4 p-0");
-const { colorMode, setColorMode } = useColorModes(
-    "coreui-free-vue-admin-template-theme"
-);
 const sidebar = useSidebarStore();
 
 onMounted(() => {
@@ -30,90 +27,21 @@ onMounted(() => {
                 @click="sidebar.toggleVisible(undefined)"
                 style="margin-inline-start: -14px"
             >
-                <CIcon icon="cil-menu" size="lg" />
+                <v-btn icon="mdi-menu" variant="text"></v-btn>
             </CHeaderToggler>
             <CHeaderNav class="d-none d-md-flex">
                 <CNavItem>
-                    <CNavLink href="/dashboard"> Dashboard </CNavLink>
+                    <CNavLink href="/admin/dashboard"> Dashboard </CNavLink>
                 </CNavItem>
                 <CNavItem>
                     <CNavLink href="#">Users</CNavLink>
                 </CNavItem>
                 <CNavItem>
-                    <CNavLink href="#">Settings</CNavLink>
+                    <CNavLink href="#">Services</CNavLink>
                 </CNavItem>
             </CHeaderNav>
-            <CHeaderNav class="ms-auto">
-                <CNavItem>
-                    <CNavLink href="#">
-                        <CIcon icon="cil-bell" size="lg" />
-                    </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                    <CNavLink href="#">
-                        <CIcon icon="cil-list" size="lg" />
-                    </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                    <CNavLink href="#">
-                        <CIcon icon="cil-envelope-open" size="lg" />
-                    </CNavLink>
-                </CNavItem>
-            </CHeaderNav>
+            <CHeaderNav class="ms-auto"> </CHeaderNav>
             <CHeaderNav>
-                <li class="nav-item py-1">
-                    <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
-                </li>
-                <CDropdown variant="nav-item" placement="bottom-end">
-                    <CDropdownToggle :caret="false">
-                        <CIcon
-                            v-if="colorMode === 'dark'"
-                            icon="cil-moon"
-                            size="lg"
-                        />
-                        <CIcon
-                            v-else-if="colorMode === 'light'"
-                            icon="cil-sun"
-                            size="lg"
-                        />
-                        <CIcon v-else icon="cil-contrast" size="lg" />
-                    </CDropdownToggle>
-                    <CDropdownMenu>
-                        <CDropdownItem
-                            :active="colorMode === 'light'"
-                            class="d-flex align-items-center"
-                            component="button"
-                            type="button"
-                            @click="setColorMode('light')"
-                        >
-                            <CIcon class="me-2" icon="cil-sun" size="lg" />
-                            Light
-                        </CDropdownItem>
-                        <CDropdownItem
-                            :active="colorMode === 'dark'"
-                            class="d-flex align-items-center"
-                            component="button"
-                            type="button"
-                            @click="setColorMode('dark')"
-                        >
-                            <CIcon class="me-2" icon="cil-moon" size="lg" />
-                            Dark
-                        </CDropdownItem>
-                        <CDropdownItem
-                            :active="colorMode === 'auto'"
-                            class="d-flex align-items-center"
-                            component="button"
-                            type="button"
-                            @click="setColorMode('auto')"
-                        >
-                            <CIcon class="me-2" icon="cil-contrast" size="lg" />
-                            Auto
-                        </CDropdownItem>
-                    </CDropdownMenu>
-                </CDropdown>
-                <li class="nav-item py-1">
-                    <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
-                </li>
                 <AppHeaderDropdownAccnt />
             </CHeaderNav>
         </CContainer>
