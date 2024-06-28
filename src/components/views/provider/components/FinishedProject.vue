@@ -42,7 +42,7 @@ const selectedHire = ref<HireInfor>();
 const hires = providerStore.hiresOfProviderComputed;
 const penddingHires = computed(() => {
     return hires.value.filter((e) => {
-        if (e.status === "done") {
+        if (e.status === "done" && !e.review) {
             return e;
         }
     });

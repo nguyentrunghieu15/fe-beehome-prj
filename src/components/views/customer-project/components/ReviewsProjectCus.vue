@@ -14,22 +14,14 @@
             :from="h.workTimeFrom"
             :to="h.workTimeTo"
             :describle="h.issue"
-            :actions="[
-                ActionProjectItem.APPROVE,
-                ActionProjectItem.DECLINE,
-                ActionProjectItem.MARK_DONE,
-            ]"
+            :actions="[]"
             :id="h.id"
         ></ProjectItem>
         <NoDataFound v-if="!penddingHires.length"></NoDataFound>
         <ProjectItemDetail
             v-if="isShowProjectDetail"
             v-model:model-value="isShowProjectDetail"
-            :actions="[
-                ActionProjectItem.APPROVE,
-                ActionProjectItem.DECLINE,
-                ActionProjectItem.MARK_DONE,
-            ]"
+            :actions="[]"
             :hire="selectedHire"
         ></ProjectItemDetail>
     </div>
@@ -56,7 +48,7 @@ onMounted(() => {
 
 const penddingHires = computed(() => {
     return hires.value.filter((e) => {
-        if (e.status === "pendding") {
+        if (e.status === "done" && e.review) {
             return e;
         }
     });

@@ -31,7 +31,6 @@ import NoDataFound from "@/components/base/NoDataFound.vue";
 import ProjectItem from "./ProjectItem.vue";
 import ProjectItemDetail from "./ProjectItemDetail.vue";
 import { computed, onMounted, proxyRefs, ref } from "vue";
-import { useProviderStore } from "@/stores/providerStore";
 import type { HireInfor } from "@/api/hire/interfaces";
 import { ActionProjectItem } from "../../provider/constants";
 import { useUserStore } from "@/stores/userStore";

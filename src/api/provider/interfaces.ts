@@ -60,6 +60,9 @@ export interface ReviewProRequest {
     providerId: string;
     rating: number;
     comment: string;
+    note: string;
+    userName: string;
+    hireId: string;
 }
 
 export interface SignUpProRequest {
@@ -110,6 +113,7 @@ export interface Review {
     comment: string;
     reply: string;
     serviceId: string;
+    note?: string;
 }
 
 export interface GetAllReviewOfProviderResponse {

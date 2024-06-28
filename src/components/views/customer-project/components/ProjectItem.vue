@@ -27,6 +27,18 @@
                     v-if="props.actions.includes(3)"
                     >Cancel</v-btn
                 >
+                <v-btn
+                    prepend-icon="mdi-comment-processing-outline"
+                    color="blue-lighten-1"
+                    v-if="props.actions.includes(4)"
+                    @click="emit('review')"
+                    >Review</v-btn
+                >
+                <v-btn
+                    prepend-icon="mdi-reply-outline"
+                    v-if="props.actions.includes(5)"
+                    >Reply</v-btn
+                >
             </div>
             <div class="absolute top-0 right-0">
                 <v-btn
@@ -43,6 +55,7 @@
 import hireService from "@/api/hire";
 import { useProviderStore } from "@/stores/providerStore";
 import type { ActionProjectItem } from "../../provider/constants";
+import { useUserStore } from "@/stores/userStore";
 
 const props = defineProps<{
     id: string;
@@ -55,14 +68,17 @@ const props = defineProps<{
 
 const emit = defineEmits<{
     view: [];
+    review: [];
 }>();
 
 const providerStore = useProviderStore();
+const userStore = useUserStore();
 
 async function onClickMarkDone(id: string) {
     try {
         await hireService.updateStatusHire(id, "done");
         providerStore.fetchHireOfProvider();
+        userStore.fetchHiresOfCustomer();
     } catch (error) {}
 }
 </script>

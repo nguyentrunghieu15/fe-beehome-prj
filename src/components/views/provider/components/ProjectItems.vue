@@ -42,6 +42,13 @@
                     v-if="props.actions.includes(3)"
                     >Cancel</v-btn
                 >
+                <v-btn
+                    color="blue-lighten-1"
+                    prepend-icon="mdi-elevation-decline"
+                    v-if="props.actions.includes(5)"
+                    @click="emit('reply')"
+                    >Reply</v-btn
+                >
             </div>
             <div class="absolute top-0 right-0">
                 <v-btn
@@ -70,6 +77,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
     view: [];
+    reply: [];
 }>();
 
 const providerStore = useProviderStore();

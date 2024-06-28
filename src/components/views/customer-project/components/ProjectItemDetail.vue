@@ -75,6 +75,17 @@
                         v-if="props.actions.includes(3)"
                         >Cancel</v-btn
                     >
+                    <v-btn
+                        prepend-icon="mdi-comment-processing-outline"
+                        color="blue-lighten-1"
+                        v-if="props.actions.includes(4)"
+                        >Review</v-btn
+                    >
+                    <v-btn
+                        prepend-icon="mdi-reply-outline"
+                        v-if="props.actions.includes(5)"
+                        >Reply</v-btn
+                    >
                 </div>
             </template>
         </Dialog>

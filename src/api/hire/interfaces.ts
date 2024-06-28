@@ -1,4 +1,4 @@
-import type { ProviderInfo } from "../provider/interfaces";
+import type { ProviderInfo, Review } from "../provider/interfaces";
 import type { Service } from "../service/interfaces";
 
 export interface CreateHireResponse {
@@ -49,6 +49,7 @@ export interface HireInfor {
     issue: string;
     service: Service;
     provider: ProviderInfo;
+    review?: Review;
 }
 
 export interface CreateHireRequest {

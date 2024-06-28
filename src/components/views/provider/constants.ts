@@ -3,4 +3,6 @@ export enum ActionProjectItem {
     APPROVE,
     DECLINE,
     CANCEL,
+    REVIEW,
+    REPLY,
 }
