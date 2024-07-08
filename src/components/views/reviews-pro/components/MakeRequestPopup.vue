@@ -49,6 +49,7 @@ import useForm from "../form/createHireForm";
 import { onMounted } from "vue";
 import type { Items } from "../constants/interfaces";
 import { useRoute } from "vue-router";
+import { useMainStore } from "@/stores/mainStore";
 
 const modelValue = defineModel<boolean>();
 
@@ -68,8 +69,17 @@ onMounted(() => {
     form.setFieldValue("providerId", providerId);
 });
 
+const mainStore = useMainStore();
+
 async function onSubmit() {
-    form.onSubmit();
-    emit("close");
+    try {
+        const res = await form.onSubmit();
+        emit("close");
+        mainStore.showNofitication({
+            content: "Make request success. Pendding from provider",
+            title: "Success",
+            typeNotification: "infor",
+        });
+    } catch (error) {}
 }
 </script>
