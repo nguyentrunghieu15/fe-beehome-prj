@@ -9,6 +9,7 @@
             :type="typeInput ? typeInput : 'date'"
             class="w-full h-[2.375rem] border rounded-lg px-2 py-1 focus:outline-none focus:ring focus:ring-blue-500"
             :class="[!modelValue ? 'text-slate-400' : '']"
+            :min="minDate"
         />
         <p
             v-if="props.errors"
@@ -24,6 +25,7 @@ const props = defineProps<{
     isRequired: boolean;
     typeInput?: string;
     errors?: string;
+    minDate?: string;
 }>();
 const modelValue = defineModel();
 </script>

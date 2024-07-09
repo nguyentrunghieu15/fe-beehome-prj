@@ -14,14 +14,15 @@
             <div class="flex gap-2">
                 <DatePicker
                     type-input="datetime-local"
-                    label="Form"
+                    label="Từ ngày"
                     :is-required="true"
                     v-model:model-value="form.workTimeFrom.value"
                     :errors="form.errors.value.workTimeFrom"
+                    min-date="2024/07/09"
                 ></DatePicker>
                 <DatePicker
                     type-input="datetime-local"
-                    label="To"
+                    label="Đến ngày"
                     :is-required="true"
                     v-model:model-value="form.workTimeTo.value"
                     :errors="form.errors.value.workTimeTo"
@@ -87,7 +88,7 @@ import { useRoute } from "vue-router";
 import { useMainStore } from "@/stores/mainStore";
 import type { AddressUnit } from "@/api/address-api/interfaces";
 import addressService from "@/api/address-api";
-import { join } from "lodash";
+import { join, now } from "lodash";
 import InputField from "@/components/base/InputField.vue";
 import AutoCompleteCombobox from "@/components/base/AutoCompleteCombobox.vue";
 const modelValue = defineModel<boolean>();

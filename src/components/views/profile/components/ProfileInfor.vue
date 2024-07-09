@@ -15,16 +15,16 @@
                 @click="$router.push({ name: 'account-settings' })"
                 >Chỉnh sửa thông tin tài khoản</v-btn
             >
-            <v-btn
+            <!-- <v-btn
                 class="justify-start mb-8 text-none"
                 rounded="0"
                 size="x-large"
                 block
                 append-icon="mdi-bell-ring"
                 >Cài đặt thông báo</v-btn
-            >
+            > -->
             <v-btn
-                class="justify-start text-none"
+                class="justify-start text-none mt-8"
                 rounded="0"
                 size="x-large"
                 block

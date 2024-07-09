@@ -42,7 +42,7 @@
             ></OverviewCard>
             <div>
                 <div>
-                    <div class="font-bold mb-2">Social media</div>
+                    <div class="font-bold mb-2">Kênh liên kết của nhà cung cấp:</div>
                     <div class="space-y-0.5">
                         <a
                             class="text-sky-500 mr-2 font-bold"
@@ -69,7 +69,7 @@
                 size="x-large"
                 prepend-icon="mdi-chat-outline"
                 color="blue-lighten-1"
-                >Message</v-btn
+                >Nhắn tin</v-btn
             >
             <v-btn
                 class="w-2/5"
@@ -77,7 +77,7 @@
                 color="blue-lighten-1"
                 prepend-icon="mdi-book-arrow-left-outline"
                 @click="emit('request')"
-                >Make a request</v-btn
+                >Tạo yêu cầu thuê</v-btn
             >
         </div>
     </div>

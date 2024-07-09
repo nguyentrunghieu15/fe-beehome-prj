@@ -7,7 +7,18 @@ export default function () {
     const schema = yup.object({
         providerId: yup.string().required("Provider ID is required"),
         serviceId: yup.string().required("Service ID is required"),
-        workTimeFrom: yup.string().required("Work time from is required"),
+        workTimeFrom: yup
+            .string()
+            .required("Work time from is required")
+            .test(
+                "is-after-now",
+                "Work time from must be after the current time",
+                function (value) {
+                    const now = new Date();
+                    return new Date(value) > now;
+                }
+            ),
+
         workTimeTo: yup
             .string()
             .required("Work time to is required")

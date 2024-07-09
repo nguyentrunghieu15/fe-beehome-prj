@@ -10,10 +10,10 @@
             <InputField
                 class=""
                 :is-required="true"
-                label="Zip code"
+                label="Vị trí"
             ></InputField>
             <DatePicker
-                label="Schedule"
+                label="Đặt lịch"
                 :is-required="true"
                 v-model:model-value="test"
             ></DatePicker>
