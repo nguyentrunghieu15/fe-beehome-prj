@@ -23,7 +23,7 @@
         </div>
         <div class="mt-4">
             <AreaTextField
-                label="Comment"
+                label="Nhận xét"
                 :is-disable="false"
                 :is-required="true"
                 :rows="4"
@@ -34,7 +34,7 @@
         </div>
         <div class="mt-4">
             <AreaTextField
-                label="Note"
+                label="Lưu ý"
                 :is-disable="false"
                 :is-required="true"
                 :rows="4"
@@ -45,13 +45,13 @@
         </div>
         <div class="flex justify-end gap-2">
             <v-btn prepend-icon="mdi-elevation-decline" @click="onClickCancel"
-                >Cancel</v-btn
+                >Hủy</v-btn
             >
             <v-btn
                 prepend-icon="mdi-comment-processing-outline"
                 color="blue-lighten-1"
                 @click="onSubmit"
-                >Submit</v-btn
+                >Nộp</v-btn
             >
         </div>
     </div>

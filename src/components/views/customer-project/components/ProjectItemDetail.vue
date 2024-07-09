@@ -6,7 +6,7 @@
         >
             <div class="mb-2 w-[40rem]">
                 <h4 class="px-4">
-                    <span class="font-bold">Provider:</span>
+                    <span class="font-bold">Nhà cung cấp:</span>
                     {{ hire?.provider?.name }}
                 </h4>
                 <div class="px-4">
@@ -19,7 +19,7 @@
                     ></OverviewCard>
                     <div>
                         <div>
-                            <div class="font-bold mb-2">Social media</div>
+                            <div class="font-bold mb-2">Kênh thông tin:</div>
                             <div class="space-y-0.5">
                                 <a
                                     class="text-sky-500 mr-2 font-bold"
@@ -40,14 +40,14 @@
                     </div>
                 </div>
                 <p class="px-4">
-                    <span class="font-bold">From:</span>
+                    <span class="font-bold">Từ này:</span>
                     {{ props.hire?.workTimeFrom }}
                 </p>
                 <p class="px-4">
-                    <span class="font-bold">To:</span> {{ hire?.workTimeTo }}
+                    <span class="font-bold">Đến ngày:</span> {{ hire?.workTimeTo }}
                 </p>
                 <p class="px-4">
-                    <span class="font-bold">Issue:</span> {{ hire?.issue }}
+                    <span class="font-bold">Mô tả vấn đề:</span> {{ hire?.issue }}
                 </p>
             </div>
             <template #actions>
@@ -56,24 +56,24 @@
                         color="blue-lighten-1"
                         prepend-icon="mdi-check-all"
                         v-if="props.actions.includes(0)"
-                        >Mark its done</v-btn
+                        >Xác nhận hoàn thành</v-btn
                     >
                     <v-btn
                         color="green-lighten-1"
                         prepend-icon="mdi-check-decagram"
                         v-if="props.actions.includes(1)"
-                        >Approve</v-btn
+                        >Chấp thuận</v-btn
                     >
                     <v-btn
                         color="red-lighten-1"
                         prepend-icon="mdi-elevation-decline"
                         v-if="props.actions.includes(2)"
-                        >Decline</v-btn
+                        >Từ chối</v-btn
                     >
                     <v-btn
                         prepend-icon="mdi-elevation-decline"
                         v-if="props.actions.includes(3)"
-                        >Cancel</v-btn
+                        >Hủy</v-btn
                     >
                     <v-btn
                         prepend-icon="mdi-comment-processing-outline"
@@ -84,7 +84,7 @@
                     <v-btn
                         prepend-icon="mdi-reply-outline"
                         v-if="props.actions.includes(5)"
-                        >Reply</v-btn
+                        >Phản hồi</v-btn
                     >
                 </div>
             </template>

@@ -34,7 +34,7 @@ import { useUserStore } from "@/stores/userStore";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 const curentNavItem = ref(0);
-const navItems = ref(["Pendding", "Started", "Finished", "Reviews"]);
+const navItems = ref(["Chờ xác nhận", "Đang bắt đầu", "Đã hoàn thành", "Đánh giá"]);
 const router = useRouter();
 
 function onClickNavItem(idx: number) {

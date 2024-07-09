@@ -4,13 +4,13 @@
             <div class="mb-2" @click="emit('view')">
                 <h3 class="text-2xl font-bold">{{ props.serviceName }}</h3>
                 <p class="px-4">
-                    <span class="font-bold">From:</span> {{ props.from }}
+                    <span class="font-bold">Từ ngày:</span> {{ props.from }}
                 </p>
                 <p class="px-4">
-                    <span class="font-bold">To:</span>{{ props.to }}
+                    <span class="font-bold">Đến ngày:</span>{{ props.to }}
                 </p>
                 <p class="px-4">
-                    <span class="font-bold">Issue:</span>
+                    <span class="font-bold">Mô tả vấn đề:</span>
                     {{ props.describle.slice(0, 255) }}
                 </p>
             </div>
@@ -20,24 +20,24 @@
                     prepend-icon="mdi-check-all"
                     v-if="props.actions.includes(0)"
                     @click="onClickMarkDone(id)"
-                    >Mark its done</v-btn
+                    >Xác nhận hoàn thành</v-btn
                 >
                 <v-btn
                     prepend-icon="mdi-elevation-decline"
                     v-if="props.actions.includes(3)"
-                    >Cancel</v-btn
+                    >Hủy</v-btn
                 >
                 <v-btn
                     prepend-icon="mdi-comment-processing-outline"
                     color="blue-lighten-1"
                     v-if="props.actions.includes(4)"
                     @click="emit('review')"
-                    >Review</v-btn
+                    >Đánh giá</v-btn
                 >
                 <v-btn
                     prepend-icon="mdi-reply-outline"
                     v-if="props.actions.includes(5)"
-                    >Reply</v-btn
+                    >Phản hồi</v-btn
                 >
             </div>
             <div class="absolute top-0 right-0">

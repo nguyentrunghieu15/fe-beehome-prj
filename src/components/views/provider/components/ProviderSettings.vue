@@ -229,6 +229,7 @@ onMounted(async () => {
         provinceUnits.value = (
             await addressService.findAllNameOfAddressUnit("province")
         ).unit;
+        provinceItems.value = []
         provinceUnits.value.forEach((element) => {
             provinceItems.value.push(element.name ?? "");
         });
@@ -249,6 +250,7 @@ onMounted(async () => {
                     provinceUnit?.code
                 )
             ).unit;
+            districtItems.value = []
             districtUnits.value.forEach((element) => {
                 districtItems.value.push(element.name ?? "");
             });
@@ -264,6 +266,7 @@ onMounted(async () => {
                     districtUnit?.code
                 )
             ).unit;
+            wardItems.value= []
             wardUnits.value.forEach((element) => {
                 wardItems.value.push(element.name ?? "");
             });
@@ -290,6 +293,7 @@ watch(province, async (newVal, oldVal) => {
                 provinceUnit?.code
             )
         ).unit;
+        districtItems.value = []
         districtUnits.value.forEach((element) => {
             districtItems.value.push(element.name ?? "");
         });
@@ -314,6 +318,7 @@ watch(district, async (newVal, oldVal) => {
                 districtUnit?.code
             )
         ).unit;
+        wardItems.value = []
         wardUnits.value.forEach((element) => {
             wardItems.value.push(element.name ?? "");
         });

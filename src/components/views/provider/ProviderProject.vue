@@ -33,7 +33,7 @@
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const curentNavItem = ref(0);
-const navItems = ref(["Request", "Starting", "Finished", "Reviews"]);
+const navItems = ref(["Yêu cầu đang chờ", "Đang tiến hành", "Hoàn thành", "Đánh giá"]);
 const router = useRouter();
 
 function onClickNavItem(idx: number) {

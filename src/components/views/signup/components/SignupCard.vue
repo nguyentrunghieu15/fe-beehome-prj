@@ -3,7 +3,7 @@
         <div class="grid grid-cols-2 gap-4">
             <InputField
                 :is-required="true"
-                label="First name:"
+                label="Họ:"
                 v-model:model-value="form.firstName.value"
                 type="text"
                 class="mb-6"
@@ -11,7 +11,7 @@
             ></InputField>
             <InputField
                 :is-required="true"
-                label="Last name:"
+                label="Tên:"
                 v-model:model-value="form.lastName.value"
                 type="Text"
                 class="mb-6"

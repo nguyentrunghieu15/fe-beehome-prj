@@ -22,6 +22,8 @@ export default function () {
         status: yup.string().optional(),
         paymentMethodId: yup.number().optional(),
         issue: yup.string().required("Issue is required"),
+        address: yup.string().required("address is required"),
+        fullAddress: yup.string().required("Issue is required"),
     });
 
     const {
@@ -52,7 +54,8 @@ export default function () {
     const [paymentMethodId, paymentMethodIdAttrs] =
         defineField("paymentMethodId");
     const [issue, issueAttrs] = defineField("issue");
-
+    const [address, addressAttrs] = defineField("address");
+    const [fullAddress, fullAddressAttrs] = defineField("fullAddress");
     return {
         onSubmit,
         providerId,
@@ -71,6 +74,10 @@ export default function () {
         issueAttrs,
         errors,
         isValidating,
+        address,
+        addressAttrs,
+        fullAddress,
+        fullAddressAttrs,
         resetForm,
         setFieldValue,
         validate,
