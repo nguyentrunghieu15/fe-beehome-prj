@@ -27,7 +27,7 @@
                 :is-disable="false"
                 :is-required="true"
                 :rows="4"
-                place-holder="Highly recommend to everyone."
+                place-holder="Khuyến khích mọi người dùng dịch vụ này."
                 :cols="4"
                 v-model:model-value="comment"
             ></AreaTextField>
@@ -39,7 +39,7 @@
                 :is-required="true"
                 :rows="4"
                 :cols="4"
-                place-holder="Best purchase of the year."
+                place-holder="Đây là dịch vụ đáng thuê nhất của năm."
                 v-model:model-value="note"
             ></AreaTextField>
         </div>

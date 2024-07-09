@@ -34,6 +34,10 @@
                         {{ hire?.workTimeTo }}
                     </p>
                     <p class="px-4">
+                        <span class="font-bold">Tại nơi:</span>
+                        {{ hire?.fullAddress }}
+                    </p>
+                    <p class="px-4">
                         <span class="font-bold">Mô tả vấn đề:</span> {{ hire?.issue }}
                     </p>
                 </div>
@@ -43,7 +47,7 @@
                     :rating="hire.review.rating"
                     :comment="hire.review.comment"
                     :note="hire.review?.note || ''"
-                    title="Thank you for your feedback!"
+                    title="Cảm ơn phản hồi của quý khách"
                     :author="hire.provider.name"
                     v-model:message="message"
                 ></ReplyCard>

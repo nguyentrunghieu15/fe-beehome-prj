@@ -40,14 +40,23 @@
                     </div>
                 </div>
                 <p class="px-4">
+                    <span class="font-bold">Thông tin yêu cầu thuê:</span>
+                </p>
+                <p class="px-6">
                     <span class="font-bold">Từ này:</span>
                     {{ props.hire?.workTimeFrom }}
                 </p>
-                <p class="px-4">
-                    <span class="font-bold">Đến ngày:</span> {{ hire?.workTimeTo }}
+                <p class="px-6">
+                    <span class="font-bold">Đến ngày:</span>
+                    {{ hire?.workTimeTo }}
                 </p>
-                <p class="px-4">
-                    <span class="font-bold">Mô tả vấn đề:</span> {{ hire?.issue }}
+                <p class="px-6">
+                    <span class="font-bold">Tại nơi:</span>
+                    {{ hire?.fullAddress }}
+                </p>
+                <p class="px-6">
+                    <span class="font-bold">Mô tả vấn đề:</span>
+                    {{ hire?.issue }}
                 </p>
             </div>
             <template #actions>
@@ -79,7 +88,7 @@
                         prepend-icon="mdi-comment-processing-outline"
                         color="blue-lighten-1"
                         v-if="props.actions.includes(4)"
-                        >Review</v-btn
+                        >Đánh giá</v-btn
                     >
                     <v-btn
                         prepend-icon="mdi-reply-outline"
