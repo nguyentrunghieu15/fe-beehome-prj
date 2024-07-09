@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="mb-4">
-            <div class="font-bold mb-2">Overviews</div>
+            <div class="font-bold mb-2">Tổng quan</div>
             <div class="space-y-0.5 text-gray-600">
                 <div>
                     <v-icon class="mr-2" icon="mdi-trophy-outline"></v-icon>
-                    <span>Hired {{ props.hiredTime }} times</span>
+                    <span>Được thuê {{ props.hiredTime }} lần</span>
                 </div>
                 <div>
                     <v-icon class="mr-2" icon="mdi-map-marker-outline"></v-icon>
@@ -13,29 +13,29 @@
                 </div>
                 <div>
                     <v-icon class="mr-2" icon="mdi-account-check"></v-icon>
-                    <span>Background checked</span>
+                    <span>Tài khoản đã được kiêm chứng</span>
                 </div>
                 <div>
                     <v-icon
                         class="mr-2"
                         icon="mdi-clock-time-eight-outline"
                     ></v-icon>
-                    <span>{{ props.yearExp }} years in business</span>
+                    <span>Có {{ props.yearExp }} năm kinh nghiệm</span>
                 </div>
                 <div>
                     <v-icon
                         class="mr-2"
                         icon=" mdi-account-group-outline"
                     ></v-icon>
-                    <span>{{ employee }} employees</span>
+                    <span>{{ employee }} nhân viên</span>
                 </div>
             </div>
         </div>
         <div>
-            <div class="font-bold mb-2">Payment methods</div>
+            <div class="font-bold mb-2">Phương thức thanh toán:</div>
             <div class="space-y-0.5 text-gray-600">
                 <p>
-                    This pro accepts payments via
+                    Nhà cung cấp ưu tiên thanh toán thông qua
                     {{ props.paymentMethods.join(", ") }}.
                 </p>
             </div>

@@ -7,7 +7,7 @@
             :initials="initialsAvatar"
         ></Avatar>
         <button class="bg-sky-500 text-white font-bold px-6 py-2 rounded mb-4">
-            Upload Photo
+            Tải ảnh
         </button>
         <p class="font-bold text-xl">
             {{ user?.firstName }} {{ user?.lastName }}
@@ -16,11 +16,11 @@
         <div class="grid grid-cols-2 divide-x">
             <div class="p-3 flex flex-column items-center">
                 <p class="text-xl font-bold">0</p>
-                <p class="text-slate-600">Projects</p>
+                <p class="text-slate-600">Số dự án</p>
             </div>
             <div class="p-3 flex flex-column items-center">
                 <p class="text-xl font-bold">0</p>
-                <p class="text-slate-600">Reviews</p>
+                <p class="text-slate-600">Số đánh giá</p>
             </div>
         </div>
     </div>

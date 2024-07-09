@@ -9,12 +9,12 @@
                     listServiceSelected = [];
                 }
             "
-            label="Add service"
+            label="Thêm mới dịch vụ"
         >
             <SearchInput
                 class="my-2"
                 :suggestions="listSuggestion"
-                placeholder="Search your need services"
+                placeholder="Tìm kiếm dịch vụ bạn cần"
                 @change-term="change"
                 @submit-term="onSubmitTerm"
                 @select-suggestion="onSelectItem"
@@ -35,7 +35,7 @@
             </div>
             <template #actions>
                 <v-btn rounded color="blue-lighten-1" @click="onClickSave"
-                    >Save</v-btn
+                    >Lưu</v-btn
                 >
             </template>
         </Dialog>

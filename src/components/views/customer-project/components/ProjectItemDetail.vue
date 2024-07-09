@@ -11,7 +11,7 @@
                 </h4>
                 <div class="px-4">
                     <OverviewCard
-                        :location="provider?.postalCode.place ?? ''"
+                        :location="provider?.address ?? ''"
                         :yearExp="hire?.provider.years ?? 0"
                         :paymentMethods="
                             provider?.paymentMethod?.map((e) => e.name) || []

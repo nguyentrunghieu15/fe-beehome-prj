@@ -8,54 +8,54 @@
                     variant="text"
                     prepend-icon="mdi-less-than"
                     @click="$router.replace({ path: '/profile' })"
-                    >Back</v-btn
+                    >Quay lại</v-btn
                 >
                 <p
                     class="flex justify-center font-semibold text-black text-3xl"
                 >
-                    Deactive account
+                    Vô hiệu hóa tài khoản
                 </p>
             </div>
             <p class="font-semibold text-black">
-                Are you sure you want to deactivate your account?
+                Bạn có chắc chắn muốn hủy kích hoạt tài khoản của mình không?
             </p>
             <p class="mb-2">
-                When you deactivate your account, you will lose access to all of
-                your projects, profile information, and any reviews you've
-                written or received on BeeHome.
+                Khi bạn hủy kích hoạt tài khoản của mình, bạn sẽ mất quyền truy
+                cập vào tất cả các dự án, thông tin hồ sơ và bất kỳ đánh giá nào
+                bạn đã viết hoặc nhận trên BeeHome.
             </p>
             <p class="mb-2">
-                If you're going on a vacation or need a break from leads, try
+                Nếu bạn đang đi nghỉ hoặc cần nghỉ ngơi, hãy thử
                 <a class="text-sky-500 hover:underline hover:cursor-pointer"
-                    >Hide my Business</a
+                    >Ẩn doanh nghiệp của tôi</a
                 >
-                instead.
+                thay vì.
             </p>
             <p class="mb-2">
-                If you are receiving too many emails from us, then you can
+                Nếu bạn nhận được quá nhiều email từ chúng tôi, bạn có thể
                 <a class="text-sky-500 hover:underline hover:cursor-pointer"
-                    >change your notification settings</a
+                    >thay đổi cài đặt thông báo của bạn</a
                 >.
             </p>
             <p class="mb-6">
-                We'd hate to see you go. If there's anything we can do to help,
-                please visit our
+                Chúng tôi không muốn thấy bạn rời đi. Nếu có bất cứ điều gì
+                chúng tôi có thể làm để giúp đỡ, vui lòng truy cập
                 <a class="text-sky-500 hover:underline hover:cursor-pointer"
-                    >Help Center</a
+                    >Trung tâm trợ giúp</a
                 >.
             </p>
             <InputField label="" :is-required="false"></InputField>
-            <p class="mb-2">Reason for deactivating your account (optional)</p>
+            <p class="mb-2">Lý do hủy kích hoạt tài khoản của bạn (tùy chọn)</p>
             <div class="mb-4">
                 <input
                     type="checkbox"
                     class="border border-gray-300 rounded mr-2"
                     v-model="isComfirm"
                 />
-                <span class="text-black"
-                    >I confirm I want to deactivate {{ user?.firstName }}
-                    {{ user?.lastName }}'s account</span
-                >
+                <span class="text-black">
+                    Tôi xác nhận tôi muốn hủy kích hoạt tài khoản của
+                    {{ user?.firstName }} {{ user?.lastName }}
+                </span>
             </div>
             <div class="flex">
                 <button

@@ -4,7 +4,7 @@
             <h1
                 class="flex justify-center py-6 text-4xl font-bold text-slate-700 w-full"
             >
-                Welcome BeeHome
+                Chào mừng tham gia BeeHome
             </h1>
             <LoginCard></LoginCard>
         </div>

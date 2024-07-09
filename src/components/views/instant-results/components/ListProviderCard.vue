@@ -1,13 +1,13 @@
 <template>
     <div class="flex-col px-4 space-y-4">
         <div v-if="provider.length" class="my-4 py-4">
-            <p class="font-bold text-3xl">Top 10 Pros near you</p>
-            <p class="text-gray-500">based on you criteria</p>
+            <p class="font-bold text-3xl">Các nhà cung cấp có thể gần bạn</p>
+            <p class="text-gray-500">dựa trên thônh tin timg kiếm</p>
         </div>
         <ProviderCard
             v-for="p in provider"
             :key="p.id"
-            :address="p.postalCode.place"
+            :address="p.address"
             :introduce="p.introduction"
             :name="p.name"
             :num-hires="p.numHires"
@@ -19,7 +19,7 @@
         <NoDataFound v-if="!provider.length"></NoDataFound>
         <div v-else class="flex justify-center py-8">
             <v-btn class="border" variant="text" color="grey-darken-1" rounded
-                >See more</v-btn
+                >Xem thêm</v-btn
             >
         </div>
     </div>
@@ -39,12 +39,12 @@ const provider = ref<Array<ProviderViewInfo>>([]);
 const route = useRoute();
 
 function loadData() {
-    if (route.query.name?.length && route.query.zipcode?.length) {
+    if (route.query.name?.length && route.query.address?.length) {
         providerService
             .findProviders({
                 filter: {
                     serviceName: route.query.name?.toString(),
-                    postalCode: route.query.zipcode?.toString(),
+                    address: route.query.address?.toString(),
                 },
             })
             .then((v) => {
@@ -60,14 +60,14 @@ onMounted(() => {
 watch(
     () => route.query.name,
     (newName, oldName) => {
-        if (newName?.length && route.query.zipcode?.length) {
+        if (newName?.length && route.query.address?.length) {
             loadData();
         }
     }
 );
 
 watch(
-    () => route.query.zipcode,
+    () => route.query.address,
     (newName, oldName) => {
         if (newName?.length && route.query.name?.length) {
             loadData();

@@ -11,25 +11,10 @@ export interface ProviderInfo {
     name: string;
     introduction: string;
     years: number;
-    postalCode: PostalCode;
+    address: string;
     numHires: number; // Not present in original interface, added from JSON
     socialMedias: SocialMedia[];
     paymentMethod: PaymentMethod[];
-}
-
-export interface PostalCode {
-    id: number;
-    countryCode: string;
-    zipcode: string;
-    place: string;
-    state: string;
-    stateCode: string;
-    province: string;
-    provinceCode: string;
-    community: string;
-    communityCode: string;
-    latitude: number;
-    longitude: number;
 }
 
 export interface AddPaymentMethodProRequest {
@@ -69,7 +54,7 @@ export interface SignUpProRequest {
     name: string;
     introduction: string;
     years: number;
-    postalCode: string;
+    address: string;
 }
 
 export interface FindProByIdResponse {
@@ -80,7 +65,7 @@ export interface ProServiceUpdateProBody {
     name?: string;
     introduction?: string;
     years?: number;
-    postalCode?: string;
+    address?: string;
 }
 
 export interface ProviderProfileResponse {
@@ -141,7 +126,7 @@ export interface ProviderViewInfo {
     name: string;
     introduction: string;
     years: number;
-    postalCode: PostalCode;
+    address: string;
     numHires: number;
     rating: Rating;
 }
@@ -160,7 +145,7 @@ export interface FilterProRequest {
     name?: string;
     introduction?: string;
     years?: number;
-    postalCode?: string;
+    address?: string;
     serviceName?: string;
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="text-bold font-bold text-2xl mb-4">Related service</h1>
+        <h1 class="text-bold font-bold text-2xl mb-4">Có thể bạn cần:</h1>
         <SingleSelected
             v-for="g in groups"
             :label="g.name"

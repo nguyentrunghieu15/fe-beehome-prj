@@ -18,32 +18,32 @@
                 @click="onClickAsCustomer"
                 class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer shrink-0"
             >
-                Join as customers
+                Tham gia với tư cách khách hàng
             </button>
         </div>
         <RouterLink
             :to="{ name: 'calendar' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Schedule</RouterLink
+            >Lịch trình</RouterLink
         >
         <RouterLink
             :to="{ name: '' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Inbox</RouterLink
+            >Nhắn Tin</RouterLink
         >
         <RouterLink
             :to="{ name: 'project-pro' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Project</RouterLink
+            >Dự án của bạn</RouterLink
         >
         <DropdownAvatar class="mr-4" avatar-url="" :initials="initialsAvatar">
             <RouterLink
                 :to="{ name: 'profile-pro' }"
                 class="block px-4 py-2 hover:bg-gray-100"
-                >Profile</RouterLink
+                >Hồ sơ</RouterLink
             >
             <p @click="logout" class="block px-4 py-2 hover:bg-gray-100">
-                Logout
+                Thoát
             </p>
         </DropdownAvatar>
     </div>

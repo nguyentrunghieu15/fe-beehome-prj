@@ -8,15 +8,17 @@
                     variant="text"
                     prepend-icon="mdi-less-than"
                     @click="$router.replace({ path: '/pro/profile' })"
-                    >Back</v-btn
+                    >Quay lại</v-btn
                 >
-                <p class="font-semibold text-3xl">Profile Information</p>
+                <p class="font-semibold text-3xl">
+                    Thông tin thương hiệu của bạn
+                </p>
             </div>
             <div class="w-[64rem] p-6">
                 <div class="grid grid-cols-5 gap-4">
                     <InputField
                         :is-required="true"
-                        label="Name:"
+                        label="Tên thương hiệu:"
                         type="text"
                         class="mb-6"
                         v-model:model-value="form.name.value"
@@ -24,29 +26,46 @@
                     ></InputField>
                     <InputField
                         :is-required="true"
-                        label="Year:"
+                        label="Năm khinh nghiệm:"
                         type="number"
                         v-model:model-value="form.years.value"
                         class="mb-6"
                         :errors="form.errors.value.years"
                     ></InputField>
                 </div>
-                <div>
-                    <InputField
+                <div class="w-full">
+                    <AutoCompleteCombobox
+                        label="Tỉnh / Thành phố trực thuộc trung ương"
+                        :items="provinceItems"
                         :is-required="true"
-                        label="Postal Code:"
-                        type="text"
-                        v-model:model-value="form.postalCode.value"
-                        class="mb-6 w-24"
-                        :errors="form.errors.value.postalCode"
-                    ></InputField>
+                        :errors="form.errors.value.address"
+                        v-model:model-value="province"
+                    ></AutoCompleteCombobox>
+                    <div class="grid grid-cols-2 gap-2">
+                        <AutoCompleteCombobox
+                            label="Thành phố / Huyện"
+                            :is-required="true"
+                            :items="districtItems"
+                            :errors="form.errors.value.address"
+                            v-model:model-value="district"
+                            :is-disable="!province"
+                        ></AutoCompleteCombobox>
+                        <AutoCompleteCombobox
+                            label="Phường / Thị trấn"
+                            :is-required="true"
+                            :items="wardItems"
+                            :errors="form.errors.value.address"
+                            v-model:model-value="ward"
+                            :is-disable="!district"
+                        ></AutoCompleteCombobox>
+                    </div>
                 </div>
                 <div>
                     <AreaTextField
                         :rows="10"
                         :cols="3"
                         :is-required="true"
-                        label="Introduction"
+                        label="Giới thiệu:"
                         v-model:model-value="form.introduction.value"
                         class="mb-6"
                         :errors="form.errors.value.introduction"
@@ -54,17 +73,17 @@
                 </div>
                 <v-btn
                     v-if="isShowSaveBtn"
-                    class="text-none ju"
+                    class="text-none"
                     rounded
                     color="blue-lighten-1"
                     size="large"
                     @click="onClickSave"
-                    >Save</v-btn
+                    >Lưu lại</v-btn
                 >
             </div>
             <div>
                 <div class="w-[64rem] mt-6 mb-2">
-                    <p class="font-semibold text-3xl">Services</p>
+                    <p class="font-semibold text-3xl">Dịch vụ của bạn</p>
                 </div>
                 <div class="w-[64rem] p-2 flex flex-wrap">
                     <ServiceItems
@@ -82,13 +101,13 @@
                         color="blue-lighten-1"
                         size="large"
                         @click="isShowAddServicePopup = true"
-                        >Add</v-btn
+                        >Thêm mới</v-btn
                     >
                 </div>
             </div>
             <div>
                 <div class="w-[64rem] mt-6 mb-2">
-                    <p class="font-semibold text-3xl">Social Media</p>
+                    <p class="font-semibold text-3xl">Đường dẫn liên kết</p>
                 </div>
                 <div class="w-[64rem] px-6 pb-6 flex flex-wrap">
                     <ul class="px-6 list-disc">
@@ -145,7 +164,7 @@
                                 }
                             }
                         "
-                        >Add</v-btn
+                        >Thêm mới</v-btn
                     >
                 </div>
             </div>
@@ -166,6 +185,10 @@ import AddServicePopup from "./AddServicePopup.vue";
 import useUpdateProviderForm from "../form/updateProviderForm";
 import SocialMediaItems from "./SocialMediaItems.vue";
 import useAddSocialMediaForm from "../form/addSocialMediaForm";
+import type { AddressUnit } from "@/api/address-api/interfaces";
+import addressService from "@/api/address-api";
+import AutoCompleteCombobox from "@/components/base/AutoCompleteCombobox.vue";
+import { join } from "lodash";
 
 const providerStore = useProviderStore();
 const provider = providerStore.providerComputed;
@@ -179,22 +202,146 @@ const isShowAddSocialMedia = ref(false);
 watch(provider, (newVal, oldVal) => {
     form.setFieldValue("name", newVal?.name);
     form.setFieldValue("years", newVal?.years);
-    form.setFieldValue("postalCode", newVal?.postalCode?.zipcode);
+    form.setFieldValue("address", newVal?.address);
     form.setFieldValue("introduction", newVal?.introduction);
 });
 
-onMounted(() => {
+const provinceUnits = ref<AddressUnit[]>([]);
+const districtUnits = ref<AddressUnit[]>([]);
+const wardUnits = ref<AddressUnit[]>([]);
+
+const provinceItems = ref<string[]>([]);
+const districtItems = ref<string[]>([]);
+const wardItems = ref<string[]>([]);
+
+const province = ref("");
+const district = ref("");
+const ward = ref("");
+let flagCounter = true;
+
+onMounted(async () => {
+    form.resetForm();
     form.setFieldValue("name", provider.value?.name);
     form.setFieldValue("years", provider.value?.years);
-    form.setFieldValue("postalCode", provider.value?.postalCode?.zipcode);
+    form.setFieldValue("address", provider.value?.address);
     form.setFieldValue("introduction", provider.value?.introduction);
+    try {
+        provinceUnits.value = (
+            await addressService.findAllNameOfAddressUnit("province")
+        ).unit;
+        provinceUnits.value.forEach((element) => {
+            provinceItems.value.push(element.name ?? "");
+        });
+    } catch (error) {}
+    const splitedAddress = provider.value?.address.split(",");
+    if (splitedAddress) {
+        province.value = splitedAddress[2].trim();
+        district.value = splitedAddress[1].trim();
+        ward.value = splitedAddress[0].trim();
+        const provinceUnit = provinceUnits.value.find(
+            (e) => e.name === province.value
+        );
+        try {
+            districtUnits.value = (
+                await addressService.findAllNameOfAddressUnit(
+                    "district",
+                    provinceUnit?.name,
+                    provinceUnit?.code
+                )
+            ).unit;
+            districtUnits.value.forEach((element) => {
+                districtItems.value.push(element.name ?? "");
+            });
+        } catch (error) {}
+        const districtUnit = districtUnits.value.find(
+            (e) => e.name === district.value
+        );
+        try {
+            wardUnits.value = (
+                await addressService.findAllNameOfAddressUnit(
+                    "ward",
+                    districtUnit?.name,
+                    districtUnit?.code
+                )
+            ).unit;
+            wardUnits.value.forEach((element) => {
+                wardItems.value.push(element.name ?? "");
+            });
+        } catch (error) {}
+    }
+});
+
+watch(province, async (newVal, oldVal) => {
+    if (!flagCounter) {
+        ward.value = "";
+        district.value = "";
+    } else {
+        return;
+    }
+    if (newVal === "") {
+        form.setFieldValue("address", "");
+    }
+    const provinceUnit = provinceUnits.value.find((e) => e.name === newVal);
+    try {
+        districtUnits.value = (
+            await addressService.findAllNameOfAddressUnit(
+                "district",
+                provinceUnit?.name,
+                provinceUnit?.code
+            )
+        ).unit;
+        districtUnits.value.forEach((element) => {
+            districtItems.value.push(element.name ?? "");
+        });
+    } catch (error) {}
+});
+
+watch(district, async (newVal, oldVal) => {
+    if (newVal === "") {
+        form.setFieldValue("address", "");
+    }
+    if (!flagCounter) {
+        ward.value = "";
+    } else {
+        return;
+    }
+    const districtUnit = districtUnits.value.find((e) => e.name === newVal);
+    try {
+        wardUnits.value = (
+            await addressService.findAllNameOfAddressUnit(
+                "ward",
+                districtUnit?.name,
+                districtUnit?.code
+            )
+        ).unit;
+        wardUnits.value.forEach((element) => {
+            wardItems.value.push(element.name ?? "");
+        });
+    } catch (error) {}
+});
+
+watch(ward, async (newVal, oldVal) => {
+    if (flagCounter) {
+        flagCounter = false;
+    }
+    if (newVal === "") {
+        form.setFieldValue("address", "");
+    } else {
+        form.setFieldValue(
+            "address",
+            join([newVal, district.value, province.value], ", ")
+        );
+    }
 });
 
 const isShowSaveBtn = computed(() => {
+    if (!form.address.value) {
+        return false;
+    }
     return (
         form.name.value !== provider.value?.name ||
         form.years.value !== provider.value?.years ||
-        form.postalCode.value !== provider.value?.postalCode.zipcode ||
+        form.address.value !== provider.value?.address ||
         form.introduction.value !== provider.value?.introduction
     );
 });

@@ -23,7 +23,7 @@
             <p>
                 {{ comment }}
             </p>
-            <p v-if="serviceName">Details: {{ serviceName }}</p>
+            <p v-if="serviceName">Chi tiết: {{ serviceName }}</p>
         </div>
         <div class="mt-4 p-4 bg-gray-50" v-if="reply">
             <p class="font-bold">{{ propName }} reply</p>

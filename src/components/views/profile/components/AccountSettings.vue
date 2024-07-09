@@ -7,17 +7,17 @@
                 variant="text"
                 prepend-icon="mdi-less-than"
                 @click="$router.replace({ path: '/profile' })"
-                >Back</v-btn
+                >Quay lại</v-btn
             >
             <p class="flex justify-center font-semibold text-3xl">
-                Edit personal information
+                Chỉnh sửa thông tin cá nhân
             </p>
         </div>
         <div class="w-[32rem] p-6">
             <div class="grid grid-cols-2 gap-4">
                 <InputField
                     :is-required="false"
-                    label="First name:"
+                    label="Họ:"
                     v-model:model-value="updateForm.firstName.value"
                     type="text"
                     class="mb-6"
@@ -25,7 +25,7 @@
                 ></InputField>
                 <InputField
                     :is-required="false"
-                    label="Last name:"
+                    label="Tên:"
                     v-model:model-value="updateForm.lastName.value"
                     type="text"
                     class="mb-6"
@@ -42,7 +42,7 @@
             ></InputField>
             <InputField
                 :is-required="false"
-                label="Phone:"
+                label="Số điện thoại:"
                 v-model:model-value="updateForm.phone.value"
                 type="text"
                 class="mb-6"
@@ -51,7 +51,7 @@
 
             <InputField
                 :is-required="false"
-                label="Timezone:"
+                label="Múi giờ:"
                 model-value="UTC +7.00"
                 type="text"
                 class="mb-6 w-1/2"
@@ -63,13 +63,13 @@
                     class="bg-sky-500 text-white py-2 px-6 text-xl font-bold rounded mr-2"
                     @click="submit"
                 >
-                    Save
+                    Lưu
                 </button>
                 <button
                     class="bg-gray-100 border-2 border-gray-400 py-2 px-6 text-xl font-bold rounded"
                     @click="$router.replace({ path: '/profile' })"
                 >
-                    Cancel
+                    Hủy
                 </button>
             </div>
         </div>

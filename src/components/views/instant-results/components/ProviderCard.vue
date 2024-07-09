@@ -23,23 +23,23 @@
                 <div class="text-gray-500 text-base">
                     <div>
                         <v-icon icon="mdi-trophy-variant-outline"></v-icon>
-                        <span>{{ numHires }} hires on BeeHome</span>
+                        <span>{{ numHires }} lần được thuê on BeeHome</span>
                     </div>
                     <div>
                         <v-icon icon="mdi-map-marker-radius-outline"></v-icon>
-                        <span>Near {{ address }}</span>
+                        <span>Khu vực {{ address }}</span>
                     </div>
                 </div>
                 <div class="flex items-center space-x-1 text-gray-500">
                     <div class="w-2 h-2 bg-green-500 rounded-xl"></div>
-                    <p>Online now - response about 4 min</p>
+                    <p>Online now - phản hồi trong khoảng 4 min</p>
                 </div>
                 <p class="text-gray-500">
-                    <span>Introduce: "</span
+                    <span>Giới thiệu: "</span
                     ><span>{{ introduce.slice(0, 255) }}"</span
                     ><span class="justify-self-end"
                         >...<button class="text-sky-500" @click="emit('more')">
-                            See more
+                            Xem thêm
                         </button></span
                     >
                 </p>
@@ -53,7 +53,7 @@
                     variants="elevated"
                     block
                     @click="emit('view')"
-                    >View Profile</v-btn
+                    >Xem chi tiết hồ sơ</v-btn
                 >
             </div>
         </div>

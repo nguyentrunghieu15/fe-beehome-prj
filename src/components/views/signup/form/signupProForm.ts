@@ -11,7 +11,7 @@ export default function () {
             .number()
             .positive("Years of experience must be positive")
             .required("Years of experience is required"),
-        postalCode: yup.string().required("Postal code is required"),
+        address: yup.string().required("address is required"),
         introduction: yup.string().required("Introduction is required"),
     });
 
@@ -34,7 +34,7 @@ export default function () {
 
     const [name, nameAttrs] = defineField("name");
     const [years, yearsAttrs] = defineField("years");
-    const [postalCode, postalCodeAttrs] = defineField("postalCode");
+    const [address, addressAttrs] = defineField("address");
     const [introduction, introductionAttrs] = defineField("introduction");
 
     return {
@@ -43,8 +43,8 @@ export default function () {
         nameAttrs,
         years,
         yearsAttrs,
-        postalCode,
-        postalCodeAttrs,
+        address,
+        addressAttrs,
         introduction,
         introductionAttrs,
         errors,

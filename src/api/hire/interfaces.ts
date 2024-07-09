@@ -29,6 +29,8 @@ export interface Hire {
     status: string;
     paymentMethodId: string;
     issue: string;
+    address: string;
+    fullAddress: string;
 }
 
 export interface HireInfor {
@@ -50,6 +52,8 @@ export interface HireInfor {
     service: Service;
     provider: ProviderInfo;
     review?: Review;
+    address: string;
+    fullAddress: string;
 }
 
 export interface CreateHireRequest {
@@ -60,6 +64,8 @@ export interface CreateHireRequest {
     status?: string;
     paymentMethodId?: number;
     issue: string;
+    address: string;
+    fullAddress:string
 }
 
 export interface FindAllHiresRequest {

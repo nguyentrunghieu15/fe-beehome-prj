@@ -1,9 +1,9 @@
 <template>
     <div class="py-4">
-        <p class="text-xl font-bold">Reviews</p>
+        <p class="text-xl font-bold">Đánh giá</p>
         <p>
-            Customers rated this pro highly for work quality, professionalism,
-            and responsiveness.
+            Khách hàng đánh giá cao chuyên gia này về chất lượng công việc, tính
+            chuyên nghiệp, và khả năng phản hồi.
         </p>
         <div class="block">
             <RatingCard
@@ -28,9 +28,10 @@
                     ></ProgressBar>
                     <span
                         >{{
-                           ( totalRating
+                            (totalRating
                                 ? (100 * counterRate[i - 1]) / totalRating
-                                : 0).toFixed(2)
+                                : 0
+                            ).toFixed(2)
                         }}%</span
                     >
                 </div>

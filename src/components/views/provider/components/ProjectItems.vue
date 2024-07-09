@@ -4,13 +4,13 @@
             <div class="mb-2" @click="emit('view')">
                 <h3 class="text-2xl font-bold">{{ props.serviceName }}</h3>
                 <p class="px-4">
-                    <span class="font-bold">From:</span> {{ props.from }}
+                    <span class="font-bold">Từ ngày:</span> {{ props.from }}
                 </p>
                 <p class="px-4">
-                    <span class="font-bold">To:</span>{{ props.to }}
+                    <span class="font-bold">Tới ngày:</span>{{ props.to }}
                 </p>
                 <p class="px-4">
-                    <span class="font-bold">Issue:</span>
+                    <span class="font-bold">Mô tả vấn đề:</span>
                     {{ props.describle.slice(0, 255) }}
                 </p>
             </div>
@@ -20,34 +20,34 @@
                     prepend-icon="mdi-check-all"
                     v-if="props.actions.includes(0)"
                     @click="onClickMarkDone(id)"
-                    >Mark its done</v-btn
+                    >Xác nhận hoàn thành</v-btn
                 >
                 <v-btn
                     color="green-lighten-1"
                     prepend-icon="mdi-check-decagram"
                     v-if="props.actions.includes(1)"
                     @click="onClickApprove(id)"
-                    >Approve</v-btn
+                    >Đồng ý yêu cầu</v-btn
                 >
                 <v-btn
                     color="red-lighten-1"
                     prepend-icon="mdi-elevation-decline"
                     v-if="props.actions.includes(2)"
                     @click="onClickDecline(id)"
-                    >Decline</v-btn
+                    >Từ chối yêu cầu</v-btn
                 >
                 <v-btn
                     color="red-lighten-1"
                     prepend-icon="mdi-elevation-decline"
                     v-if="props.actions.includes(3)"
-                    >Cancel</v-btn
+                    >Hủy</v-btn
                 >
                 <v-btn
                     color="blue-lighten-1"
                     prepend-icon="mdi-elevation-decline"
                     v-if="props.actions.includes(5)"
                     @click="emit('reply')"
-                    >Reply</v-btn
+                    >Phản hồi đánh giá</v-btn
                 >
             </div>
             <div class="absolute top-0 right-0">

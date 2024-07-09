@@ -18,32 +18,32 @@
                 @click="onClickAsPro"
                 class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer shrink-0"
             >
-                {{ isProvider ? "Join as a pro" : "Sign up as a pro" }}
+                {{ isProvider ? "Tham gia với tư cách nhà cung cấp" : "Đăng kí thương hiệu của bạn" }}
             </button>
         </div>
         <RouterLink
             :to="{ name: 'cus-project' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Project</RouterLink
+            >Dự án của bạn</RouterLink
         >
         <RouterLink
             :to="{ name: 'error' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Team</RouterLink
+            >Nhóm</RouterLink
         >
         <RouterLink
             :to="{ name: 'error' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Inbox</RouterLink
+            >Nhắn tin</RouterLink
         >
         <DropdownAvatar class="mr-4" avatar-url="" :initials="initialsAvatar">
             <RouterLink
                 :to="{ path: '/profile' }"
                 class="block px-4 py-2 hover:bg-gray-100"
-                >Profile</RouterLink
+                >Hồ sơ cá nhân</RouterLink
             >
             <p @click="logout" class="block px-4 py-2 hover:bg-gray-100">
-                Logout
+                Thoát
             </p>
         </DropdownAvatar>
     </div>

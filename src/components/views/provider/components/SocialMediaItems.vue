@@ -24,8 +24,8 @@
             @click="isOpenDeletePopup = !isOpenDeletePopup"
         ></v-btn>
         <comfirm-popup
-            title="Remove social media"
-            :content="'Are you sure delete ' + props.name + ' link'"
+            title="Xóa đường dẫn liên kết"
+            :content="'Bạn có chắc chắn xóa ' + props.name + ' link?'"
             v-model:is-open="isOpenDeletePopup"
             @confirm="onRemove"
         ></comfirm-popup>

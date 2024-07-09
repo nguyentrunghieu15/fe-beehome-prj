@@ -9,7 +9,7 @@
                     style="font-weight: bold"
                     color="blue-darken-1"
                     @click="$emit('onclick-component', 'pro')"
-                    >hire a pro</v-btn
+                    >Thuê nhà cung cấp</v-btn
                 >
                 <v-btn
                     variant="text"
@@ -18,16 +18,16 @@
                     style="font-weight: bold"
                     class="px-0 md:px-6"
                     @click="$emit('onclick-component', 'customer')"
-                    >find customers</v-btn
+                    >Tìm kiếm khách hàng</v-btn
                 >
             </div>
             <div class="mb-8 text-4xl font-extrabold">
-                Meet new customers in your area.
+                Tìm kiếm khách hàng tiềm năng cho bạn.
             </div>
-            <p class="mb-4">Sign up to start growing your business.</p>
+            <p class="mb-4">Haỹ đăng kí để bắt đầu xây dựng thương hiệu.</p>
             <div>
                 <v-btn variant="elevated" color="blue-darken-1"
-                    >Get started</v-btn
+                    >Bắt đầu</v-btn
                 >
             </div>
         </div>

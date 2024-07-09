@@ -4,182 +4,123 @@
             <div class="mb-6">
                 <p tag="b">
                     <p class="font-bold">BeeHome</p>
-                    Consider it done.
+                    Xem như đã hoàn thành.
                 </p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >About</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Giới thiệu</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Careers</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Nghề nghiệp</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Press</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Báo chí</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p size="small" class="hover:text-blue-700" type="info"
-                    >Blog</p
-                >
+                <p size="small" class="hover:text-blue-700" type="info">Blog</p>
             </div>
             <div class="mb-2 flex">
                 <v-icon icon="mdi-camera"></v-icon>
-                <v-icon icon="mdi-facebook"></v-icon
-                ><v-icon icon="mdi-twitter"></v-icon>
+                <v-icon icon="mdi-facebook"></v-icon>
+                <v-icon icon="mdi-twitter"></v-icon>
             </div>
         </div>
         <div class="flex flex-col justify-start">
             <div class="mb-6">
-                <p tag="b"> Customers</p>
+                <p tag="b">Khách hàng</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" type="info" size="small"
-                    >How to use BeeHome</p
-                >
+                <p class="hover:text-blue-700" type="info" size="small">Cách sử dụng BeeHome</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Sign up</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Đăng ký</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Get the app</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Tải ứng dụng</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Services near me</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Dịch vụ gần tôi</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Cost estimates</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Ước tính chi phí</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p size="small" type="info">Home resource center</p>
+                <p size="small" type="info">Trung tâm tài nguyên nhà</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Home inspiration pictures</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Hình ảnh cảm hứng nhà</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Small business survey</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Khảo sát doanh nghiệp nhỏ</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Questions and answers</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Câu hỏi và trả lời</p>
             </div>
         </div>
         <div class="flex flex-col justify-start">
             <div class="mb-6">
-                <p tag="b">Pros</p>
+                <p tag="b">Chuyên gia</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" type="info" size="small"
-                    >BeeHome for pros</p
-                >
+                <p class="hover:text-blue-700" type="info" size="small">BeeHome cho chuyên gia</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Sign up as a pro</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Đăng ký làm chuyên gia</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Community</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Cộng đồng</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Pro Resources</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Tài nguyên chuyên gia</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Success stories</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Câu chuyện thành công</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Pro reviews</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Đánh giá chuyên gia</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >iPhone app for pros</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Ứng dụng iPhone cho chuyên gia</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Android app for pros</p
-                >
-            </div>
-        </div>
-
-        <div class="flex flex-col justify-start">
-            <div class="mb-6">
-                <p tag="b">Support</p>
-            </div>
-            <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" type="info" size="small"
-                    >Help</p
-                >
-            </div>
-            <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Safety</p
-                >
-            </div>
-            <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Terms of Use</p
-                >
-            </div>
-            <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Privacy Policy</p
-                >
-            </div>
-            <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >CA Notice at Collection</p
-                >
-            </div>
-            <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Do not Sell or Share My Personal Information</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Ứng dụng Android cho chuyên gia</p>
             </div>
         </div>
         <div class="flex flex-col justify-start">
             <div class="mb-6">
-                <p tag="b">Related Links</p>
+                <p tag="b">Hỗ trợ</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" type="info" size="small"
-                    >Find a tax preparer near New York, NY</p
-                >
+                <p class="hover:text-blue-700" type="info" size="small">Trợ giúp</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Find a mobile dog groomer near you</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">An toàn</p>
             </div>
             <div class="mb-2 hover:underline">
-                <p class="hover:text-blue-700" size="small" type="info"
-                    >Find a Mobile Notary near Manhattan, NY</p
-                >
+                <p class="hover:text-blue-700" size="small" type="info">Điều khoản sử dụng</p>
+            </div>
+            <div class="mb-2 hover:underline">
+                <p class="hover:text-blue-700" size="small" type="info">Chính sách bảo mật</p>
+            </div>
+            <div class="mb-2 hover:underline">
+                <p class="hover:text-blue-700" size="small" type="info">Thông báo CA tại điểm thu thập</p>
+            </div>
+            <div class="mb-2 hover:underline">
+                <p class="hover:text-blue-700" size="small" type="info">Không bán hoặc chia sẻ thông tin cá nhân của tôi</p>
+            </div>
+        </div>
+        <div class="flex flex-col justify-start">
+            <div class="mb-6">
+                <p tag="b">Liên kết liên quan</p>
+            </div>
+            <div class="mb-2 hover:underline">
+                <p class="hover:text-blue-700" type="info" size="small">Tìm người chuẩn bị thuế gần Hà Nội</p>
+            </div>
+            <div class="mb-2 hover:underline">
+                <p class="hover:text-blue-700" size="small" type="info">Tìm người chăm sóc chó di động gần bạn</p>
+            </div>
+            <div class="mb-2 hover:underline">
+                <p class="hover:text-blue-700" size="small" type="info">Tìm công chứng viên di động gần Hà Nội</p>
             </div>
         </div>
     </div>

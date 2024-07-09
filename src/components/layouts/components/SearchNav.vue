@@ -14,27 +14,29 @@
             >
             <SearchInput
                 :suggestions="listSuggestion"
-                placeholder="What's on to-do list?"
-                custom-style="ml-4 w-96 border text-gray-900 border-gray-300  text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block "
+                placeholder="Tìm kiếm dịch vụ bạn muốn"
+                custom-style="ml-4 w-48 border text-gray-900 border-gray-300  text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block "
                 @change-term="change"
                 @submit-term="onSubmitTerm"
                 @select-suggestion="onSelectItem"
                 v-model:model-value="todo"
             ></SearchInput>
-            <input
-                type="text"
-                class="w-24 border focus:text-gray-900 border-gray-300 text-gray-400 text-sm focus:ring-blue-500 focus:border-blue-500 block dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Zipcode"
-                v-model="zipcode"
-                @keyup.enter="onClickSearch"
-            />
+            <SearchInput
+                :suggestions="listSuggestionAddress"
+                placeholder="Địa chỉ"
+                custom-style="w-80 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block"
+                @change-term="changeAddress"
+                @submit-term="onSubmitAddressTerm"
+                @select-suggestion="onSelectAddressItem"
+                v-model:model-value="addressUnit"
+            ></SearchInput>
             <v-btn
                 class="m-0"
                 rounded="0"
                 color="primary"
                 @click="onClickSearch"
             >
-                Search
+                Tìm kiếm
                 <v-icon icon="mdi-magnify"></v-icon>
             </v-btn>
         </div>
@@ -43,32 +45,36 @@
                 @click="onClickAsPro"
                 class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer shrink-0"
             >
-                {{ isProvider ? "Join up as a pro" : "Sign up as a pro" }}
+                {{
+                    isProvider
+                        ? "Tham gia với tư cách khách hàng"
+                        : "Tham gia với tư cách nhà cung cấp"
+                }}
             </button>
         </div>
         <RouterLink
             :to="{ name: 'cus-project' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Project</RouterLink
+            >Dự án của bạn</RouterLink
         >
         <RouterLink
             :to="{ name: '' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Team</RouterLink
+            >Nhóm</RouterLink
         >
         <RouterLink
             :to="{ name: '' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Inbox</RouterLink
+            >Nhắn Tin</RouterLink
         >
         <DropdownAvatar class="mr-4" avatar-url="" :initials="initialsAvatar">
             <RouterLink
                 :to="{ path: '/profile' }"
                 class="block px-4 py-2 hover:bg-gray-100"
-                >Profile</RouterLink
+                >Hồ sơ</RouterLink
             >
             <p @click="logout" class="block px-4 py-2 hover:bg-gray-100">
-                Logout
+                Thoát
             </p>
         </DropdownAvatar>
     </div>
@@ -81,6 +87,7 @@ import { useUserStore } from "@/stores/userStore";
 import SearchInput from "@/components/base/SearchInput.vue";
 import type { ISuggestion } from "@/components/base/constants";
 import serviceManagerService from "@/api/service";
+import addressService from "@/api/address-api";
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -123,8 +130,6 @@ onMounted(() => {
 
 const listSuggestion = ref<Array<ISuggestion>>([]);
 const todo = ref("");
-const zipcode = ref("");
-
 function onSubmitTerm(value: string) {
     serviceManagerService.fulltextSearchServices(value).then((services) => {
         listSuggestion.value = services.services.map((e) => {
@@ -145,13 +150,35 @@ function onSelectItem(v: ISuggestion) {
     listSuggestion.value = [];
 }
 
+const listSuggestionAddress = ref<Array<ISuggestion>>([]);
+const addressUnit = ref("");
+function onSubmitAddressTerm(value: string) {
+    addressService.findAllAddress(value).then((addresss) => {
+        listSuggestionAddress.value = addresss.address.map((e) => {
+            return {
+                id: e,
+                text: e,
+            };
+        });
+    });
+}
+
+function changeAddress() {
+    listSuggestionAddress.value = [];
+}
+
+function onSelectAddressItem(v: ISuggestion) {
+    addressUnit.value = v.text;
+    listSuggestionAddress.value = [];
+}
+
 function onClickSearch() {
-    if (!todo.value || !zipcode.value) return;
+    if (!todo.value || !addressUnit.value) return;
     router.replace({
         name: "view-results",
         query: {
             name: todo.value,
-            zipcode: zipcode.value,
+            address: addressUnit.value,
         },
     });
 }

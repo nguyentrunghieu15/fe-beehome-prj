@@ -13,7 +13,7 @@
                 block
                 append-icon="mdi-account-circle"
                 @click="$router.push({ name: 'account-settings' })"
-                >Account settings</v-btn
+                >Chỉnh sửa thông tin tài khoản</v-btn
             >
             <v-btn
                 class="justify-start mb-8 text-none"
@@ -21,7 +21,7 @@
                 size="x-large"
                 block
                 append-icon="mdi-bell-ring"
-                >Nofitication settings</v-btn
+                >Cài đặt thông báo</v-btn
             >
             <v-btn
                 class="justify-start text-none"
@@ -29,7 +29,7 @@
                 size="x-large"
                 block
                 @click="$router.push({ name: 'delete-account' })"
-                >Deactive account</v-btn
+                >Vô hiệu hóa tài khoản</v-btn
             >
         </div>
     </div>

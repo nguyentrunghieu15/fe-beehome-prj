@@ -15,17 +15,17 @@
         </div>
         <a
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Explore</a
+            >Thông tin</a
         >
         <RouterLink
             :to="{ name: 'signup' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Sign up</RouterLink
+            >Đăng kí</RouterLink
         >
         <RouterLink
             :to="{ name: 'login' }"
             class="flex items-center h-full px-4 text-slate-600 hover:border-b-slate-300 hover:border-b-2 z-20"
-            >Log in</RouterLink
+            >Đăng nhập</RouterLink
         >
     </div>
 </template>

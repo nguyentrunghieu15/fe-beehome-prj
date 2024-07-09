@@ -1,14 +1,14 @@
 <template>
     <Dialog label="Make a request" v-model:model-value="modelValue">
         <div class="py-2 w-[40rem]">
-            <h1 class="text-sm font-bold">Select your service</h1>
+            <h1 class="text-sm font-bold">Lựa chọn dịch vụ bạn muốn thuê</h1>
             <v-autocomplete
                 base-color="white"
                 item-title="name"
                 item-value="id"
                 :items="props.listService"
                 variant="solo"
-                placeholder="What's on to-do list?"
+                placeholder="Tên dichj vụ bạn cần là gì?"
                 v-model="form.serviceId.value"
             ></v-autocomplete>
             <div class="flex gap-2">
@@ -28,7 +28,7 @@
                 ></DatePicker>
             </div>
             <AreaTextField
-                label="Describle your issue"
+                label="Mô tả vấn đề của bạn"
                 :isRequired="true"
                 :rows="10"
                 :cols="5"
@@ -36,8 +36,8 @@
             ></AreaTextField>
         </div>
         <template #actions>
-            <v-btn class="mr-2" @click="emit('close')">Cancel</v-btn>
-            <v-btn color="blue-lighten-1" @click="onSubmit">Create</v-btn>
+            <v-btn class="mr-2" @click="emit('close')">Hủy</v-btn>
+            <v-btn color="blue-lighten-1" @click="onSubmit">Thuê</v-btn>
         </template>
     </Dialog>
 </template>

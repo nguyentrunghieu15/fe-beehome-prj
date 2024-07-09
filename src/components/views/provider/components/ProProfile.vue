@@ -13,7 +13,7 @@
                 block
                 append-icon="mdi-account-circle"
                 @click="$router.push({ name: 'provider-settings' })"
-                >Provider settings</v-btn
+                >Chỉnh sửa thông tin thương hiệu</v-btn
             >
             <v-btn
                 class="justify-start mb-8 text-none"
@@ -21,14 +21,14 @@
                 size="x-large"
                 block
                 append-icon="mdi-bell-ring"
-                >Nofitication settings</v-btn
+                >Cài đặt thông báo</v-btn
             >
             <v-btn
                 class="justify-start text-none"
                 rounded="0"
                 size="x-large"
                 block
-                >Deactive Provider</v-btn
+                >Vô hiệu hóa thương hiệu</v-btn
             >
         </div>
     </div>

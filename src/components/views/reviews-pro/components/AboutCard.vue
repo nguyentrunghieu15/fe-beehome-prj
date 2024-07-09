@@ -35,7 +35,7 @@
             <OverviewCard
                 :year-exp="provider?.years || 0"
                 :hired-time="provider?.numHires ?? 0"
-                :location="provider?.postalCode.place || ''"
+                :location="provider?.address || ''"
                 :payment-methods="
                     provider?.paymentMethod.map((e) => e.name) || []
                 "

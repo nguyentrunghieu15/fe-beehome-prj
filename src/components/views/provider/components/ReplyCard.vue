@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="max-w-sm rounded overflow-hidden shadow-lg p-4 bg-white">
-            <div class="font-bold text-xl mb-2">User review:</div>
+            <div class="font-bold text-xl mb-2">Đánh giá của khách hàng:</div>
             <div class="mt-4">
-                <span class="font-bold">Rating:</span>
+                <span class="font-bold">Số điểm:</span>
                 <div class="flex items-center">
                     <span
                         v-for="n in rating"
@@ -22,11 +22,11 @@
                 </div>
             </div>
             <div class="mt-4">
-                <span class="font-bold">Comment:</span>
+                <span class="font-bold">Nhận xét:</span>
                 <p class="text-gray-700">{{ comment }}</p>
             </div>
             <div class="mt-4">
-                <span class="font-bold">Note:</span>
+                <span class="font-bold">Lưu ý:</span>
                 <p class="text-gray-700">{{ note }}</p>
             </div>
         </div>
