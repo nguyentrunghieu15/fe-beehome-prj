@@ -2,7 +2,7 @@
     <div class="flex-col px-4 space-y-4">
         <div v-if="provider.length" class="my-4 py-4">
             <p class="font-bold text-3xl">Các nhà cung cấp có thể gần bạn</p>
-            <p class="text-gray-500">dựa trên thônh tin timg kiếm</p>
+            <p class="text-gray-500">dựa trên thônh tin tìm kiếm</p>
         </div>
         <ProviderCard
             v-for="p in provider"
@@ -18,7 +18,12 @@
         ></ProviderCard>
         <NoDataFound v-if="!provider.length"></NoDataFound>
         <div v-else class="flex justify-center py-8">
-            <v-btn class="border" variant="text" color="grey-darken-1" rounded
+            <v-btn
+                class="border"
+                variant="text"
+                color="grey-darken-1"
+                rounded
+                @click="loadData"
                 >Xem thêm</v-btn
             >
         </div>
@@ -38,17 +43,27 @@ const provider = ref<Array<ProviderViewInfo>>([]);
 
 const route = useRoute();
 
+const curentPage = ref(0);
+
 function loadData() {
     if (route.query.name?.length && route.query.address?.length) {
+        const name = route.query.name?.toString();
+        const address = route.query.address?.toString();
         providerService
             .findProviders({
                 filter: {
-                    serviceName: route.query.name?.toString(),
-                    address: route.query.address?.toString(),
+                    serviceName: name,
+                    address: address,
+                },
+                pagination: {
+                    limit: 10,
+                    page: curentPage.value,
+                    pageSize: 10,
                 },
             })
             .then((v) => {
-                provider.value = v.providers;
+                curentPage.value++;
+                provider.value.push(...v.providers);
             });
     }
 }

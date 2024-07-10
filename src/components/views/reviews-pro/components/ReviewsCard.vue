@@ -15,7 +15,8 @@
                 <div
                     v-for="i in 5"
                     :key="i"
-                    class="flex items-center space-x-2"
+                    class="flex items-center space-x-2 hover:bg-gray-300"
+                    @click="emit('clickRate', i)"
                 >
                     <span>{{ i }}</span>
                     <v-icon icon="mdi-star" size="10" class="text-amber-500">
@@ -47,5 +48,9 @@ const prop = defineProps<{
     totalRating: number;
     avgRating: number;
     counterRate: number[];
+}>();
+
+const emit = defineEmits<{
+    clickRate: [rate: number];
 }>();
 </script>

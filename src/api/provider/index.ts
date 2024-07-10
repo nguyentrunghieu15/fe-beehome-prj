@@ -19,6 +19,7 @@ import type {
     FindProsRequest,
     GetAllReviewOfProviderResponse,
     UpdateSocialMediaProRequest,
+    GetReviewsOfProviderRequest,
 } from "./interfaces";
 import { AuthInterceptor } from "../user/interceptor";
 import {
@@ -134,7 +135,21 @@ export class ProviderService extends BaseService {
     ): Promise<GetAllReviewOfProviderResponse> {
         const response =
             await this.axiosInstance.get<GetAllReviewOfProviderResponse>(
-                `/${id}/reviews`
+                `/${id}/reviews/all`
+            );
+        return response.data;
+    }
+
+     // New method to get filtered reviews of a provider
+     public async getReviewsOfProvider(
+        id: string,
+        query: GetReviewsOfProviderRequest
+    ): Promise<GetAllReviewOfProviderResponse> {
+        const response =
+            await this.axiosInstance.get<GetAllReviewOfProviderResponse>(
+                `/${id}/reviews`, {
+                    params: query
+                }
             );
         return response.data;
     }

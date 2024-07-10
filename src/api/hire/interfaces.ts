@@ -65,11 +65,19 @@ export interface CreateHireRequest {
     paymentMethodId?: number;
     issue: string;
     address: string;
-    fullAddress:string
+    fullAddress: string;
 }
 
 export interface FindAllHiresRequest {
     userId?: string;
     providerId?: string;
     status?: string;
+}
+
+export enum HireStatus {
+    PENDDING = "pendding",
+    START = "starting",
+    FINISH = "finished",
+    REVIEW = "review",
+    CANCEL = "cancel",
 }

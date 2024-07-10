@@ -14,6 +14,7 @@
                     :avg-rating="avgRating"
                     :total-rating="totalRating"
                     :counter-rate="counterRate"
+                    @clickRate="onClickRate"
                 ></ReviewsCard>
                 <FeedbackCard
                     v-for="r in reviews"
@@ -27,6 +28,16 @@
                     :reply="r.reply"
                     :service-name="r.service?.name"
                 ></FeedbackCard>
+                <div class="flex justify-center py-8">
+                    <v-btn
+                        class="border"
+                        variant="text"
+                        color="grey-darken-1"
+                        rounded
+                        @click="loadReview"
+                        >Xem thêm</v-btn
+                    >
+                </div>
             </div>
             <div v-if="currentProvider?.id !== route.query.id">
                 <ContactCard class="sticky top-10"></ContactCard>
@@ -85,18 +96,37 @@ function loadData() {
     }
 }
 
+let counterPage = 0;
+let filter = 0;
 function loadReview() {
     const providerId = route.query.id?.toString() ?? "";
-    providerService.getAllReviewsOfProvider(providerId).then((e) => {
-        reviews.value = e.reviews;
-        let sumRate = 0;
-        e.reviews.forEach((element) => {
-            totalRating.value++;
-            sumRate = sumRate + element.rating;
-            counterRate.value[element.rating - 1]++;
+    providerService
+        .getReviewsOfProvider(providerId, {
+            "filter.rating": filter,
+            "pagination.limit": 10,
+            "pagination.page": counterPage,
+            "pagination.pageSize": 10,
+        })
+        .then((e) => {
+            reviews.value.push(...e.reviews);
+            let sumRate = 0;
+            e.reviews.forEach((element) => {
+                totalRating.value++;
+                sumRate = sumRate + element.rating;
+                counterRate.value[element.rating - 1]++;
+            });
+            avgRating.value = totalRating.value
+                ? sumRate / totalRating.value
+                : 0;
+            counterPage++;
         });
-        avgRating.value = totalRating.value ? sumRate / totalRating.value : 0;
-    });
+}
+
+function onClickRate(v: number) {
+    filter = v;
+    counterPage = 0;
+    reviews.value = [];
+    loadReview();
 }
 
 onMounted(() => {

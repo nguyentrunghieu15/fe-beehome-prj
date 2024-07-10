@@ -172,3 +172,12 @@ export interface SocialMedia {
     link: string;
     providerId: string;
 }
+
+export interface GetReviewsOfProviderRequest {
+    "filter.rating"?: number;
+    "pagination.limit"?: number;
+    "pagination.page"?: number;
+    "pagination.pageSize"?: number;
+    "pagination.sort"?: "NONE" | "ASC" | "DESC";
+    "pagination.sortBy"?: string;
+}

@@ -12,22 +12,11 @@
                     <span>{{ props.location }}</span>
                 </div>
                 <div>
-                    <v-icon class="mr-2" icon="mdi-account-check"></v-icon>
-                    <span>Tài khoản đã được kiêm chứng</span>
-                </div>
-                <div>
                     <v-icon
                         class="mr-2"
                         icon="mdi-clock-time-eight-outline"
                     ></v-icon>
                     <span>Có {{ props.yearExp }} năm kinh nghiệm</span>
-                </div>
-                <div>
-                    <v-icon
-                        class="mr-2"
-                        icon=" mdi-account-group-outline"
-                    ></v-icon>
-                    <span>{{ employee }} nhân viên</span>
                 </div>
             </div>
         </div>
@@ -52,5 +41,4 @@ const props = defineProps<{
     paymentMethods: string[];
 }>();
 
-const employee = ref(6);
 </script>
