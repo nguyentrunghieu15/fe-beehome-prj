@@ -67,7 +67,7 @@ export const useProviderStore = defineStore("provider", () => {
     function fetchHireOfProvider() {
         if (provider.value) {
             hireService
-                .findAllHires({ providerId: provider.value.id })
+                .findHires({ providerId: provider.value.id })
                 .then((data) => {
                     setHireOfProvider(data.hires);
                 });

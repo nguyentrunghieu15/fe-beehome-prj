@@ -14,10 +14,7 @@
             :from="h.workTimeFrom"
             :to="h.workTimeTo"
             :describle="h.issue"
-            :actions="[
-                ActionProjectItem.APPROVE,
-                ActionProjectItem.DECLINE,
-            ]"
+            :actions="[]"
             :id="h.id"
              @update="onUpdate"
         ></ProjectItems>
@@ -25,12 +22,9 @@
         <ProjectItemsDetail
             v-if="isShowProjectDetail"
             v-model:model-value="isShowProjectDetail"
-            :actions="[
-                ActionProjectItem.APPROVE,
-                ActionProjectItem.DECLINE,
-            ]"
+            :actions="[]"
             :hire="selectedHire"
-             @update="onUpdate"
+            @update="onUpdate"
         ></ProjectItemsDetail>
     </div>
 </template>
@@ -55,7 +49,7 @@ async function loadData(page?: number, limit = 5, pageSize = 5) {
     try {
         const res = await hireService.findHires({
             providerId: providerStore.providerComputed.value?.id,
-            status: HireStatus.PENDDING,
+            status: HireStatus.CANCEL,
             pagination: {
                 limit: limit,
                 page: page,

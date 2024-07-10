@@ -47,8 +47,8 @@
             >
                 {{
                     isProvider
-                        ? "Tham gia với tư cách khách hàng"
-                        : "Tham gia với tư cách nhà cung cấp"
+                        ? "Tham gia với tư cách nhà cung cấp"
+                        : "Tham gia với tư cách khách hàng"
                 }}
             </button>
         </div>

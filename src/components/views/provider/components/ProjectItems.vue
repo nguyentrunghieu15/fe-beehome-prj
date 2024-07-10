@@ -4,17 +4,23 @@
             <div class="mb-2" @click="emit('view')">
                 <h3 class="text-2xl font-bold">{{ props.serviceName }}</h3>
                 <p class="px-4">
-                    <span class="font-bold">Từ ngày:</span> {{ props.from }}
+                    <span class="font-bold">Từ ngày:</span>
+                    {{ FormatTimestamp(props.from) }}
                 </p>
                 <p class="px-4">
-                    <span class="font-bold">Tới ngày:</span>{{ props.to }}
+                    <span class="font-bold">Tới ngày:</span
+                    >{{ FormatTimestamp(props.to) }}
                 </p>
                 <p class="px-4">
                     <span class="font-bold">Mô tả vấn đề:</span>
-                    {{ props.describle.slice(0, 255) }}
+                    {{
+                        props.describle.length < 255
+                            ? props.describle
+                            : props.describle.slice(0, 255) + "..."
+                    }}
                 </p>
             </div>
-            <div class="flex gap-2 justify-center">
+            <div class="flex gap-2 justify-end">
                 <v-btn
                     color="blue-lighten-1"
                     prepend-icon="mdi-check-all"
@@ -40,6 +46,7 @@
                     color="red-lighten-1"
                     prepend-icon="mdi-elevation-decline"
                     v-if="props.actions.includes(3)"
+                    @click="onClickCancel(props?.id)"
                     >Hủy</v-btn
                 >
                 <v-btn
@@ -65,6 +72,8 @@
 import hireService from "@/api/hire";
 import type { ActionProjectItem } from "../constants";
 import { useProviderStore } from "@/stores/providerStore";
+import { FormatTimestamp } from "@/utils";
+import { HireStatus } from "@/api/hire/interfaces";
 
 const props = defineProps<{
     id: string;
@@ -78,28 +87,34 @@ const props = defineProps<{
 const emit = defineEmits<{
     view: [];
     reply: [];
+    update: [];
 }>();
-
-const providerStore = useProviderStore();
 
 async function onClickMarkDone(id: string) {
     try {
-        await hireService.updateStatusHire(id, "done");
-        providerStore.fetchHireOfProvider();
+        await hireService.updateStatusHire(id, HireStatus.FINISH);
+        emit("update");
     } catch (error) {}
 }
 
 function onClickApprove(id: string) {
     try {
-        hireService.updateStatusHire(id, "approve");
-        providerStore.fetchHireOfProvider();
+        hireService.updateStatusHire(id, HireStatus.START);
+        emit("update");
     } catch (error) {}
 }
 
 function onClickDecline(id: string) {
     try {
-        hireService.updateStatusHire(id, "decline");
-        providerStore.fetchHireOfProvider();
+        hireService.updateStatusHire(id, HireStatus.CANCEL);
+        emit("update");
+    } catch (error) {}
+}
+
+function onClickCancel(id: string) {
+    try {
+        hireService.updateStatusHire(id, HireStatus.CANCEL);
+        emit("update");
     } catch (error) {}
 }
 </script>

@@ -1,5 +1,5 @@
 import type { ProviderInfo, Review } from "../provider/interfaces";
-import type { Service } from "../service/interfaces";
+import type { Pagination, Service } from "../service/interfaces";
 
 export interface CreateHireResponse {
     hire: Hire;
@@ -68,10 +68,11 @@ export interface CreateHireRequest {
     fullAddress: string;
 }
 
-export interface FindAllHiresRequest {
+export interface FindHiresRequest {
     userId?: string;
     providerId?: string;
     status?: string;
+    pagination?: Pagination;
 }
 
 export enum HireStatus {

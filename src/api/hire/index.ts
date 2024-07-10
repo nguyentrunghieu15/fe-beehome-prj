@@ -3,8 +3,8 @@ import { BaseService } from "@/plugins/axios";
 import type {
     CreateHireRequest,
     CreateHireResponse,
-    FindAllHireResponse,
-    FindAllHiresRequest,
+    FindAllHireResponse as FindHireResponse,
+    FindHiresRequest,
     UpdateStatusHireResponse,
 } from "./interfaces";
 import { AuthInterceptor } from "../user/interceptor";
@@ -15,10 +15,10 @@ export class HireService extends BaseService {
         super(baseURL);
     }
 
-    public async findAllHires(
-        data: FindAllHiresRequest
-    ): Promise<FindAllHireResponse> {
-        const response = await this.axiosInstance.get<FindAllHireResponse>("", {
+    public async findHires(
+        data: FindHiresRequest
+    ): Promise<FindHireResponse> {
+        const response = await this.axiosInstance.get<FindHireResponse>("", {
             params: data,
         });
         return response.data;

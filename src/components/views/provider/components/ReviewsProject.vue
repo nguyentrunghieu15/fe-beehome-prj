@@ -2,7 +2,7 @@
     <div>
         <ProjectItems
             class="my-4"
-            v-for="h in penddingHires"
+            v-for="h in hires"
             :key="h.id"
             @view="
                 () => {
@@ -16,19 +16,15 @@
             :describle="h.issue"
             :actions="[ActionProjectItem.REPLY]"
             :id="h.id"
-            @reply="
-                () => {
-                    isShowProjectDetail = !isShowProjectDetail;
-                    selectedHire = h;
-                }
-            "
+            @update="onUpdate"
         ></ProjectItems>
-        <NoDataFound v-if="!penddingHires.length"></NoDataFound>
+        <NoDataFound v-if="!hires.length"></NoDataFound>
         <ProjectItemsDetail
             v-if="isShowProjectDetail"
             v-model:model-value="isShowProjectDetail"
             :actions="[ActionProjectItem.REPLY]"
             :hire="selectedHire"
+            @update="onUpdate"
         ></ProjectItemsDetail>
     </div>
 </template>
@@ -36,21 +32,42 @@
 import NoDataFound from "@/components/base/NoDataFound.vue";
 import ProjectItems from "./ProjectItems.vue";
 import ProjectItemsDetail from "./ProjectItemsDetail.vue";
-import { computed, onMounted, proxyRefs, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useProviderStore } from "@/stores/providerStore";
 import { ActionProjectItem } from "../constants";
-import type { HireInfor } from "@/api/hire/interfaces";
+import { HireStatus, type HireInfor } from "@/api/hire/interfaces";
+import hireService from "@/api/hire";
 
 const isShowProjectDetail = ref(false);
 const providerStore = useProviderStore();
-const provider = providerStore.providerComputed;
 const selectedHire = ref<HireInfor>();
-const hires = providerStore.hiresOfProviderComputed;
-const penddingHires = computed(() => {
-    return hires.value.filter((e) => {
-        if (e.status === "done" && e.review) {
-            return e;
-        }
-    });
+const hires = ref<HireInfor[]>([]);
+
+let counterPage = 0;
+
+async function loadData(page?: number, limit = 5, pageSize = 5) {
+    try {
+        const res = await hireService.findHires({
+            providerId: providerStore.providerComputed.value?.id,
+            status: HireStatus.REVIEW,
+            pagination: {
+                limit: limit,
+                page: page,
+                pageSize: pageSize,
+            },
+        });
+        hires.value?.push(...res.hires);
+        counterPage++;
+    } catch (error) {}
+}
+
+onMounted(() => {
+    loadData(counterPage);
 });
+
+function onUpdate() {
+    hires.value = [];
+    loadData(0, counterPage * 5 + 5, counterPage * 5 + 5);
+    counterPage--;
+}
 </script>

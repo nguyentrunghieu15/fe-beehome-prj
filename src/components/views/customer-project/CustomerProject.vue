@@ -34,7 +34,14 @@ import { useUserStore } from "@/stores/userStore";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 const curentNavItem = ref(0);
-const navItems = ref(["Chờ xác nhận", "Đang bắt đầu", "Đã hoàn thành", "Đánh giá"]);
+const navItems = ref([
+    "Chờ xác nhận",
+    "Đang bắt đầu",
+    "Đã hoàn thành",
+    // "Đánh giá",
+    "Đã Hủy",
+]);
+const user = useUserStore().userComputed
 const router = useRouter();
 
 function onClickNavItem(idx: number) {
@@ -50,8 +57,11 @@ function onClickNavItem(idx: number) {
         case 2:
             router.push({ name: "cus-finished" });
             break;
+        // case 3:
+        //     router.push({ name: "cus-reviews" });
+        //     break;
         case 3:
-            router.push({ name: "cus-reviews" });
+            router.push({ name: "cus-cancels" });
             break;
         default:
             break;

@@ -4,17 +4,23 @@
             <div class="mb-2" @click="emit('view')">
                 <h3 class="text-2xl font-bold">{{ props.serviceName }}</h3>
                 <p class="px-4">
-                    <span class="font-bold">Từ ngày:</span> {{ props.from }}
+                    <span class="font-bold">Từ ngày:</span>
+                    {{ FormatTimestamp(props.from) }}
                 </p>
                 <p class="px-4">
-                    <span class="font-bold">Đến ngày:</span>{{ props.to }}
+                    <span class="font-bold">Đến ngày:</span
+                    >{{ FormatTimestamp(props.to) }}
                 </p>
                 <p class="px-4">
                     <span class="font-bold">Mô tả vấn đề:</span>
-                    {{ props.describle.slice(0, 255) }}
+                    {{
+                        props.describle.length < 255
+                            ? props.describle
+                            : props.describle.slice(0, 255) + "..."
+                    }}
                 </p>
             </div>
-            <div class="flex gap-2 justify-center">
+            <div class="flex gap-2 justify-end">
                 <v-btn
                     color="blue-lighten-1"
                     prepend-icon="mdi-check-all"
@@ -25,6 +31,7 @@
                 <v-btn
                     prepend-icon="mdi-elevation-decline"
                     v-if="props.actions.includes(3)"
+                    @click="onClickCancel(id)"
                     >Hủy</v-btn
                 >
                 <v-btn
@@ -33,11 +40,6 @@
                     v-if="props.actions.includes(4)"
                     @click="emit('review')"
                     >Đánh giá</v-btn
-                >
-                <v-btn
-                    prepend-icon="mdi-reply-outline"
-                    v-if="props.actions.includes(5)"
-                    >Phản hồi</v-btn
                 >
             </div>
             <div class="absolute top-0 right-0">
@@ -53,9 +55,9 @@
 </template>
 <script setup lang="ts">
 import hireService from "@/api/hire";
-import { useProviderStore } from "@/stores/providerStore";
 import type { ActionProjectItem } from "../../provider/constants";
-import { useUserStore } from "@/stores/userStore";
+import { HireStatus } from "@/api/hire/interfaces";
+import { FormatTimestamp } from "@/utils";
 
 const props = defineProps<{
     id: string;
@@ -69,16 +71,21 @@ const props = defineProps<{
 const emit = defineEmits<{
     view: [];
     review: [];
+    update: [];
 }>();
-
-const providerStore = useProviderStore();
-const userStore = useUserStore();
 
 async function onClickMarkDone(id: string) {
     try {
-        await hireService.updateStatusHire(id, "done");
-        providerStore.fetchHireOfProvider();
-        userStore.fetchHiresOfCustomer();
+        await hireService.updateStatusHire(id, HireStatus.FINISH);
+        emit("update");
+    } catch (error) {}
+}
+
+
+function onClickCancel(id: string) {
+    try {
+        hireService.updateStatusHire(id, HireStatus.CANCEL);
+        emit("update");
     } catch (error) {}
 }
 </script>

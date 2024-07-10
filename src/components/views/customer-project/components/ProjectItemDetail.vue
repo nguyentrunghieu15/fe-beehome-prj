@@ -43,12 +43,12 @@
                     <span class="font-bold">Thông tin yêu cầu thuê:</span>
                 </p>
                 <p class="px-6">
-                    <span class="font-bold">Từ này:</span>
-                    {{ props.hire?.workTimeFrom }}
+                    <span class="font-bold">Từ ngày:</span>
+                    {{ FormatTimestamp(props.hire?.workTimeFrom || "") }}
                 </p>
                 <p class="px-6">
                     <span class="font-bold">Đến ngày:</span>
-                    {{ hire?.workTimeTo }}
+                    {{ FormatTimestamp(hire?.workTimeTo || "") }}
                 </p>
                 <p class="px-6">
                     <span class="font-bold">Tại nơi:</span>
@@ -65,23 +65,13 @@
                         color="blue-lighten-1"
                         prepend-icon="mdi-check-all"
                         v-if="props.actions.includes(0)"
+                        @click="onClickMarkDone(hire?.id || '')"
                         >Xác nhận hoàn thành</v-btn
-                    >
-                    <v-btn
-                        color="green-lighten-1"
-                        prepend-icon="mdi-check-decagram"
-                        v-if="props.actions.includes(1)"
-                        >Chấp thuận</v-btn
-                    >
-                    <v-btn
-                        color="red-lighten-1"
-                        prepend-icon="mdi-elevation-decline"
-                        v-if="props.actions.includes(2)"
-                        >Từ chối</v-btn
                     >
                     <v-btn
                         prepend-icon="mdi-elevation-decline"
                         v-if="props.actions.includes(3)"
+                        @click="onClickCancel(hire?.id || '')"
                         >Hủy</v-btn
                     >
                     <v-btn
@@ -90,24 +80,21 @@
                         v-if="props.actions.includes(4)"
                         >Đánh giá</v-btn
                     >
-                    <v-btn
-                        prepend-icon="mdi-reply-outline"
-                        v-if="props.actions.includes(5)"
-                        >Phản hồi</v-btn
-                    >
                 </div>
             </template>
         </Dialog>
     </div>
 </template>
 <script setup lang="ts">
-import type { HireInfor } from "@/api/hire/interfaces";
+import { HireStatus, type HireInfor } from "@/api/hire/interfaces";
 import Dialog from "@/components/base/Dialog.vue";
 import type { ActionProjectItem } from "../../provider/constants";
 import OverviewCard from "../../reviews-pro/components/OverviewCard.vue";
 import type { ProviderInfo } from "@/api/provider/interfaces";
 import { onMounted, ref } from "vue";
 import providerService from "@/api/provider";
+import { FormatTimestamp } from "@/utils";
+import hireService from "@/api/hire";
 const props = defineProps<{
     hire?: HireInfor;
     actions: ActionProjectItem[];
@@ -124,4 +111,22 @@ onMounted(() => {
         });
     }
 });
+
+const emit = defineEmits<{
+    update: [];
+}>();
+
+async function onClickMarkDone(id: string) {
+    try {
+        await hireService.updateStatusHire(id, HireStatus.FINISH);
+        emit("update");
+    } catch (error) {}
+}
+
+function onClickCancel(id: string) {
+    try {
+        hireService.updateStatusHire(id, HireStatus.CANCEL);
+        emit("update");
+    } catch (error) {}
+}
 </script>

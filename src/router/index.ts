@@ -33,6 +33,8 @@ import ReviewsProjectCus from "@/components/views/customer-project/components/Re
 import ProSchedule from "@/components/views/provider/ProSchedule.vue";
 import SidebarLayout from "@/components/layouts/SidebarLayout.vue";
 import Dashboard from "@/components/views/dashboard/Dashboard.vue";
+import CancelProjectCus from "@/components/views/customer-project/components/CancelProjectCus.vue";
+import CancelProject from "@/components/views/provider/components/CancelProject.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -159,6 +161,15 @@ const routes: RouteRecordRaw[] = [
                             nav: NavigationComponent.SEARCH_NAV,
                         },
                     },
+                    {
+                        path: "cancels",
+                        component: CancelProjectCus,
+                        name: "cus-cancels",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.SEARCH_NAV,
+                        },
+                    },
                 ],
             },
         ],
@@ -216,6 +227,15 @@ const routes: RouteRecordRaw[] = [
                         path: "reviews",
                         component: ReviewsProject,
                         name: "pro-reviews",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.PROVIDER_NAV,
+                        },
+                    },
+                    {
+                        path: "cancels",
+                        component: CancelProject,
+                        name: "pro-cancels",
                         meta: {
                             requiredAuth: true,
                             nav: NavigationComponent.PROVIDER_NAV,

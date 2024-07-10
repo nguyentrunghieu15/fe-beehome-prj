@@ -38,7 +38,8 @@
                         {{ hire?.fullAddress }}
                     </p>
                     <p class="px-4">
-                        <span class="font-bold">Mô tả vấn đề:</span> {{ hire?.issue }}
+                        <span class="font-bold">Mô tả vấn đề:</span>
+                        {{ hire?.issue }}
                     </p>
                 </div>
                 <ReplyCard
@@ -58,24 +59,28 @@
                         color="blue-lighten-1"
                         prepend-icon="mdi-check-all"
                         v-if="props.actions.includes(0)"
+                        @click="onClickMarkDone(hire?.id || '')"
                         >Xác nhận hoàn thành</v-btn
                     >
                     <v-btn
                         color="green-lighten-1"
                         prepend-icon="mdi-check-decagram"
                         v-if="props.actions.includes(1)"
+                        @click="onClickApprove(hire?.id || '')"
                         >Đồng ý yêu cầu</v-btn
                     >
                     <v-btn
                         color="red-lighten-1"
                         prepend-icon="mdi-elevation-decline"
                         v-if="props.actions.includes(2)"
+                        @click="onClickDecline(hire?.id || '')"
                         >Từ chối yêu cầu</v-btn
                     >
                     <v-btn
                         color="red-lighten-1"
                         prepend-icon="mdi-elevation-decline"
                         v-if="props.actions.includes(3)"
+                        @click="onClickCancel(hire?.id || '')"
                         >Hủy</v-btn
                     >
                     <v-btn
@@ -91,7 +96,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { HireInfor } from "@/api/hire/interfaces";
+import { HireStatus, type HireInfor } from "@/api/hire/interfaces";
 import Dialog from "@/components/base/Dialog.vue";
 import type { ActionProjectItem } from "../constants";
 import type { UserInfor } from "@/api/user/interfaces";
@@ -100,6 +105,7 @@ import userService from "@/api/user";
 import ReplyCard from "./ReplyCard.vue";
 import providerService from "@/api/provider";
 import { useProviderStore } from "@/stores/providerStore";
+import hireService from "@/api/hire";
 
 const props = defineProps<{
     hire?: HireInfor;
@@ -122,14 +128,45 @@ onMounted(() => {
 
 const onReply = async () => {
     try {
-        console.log(1);
         if (message.value && props.hire?.review?.id) {
             await providerService.replyReviewAsPro({
                 reply: message.value,
                 reviewId: props.hire?.review?.id,
             });
-            await useProviderStore().fetchHireOfProvider();
+            emit("update");
         }
     } catch (error) {}
 };
+
+const emit = defineEmits<{
+    update: [];
+}>();
+
+async function onClickMarkDone(id: string) {
+    try {
+        await hireService.updateStatusHire(id, HireStatus.FINISH);
+        emit("update");
+    } catch (error) {}
+}
+
+function onClickApprove(id: string) {
+    try {
+        hireService.updateStatusHire(id, HireStatus.START);
+        emit("update");
+    } catch (error) {}
+}
+
+function onClickDecline(id: string) {
+    try {
+        hireService.updateStatusHire(id, HireStatus.CANCEL);
+        emit("update");
+    } catch (error) {}
+}
+
+function onClickCancel(id: string) {
+    try {
+        hireService.updateStatusHire(id, HireStatus.CANCEL);
+        emit("update");
+    } catch (error) {}
+}
 </script>
