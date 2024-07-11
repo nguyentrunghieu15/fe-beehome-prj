@@ -72,6 +72,8 @@ export interface FindHiresRequest {
     userId?: string;
     providerId?: string;
     status?: string;
+    serviceId?: string;
+    searchName?: string;
     pagination?: Pagination;
 }
 

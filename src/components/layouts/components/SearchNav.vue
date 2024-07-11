@@ -46,7 +46,8 @@
                 class="p-2 bg-sky-500 text-white font-bold rounded-3xl hover:cursor-pointer shrink-0"
             >
                 {{
-                    isProvider
+                    isProvider &&
+                    !$router.currentRoute.value.path.startsWith("/pro/")
                         ? "Tham gia với tư cách nhà cung cấp"
                         : "Tham gia với tư cách khách hàng"
                 }}

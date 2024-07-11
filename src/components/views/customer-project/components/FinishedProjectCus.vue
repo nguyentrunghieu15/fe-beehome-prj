@@ -1,5 +1,9 @@
 <template>
     <div>
+        <FilterProject
+            :list-service="listService"
+            @apply="applyFilter"
+        ></FilterProject>
         <div v-for="h in hires" class="flex gap-4">
             <ProjectItem
                 class="my-4"
@@ -21,7 +25,7 @@
                 :describle="h.issue"
                 :actions="[ActionProjectItem.REVIEW]"
                 :id="h.id"
-                @update="onUpdate"
+                @update="loadData(counterPage)"
             ></ProjectItem>
             <div class="p-4" v-show="h.id === isShowReviewCardId">
                 <ReviewCard
@@ -39,7 +43,12 @@
                 variant="text"
                 color="grey-darken-1"
                 rounded
-                @click="loadData(counterPage)"
+                @click="
+                    () => {
+                        counterPage++;
+                        loadData(counterPage);
+                    }
+                "
                 >Xem thêm</v-btn
             >
         </div>
@@ -50,7 +59,7 @@
             v-model:model-value="isShowProjectDetail"
             :actions="[ActionProjectItem.REVIEW]"
             :hire="selectedHire"
-            @update="onUpdate"
+            @update="loadData(counterPage)"
         ></ProjectItemDetail>
     </div>
 </template>
@@ -62,8 +71,11 @@ import { onMounted, ref } from "vue";
 import { HireStatus, type HireInfor } from "@/api/hire/interfaces";
 import { ActionProjectItem } from "../../provider/constants";
 import { useUserStore } from "@/stores/userStore";
+import FilterProject from "./FilterProject.vue";
 import ReviewCard from "./ReviewCard.vue";
 import hireService from "@/api/hire";
+import serviceManagerService from "@/api/service";
+import type { Service } from "@/api/service/interfaces";
 const isShowProjectDetail = ref(false);
 const selectedHire = ref<HireInfor>();
 
@@ -71,13 +83,18 @@ const userStore = useUserStore();
 const hires = ref<HireInfor[]>([]);
 
 var isShowReviewCardId = ref("");
-let counterPage = 0;
+const counterPage = ref(0);
+const search = ref();
+const serviceId = ref();
+const listService = ref<Service[]>([]);
 
 async function loadData(page?: number, limit = 5, pageSize = 5) {
     try {
         const res = await hireService.findHires({
             userId: userStore.userComputed.value?.id,
-            status: HireStatus.START,
+            status: HireStatus.FINISH,
+            searchName: search.value || "",
+            serviceId: serviceId.value || "",
             pagination: {
                 limit: limit,
                 page: page,
@@ -85,21 +102,24 @@ async function loadData(page?: number, limit = 5, pageSize = 5) {
             },
         });
         hires.value?.push(...res.hires);
-        counterPage++;
     } catch (error) {}
 }
 
-onMounted(() => {
-    loadData(counterPage);
-});
-
-function onUpdate() {
+async function applyFilter(searchString: string, serviceString: string) {
+    search.value = searchString;
+    serviceId.value = serviceString;
+    counterPage.value = 0;
     hires.value = [];
-    loadData(0, counterPage * 5 + 5, counterPage * 5 + 5);
-    counterPage--;
+    loadData(counterPage.value);
 }
 
+onMounted(() => {
+    loadData(counterPage.value);
+    serviceManagerService.listServices({}).then((e) => {
+        listService.value = e.services;
+    });
+});
 function onSubmitReview() {
-    loadData();
+    loadData(counterPage.value);
 }
 </script>

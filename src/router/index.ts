@@ -23,18 +23,17 @@ import ProProfile from "@/components/views/provider/components/ProProfile.vue";
 import ProviderSettings from "@/components/views/provider/components/ProviderSettings.vue";
 import RequestProject from "@/components/views/provider/components/RequestProject.vue";
 import StartedProject from "@/components/views/provider/components/StartedProject.vue";
-import FinishedProject from "@/components/views/provider/components/FinishedProject.vue";
 import ReviewsProject from "@/components/views/provider/components/ReviewsProject.vue";
 import CustomerProject from "@/components/views/customer-project/CustomerProject.vue";
 import PenddingProjectCus from "@/components/views/customer-project/components/PenddingProjectCus.vue";
 import StartedProjectCus from "@/components/views/customer-project/components/StartedProjectCus.vue";
 import FinishedProjectCus from "@/components/views/customer-project/components/FinishedProjectCus.vue";
-import ReviewsProjectCus from "@/components/views/customer-project/components/ReviewsProjectCus.vue";
 import ProSchedule from "@/components/views/provider/ProSchedule.vue";
 import SidebarLayout from "@/components/layouts/SidebarLayout.vue";
 import Dashboard from "@/components/views/dashboard/Dashboard.vue";
 import CancelProjectCus from "@/components/views/customer-project/components/CancelProjectCus.vue";
 import CancelProject from "@/components/views/provider/components/CancelProject.vue";
+import DeleteAccountPro from "@/components/views/provider/components/DeleteAccountPro.vue";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -153,15 +152,6 @@ const routes: RouteRecordRaw[] = [
                         },
                     },
                     {
-                        path: "reviews",
-                        component: ReviewsProjectCus,
-                        name: "cus-reviews",
-                        meta: {
-                            requiredAuth: true,
-                            nav: NavigationComponent.SEARCH_NAV,
-                        },
-                    },
-                    {
                         path: "cancels",
                         component: CancelProjectCus,
                         name: "cus-cancels",
@@ -215,15 +205,6 @@ const routes: RouteRecordRaw[] = [
                         },
                     },
                     {
-                        path: "finished",
-                        component: FinishedProject,
-                        name: "pro-finished",
-                        meta: {
-                            requiredAuth: true,
-                            nav: NavigationComponent.PROVIDER_NAV,
-                        },
-                    },
-                    {
                         path: "reviews",
                         component: ReviewsProject,
                         name: "pro-reviews",
@@ -260,6 +241,15 @@ const routes: RouteRecordRaw[] = [
                         path: "/provider-settings",
                         component: ProviderSettings,
                         name: "provider-settings",
+                        meta: {
+                            requiredAuth: true,
+                            nav: NavigationComponent.PROVIDER_NAV,
+                        },
+                    },
+                    {
+                        path: "/delete-pro",
+                        component: DeleteAccountPro,
+                        name: "delete-pro",
                         meta: {
                             requiredAuth: true,
                             nav: NavigationComponent.PROVIDER_NAV,

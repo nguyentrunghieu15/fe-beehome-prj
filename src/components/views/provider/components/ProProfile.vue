@@ -28,6 +28,7 @@
                 rounded="0"
                 size="x-large"
                 block
+                @click="$router.push({ name: 'delete-pro' })"
                 >Vô hiệu hóa thương hiệu</v-btn
             >
         </div>

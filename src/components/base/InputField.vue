@@ -1,7 +1,7 @@
 <template>
     <div class="mb-4">
         <label
-            v-if="label.length"
+            v-if="label?.length"
             class="block mb-2 text-sm font-bold text-gray-900"
             >{{ props.label }}
             <span v-if="isRequired" class="text-red-800">*</span></label
@@ -31,8 +31,8 @@
 import type { InputTypeHTMLAttribute } from "vue";
 
 const props = defineProps<{
-    label: string;
-    isRequired: boolean;
+    label?: string;
+    isRequired?: boolean;
     placeHolder?: string;
     errors?: string;
     isDisable?: boolean;

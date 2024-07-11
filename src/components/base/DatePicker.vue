@@ -21,8 +21,8 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-    label: string;
-    isRequired: boolean;
+    label?: string;
+    isRequired?: boolean;
     typeInput?: string;
     errors?: string;
     minDate?: string;

@@ -38,11 +38,16 @@ const navItems = ref([
     "Chờ xác nhận",
     "Đang bắt đầu",
     "Đã hoàn thành",
-    // "Đánh giá",
     "Đã Hủy",
 ]);
-const user = useUserStore().userComputed
+const userStore = useUserStore();
 const router = useRouter();
+
+onMounted(() => {
+    if (userStore.userComputed.value?.id) {
+        userStore.fetchUser();
+    }
+});
 
 function onClickNavItem(idx: number) {
     if (curentNavItem.value === idx) return;
@@ -57,9 +62,6 @@ function onClickNavItem(idx: number) {
         case 2:
             router.push({ name: "cus-finished" });
             break;
-        // case 3:
-        //     router.push({ name: "cus-reviews" });
-        //     break;
         case 3:
             router.push({ name: "cus-cancels" });
             break;

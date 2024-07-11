@@ -35,8 +35,8 @@ import { computed, ref } from "vue";
 import type { SingleSelectedItem } from "./constants";
 
 const props = defineProps<{
-    label: string;
-    isRequired: boolean;
+    label?: string;
+    isRequired?: boolean;
     maxLength: number;
     list: SingleSelectedItem[];
 }>();

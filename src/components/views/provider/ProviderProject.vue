@@ -31,20 +31,24 @@
 
 <script setup lang="ts">
 import { useProviderStore } from "@/stores/providerStore";
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const curentNavItem = ref(0);
 const navItems = ref([
     "Yêu cầu đang chờ",
     "Đang tiến hành",
-    "Hoàn thành",
-    // "Đánh giá",
+    "Đánh giá",
     "Đã hủy",
 ]);
 const router = useRouter();
 
 const providerStore = useProviderStore();
-const provider = providerStore.providerComputed;
+
+onMounted(async () => {
+    if (providerStore.providerComputed.value?.id) {
+        await providerStore.fetchProvider();
+    }
+});
 
 function onClickNavItem(idx: number) {
     if (curentNavItem.value === idx) return;
@@ -57,11 +61,8 @@ function onClickNavItem(idx: number) {
             router.push({ name: "pro-started" });
             break;
         case 2:
-            router.push({ name: "pro-finished" });
+            router.push({ name: "pro-reviews" });
             break;
-        // case 3:
-        //     router.push({ name: "pro-reviews" });
-        //     break;
         case 3:
             router.push({ name: "pro-cancels" });
             break;

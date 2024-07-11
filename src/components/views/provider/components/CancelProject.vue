@@ -1,5 +1,9 @@
 <template>
     <div>
+        <FilterProject
+            :list-service="listService"
+            @apply="applyFilter"
+        ></FilterProject>
         <ProjectItems
             class="my-4"
             v-for="h in hires"
@@ -16,15 +20,30 @@
             :describle="h.issue"
             :actions="[]"
             :id="h.id"
-             @update="onUpdate"
+            @update="loadData(counterPage)"
         ></ProjectItems>
         <NoDataFound v-if="!hires.length"></NoDataFound>
+        <div v-if="hires.length" class="flex justify-center py-8">
+            <v-btn
+                class="border"
+                variant="text"
+                color="grey-darken-1"
+                rounded
+                @click="
+                    () => {
+                        counterPage++;
+                        loadData(counterPage);
+                    }
+                "
+                >Xem thêm</v-btn
+            >
+        </div>
         <ProjectItemsDetail
             v-if="isShowProjectDetail"
             v-model:model-value="isShowProjectDetail"
             :actions="[]"
             :hire="selectedHire"
-            @update="onUpdate"
+            @update="loadData(counterPage)"
         ></ProjectItemsDetail>
     </div>
 </template>
@@ -34,22 +53,29 @@ import ProjectItems from "./ProjectItems.vue";
 import ProjectItemsDetail from "./ProjectItemsDetail.vue";
 import { onMounted, ref } from "vue";
 import { useProviderStore } from "@/stores/providerStore";
-import { ActionProjectItem } from "../constants";
 import { HireStatus, type HireInfor } from "@/api/hire/interfaces";
 import hireService from "@/api/hire";
+import FilterProject from "../../customer-project/components/FilterProject.vue";
+import type { Service } from "@/api/service/interfaces";
+import serviceManagerService from "@/api/service";
 
 const isShowProjectDetail = ref(false);
 const providerStore = useProviderStore();
 const selectedHire = ref<HireInfor>();
 const hires = ref<HireInfor[]>([]);
 
-let counterPage = 0;
+const counterPage = ref(0);
+const search = ref();
+const serviceId = ref();
+const listService = ref<Service[]>([]);
 
 async function loadData(page?: number, limit = 5, pageSize = 5) {
     try {
         const res = await hireService.findHires({
             providerId: providerStore.providerComputed.value?.id,
             status: HireStatus.CANCEL,
+            searchName: search.value || "",
+            serviceId: serviceId.value || "",
             pagination: {
                 limit: limit,
                 page: page,
@@ -57,17 +83,21 @@ async function loadData(page?: number, limit = 5, pageSize = 5) {
             },
         });
         hires.value?.push(...res.hires);
-        counterPage++;
     } catch (error) {}
 }
 
-onMounted(() => {
-    loadData(counterPage);
-});
-
-function onUpdate() {
+async function applyFilter(searchString: string, serviceString: string) {
+    search.value = searchString;
+    serviceId.value = serviceString;
+    counterPage.value = 0;
     hires.value = [];
-    loadData(0, counterPage * 5 + 5, counterPage * 5 + 5);
-    counterPage--;
+    loadData(counterPage.value);
 }
+
+onMounted(() => {
+    loadData(counterPage.value);
+    serviceManagerService.listServices({}).then((e) => {
+        listService.value = e.services;
+    });
+});
 </script>
