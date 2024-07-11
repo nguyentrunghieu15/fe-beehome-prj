@@ -20,7 +20,12 @@
             :describle="h.issue"
             :actions="[ActionProjectItem.APPROVE, ActionProjectItem.DECLINE]"
             :id="h.id"
-            @update="loadData(counterPage)"
+            @update="
+                () => {
+                    hires = [];
+                    loadData(0, counterPage * 5+5, 5);
+                }
+            "
         ></ProjectItems>
         <div v-if="hires.length" class="flex justify-center py-8">
             <v-btn
@@ -43,7 +48,12 @@
             v-model:model-value="isShowProjectDetail"
             :actions="[ActionProjectItem.APPROVE, ActionProjectItem.DECLINE]"
             :hire="selectedHire"
-            @update="loadData(counterPage)"
+            @update="
+                () => {
+                    hires = [];
+                    loadData(0, counterPage * 5+5, 5);
+                }
+            "
         ></ProjectItemsDetail>
     </div>
 </template>
@@ -96,7 +106,12 @@ async function applyFilter(searchString: string, serviceString: string) {
 }
 
 onMounted(() => {
-    loadData(counterPage.value);
+    if (!providerStore.providerComputed.value?.id) {
+        providerStore.fetchProvider();
+    }
+    setTimeout(() => {
+        loadData(counterPage.value);
+    }, 200);
     serviceManagerService.listServices({}).then((e) => {
         listService.value = e.services;
     });

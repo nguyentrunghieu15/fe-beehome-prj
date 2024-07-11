@@ -108,7 +108,7 @@ export interface GetAllReviewOfProviderResponse {
 }
 
 export interface DeleteServiceForProRequest {
-    servicesId: string[];
+    servicesId: string;
 }
 
 export interface FindProsResponse {

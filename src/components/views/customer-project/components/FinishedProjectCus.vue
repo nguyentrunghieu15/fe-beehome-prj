@@ -25,7 +25,12 @@
                 :describle="h.issue"
                 :actions="[ActionProjectItem.REVIEW]"
                 :id="h.id"
-                @update="loadData(counterPage)"
+                @update="
+                    () => {
+                        hires = [];
+                        loadData(0, counterPage * 5 + 5, 5);
+                    }
+                "
             ></ProjectItem>
             <div class="p-4" v-show="h.id === isShowReviewCardId">
                 <ReviewCard
@@ -59,7 +64,12 @@
             v-model:model-value="isShowProjectDetail"
             :actions="[ActionProjectItem.REVIEW]"
             :hire="selectedHire"
-            @update="loadData(counterPage)"
+            @update="
+                () => {
+                    hires = [];
+                    loadData(0, counterPage * 5+5, 5);
+                }
+            "
         ></ProjectItemDetail>
     </div>
 </template>
@@ -114,7 +124,12 @@ async function applyFilter(searchString: string, serviceString: string) {
 }
 
 onMounted(() => {
-    loadData(counterPage.value);
+    if (!userStore.userComputed.value?.id) {
+        userStore.fetchUser();
+    }
+    setTimeout(() => {
+        loadData(counterPage.value);
+    }, 200);
     serviceManagerService.listServices({}).then((e) => {
         listService.value = e.services;
     });

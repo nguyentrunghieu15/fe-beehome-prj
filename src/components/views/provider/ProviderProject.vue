@@ -30,8 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { useProviderStore } from "@/stores/providerStore";
-import { onMounted, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 const curentNavItem = ref(0);
 const navItems = ref([
@@ -41,14 +40,6 @@ const navItems = ref([
     "Đã hủy",
 ]);
 const router = useRouter();
-
-const providerStore = useProviderStore();
-
-onMounted(async () => {
-    if (providerStore.providerComputed.value?.id) {
-        await providerStore.fetchProvider();
-    }
-});
 
 function onClickNavItem(idx: number) {
     if (curentNavItem.value === idx) return;

@@ -157,7 +157,7 @@ export class ProviderService extends BaseService {
     public async deleteServiceForPro(
         serviceData: DeleteServiceForProRequest
     ): Promise<void> {
-        await this.axiosInstance.post<void>("/delete-service", serviceData);
+        await this.axiosInstance.delete<void>(`/delete-service/${serviceData.servicesId}`);
     }
 
     public async updateSocialMediaForPro(

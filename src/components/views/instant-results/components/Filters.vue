@@ -70,7 +70,7 @@ function onSelect(value: string) {
         name: "view-results",
         query: {
             name: value,
-            zipcode: route.query.zipcode,
+            address: route.query.address,
         },
     });
 }

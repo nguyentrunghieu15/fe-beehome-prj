@@ -30,8 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from "@/stores/userStore";
-import { onMounted, ref } from "vue";
+import {  ref } from "vue";
 import { useRouter } from "vue-router";
 const curentNavItem = ref(0);
 const navItems = ref([
@@ -40,14 +39,8 @@ const navItems = ref([
     "Đã hoàn thành",
     "Đã Hủy",
 ]);
-const userStore = useUserStore();
 const router = useRouter();
 
-onMounted(() => {
-    if (userStore.userComputed.value?.id) {
-        userStore.fetchUser();
-    }
-});
 
 function onClickNavItem(idx: number) {
     if (curentNavItem.value === idx) return;

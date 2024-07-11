@@ -25,7 +25,6 @@
                 :describle="h.issue"
                 :actions="[]"
                 :id="h.id"
-                @update="loadData(counterPage)"
             ></ProjectItem>
             <div class="p-4" v-show="h.id === isShowReviewCardId">
                 <ReviewCard
@@ -112,7 +111,12 @@ async function applyFilter(searchString: string, serviceString: string) {
 }
 
 onMounted(() => {
-    loadData(counterPage.value);
+    if (!userStore.userComputed.value?.id) {
+        userStore.fetchUser();
+    }
+    setTimeout(() => {
+        loadData(counterPage.value);
+    }, 200);
     serviceManagerService.listServices({}).then((e) => {
         listService.value = e.services;
     });

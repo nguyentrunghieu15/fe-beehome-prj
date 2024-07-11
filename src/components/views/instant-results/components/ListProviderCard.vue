@@ -23,7 +23,12 @@
                 variant="text"
                 color="grey-darken-1"
                 rounded
-                @click="loadData"
+                @click="
+                    () => {
+                        curentPage++;
+                        loadData(curentPage);
+                    }
+                "
                 >Xem thêm</v-btn
             >
         </div>
@@ -45,7 +50,7 @@ const route = useRoute();
 
 const curentPage = ref(0);
 
-function loadData() {
+function loadData(page?: number) {
     if (route.query.name?.length && route.query.address?.length) {
         const name = route.query.name?.toString();
         const address = route.query.address?.toString();
@@ -57,26 +62,27 @@ function loadData() {
                 },
                 pagination: {
                     limit: 10,
-                    page: curentPage.value,
+                    page: page,
                     pageSize: 10,
                 },
             })
             .then((v) => {
-                curentPage.value++;
                 provider.value.push(...v.providers);
             });
     }
 }
 
 onMounted(() => {
-    loadData();
+    loadData(curentPage.value);
 });
 
 watch(
     () => route.query.name,
     (newName, oldName) => {
+        curentPage.value = 0;
+        provider.value = [];
         if (newName?.length && route.query.address?.length) {
-            loadData();
+            loadData(curentPage.value);
         }
     }
 );
@@ -84,8 +90,10 @@ watch(
 watch(
     () => route.query.address,
     (newName, oldName) => {
+        curentPage.value = 0;
+        provider.value = [];
         if (newName?.length && route.query.name?.length) {
-            loadData();
+            loadData(curentPage.value);
         }
     }
 );

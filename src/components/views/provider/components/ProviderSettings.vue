@@ -220,6 +220,9 @@ const ward = ref("");
 let flagCounter = true;
 
 onMounted(async () => {
+    if (!providerStore.providerComputed.value?.id) {
+        providerStore.fetchProvider();
+    }
     form.resetForm();
     form.setFieldValue("name", provider.value?.name);
     form.setFieldValue("years", provider.value?.years);
@@ -361,7 +364,7 @@ const onClickSave = async () => {
 };
 
 function onClickRemoveService(id: string) {
-    providerService.deleteServiceForPro({ servicesId: [id] }).then(() => {
+    providerService.deleteServiceForPro({ servicesId: id }).then(() => {
         providerStore.fetchProvider();
     });
 }
