@@ -133,6 +133,8 @@ onMounted(async () => {
 watch(province, async (newVal, oldVal) => {
     ward.value = "";
     district.value = "";
+    districtItems.value = [];
+    wardItems.value = [];
     if (newVal === "") {
         form.setFieldValue("address", "");
     }
@@ -156,6 +158,7 @@ watch(district, async (newVal, oldVal) => {
         form.setFieldValue("address", "");
     }
     ward.value = "";
+    wardItems.value = [];
     const districtUnit = districtUnits.value.find((e) => e.name === newVal);
     try {
         wardUnits.value = (

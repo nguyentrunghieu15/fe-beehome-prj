@@ -67,7 +67,7 @@
             @update="
                 () => {
                     hires = [];
-                    loadData(0, counterPage * 5+5, 5);
+                    loadData(0, counterPage * 5 + 5, 5);
                 }
             "
         ></ProjectItemDetail>
@@ -129,12 +129,14 @@ onMounted(() => {
     }
     setTimeout(() => {
         loadData(counterPage.value);
-    }, 200);
+    }, 1000);
     serviceManagerService.listServices({}).then((e) => {
         listService.value = e.services;
     });
 });
 function onSubmitReview() {
-    loadData(counterPage.value);
+    isShowReviewCardId.value = "";
+    hires.value = [];
+    loadData(0, counterPage.value * 5 + 5, 5);
 }
 </script>

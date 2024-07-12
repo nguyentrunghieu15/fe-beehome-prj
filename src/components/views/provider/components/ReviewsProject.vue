@@ -23,7 +23,13 @@
             @update="
                 () => {
                     hires = [];
-                    loadData(0, counterPage * 5+5, 5);
+                    loadData(0, counterPage * 5 + 5, 5);
+                }
+            "
+            @reply="
+                () => {
+                    isShowProjectDetail = !isShowProjectDetail;
+                    selectedHire = h;
                 }
             "
         ></ProjectItems>
@@ -51,7 +57,7 @@
             @update="
                 () => {
                     hires = [];
-                    loadData(0, counterPage * 5+5, 5);
+                    loadData(0, counterPage * 5 + 5, 5);
                 }
             "
         ></ProjectItemsDetail>
@@ -111,7 +117,7 @@ onMounted(() => {
     }
     setTimeout(() => {
         loadData(counterPage.value);
-    }, 200);
+    }, 1000);
     serviceManagerService.listServices({}).then((e) => {
         listService.value = e.services;
     });

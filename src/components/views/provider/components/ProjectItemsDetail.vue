@@ -50,6 +50,7 @@
                     :note="hire.review?.note || ''"
                     title="Cảm ơn phản hồi của quý khách"
                     :author="hire.provider.name"
+                    :reply="hire?.review.reply"
                     v-model:message="message"
                 ></ReplyCard>
             </div>
@@ -104,7 +105,6 @@ import { onMounted, ref } from "vue";
 import userService from "@/api/user";
 import ReplyCard from "./ReplyCard.vue";
 import providerService from "@/api/provider";
-import { useProviderStore } from "@/stores/providerStore";
 import hireService from "@/api/hire";
 
 const props = defineProps<{

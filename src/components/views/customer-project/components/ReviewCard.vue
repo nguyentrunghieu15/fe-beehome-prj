@@ -60,10 +60,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import AreaTextField from "@/components/base/AreaTextField.vue";
-import type { HireInfor } from "@/api/hire/interfaces";
+import { HireStatus, type HireInfor } from "@/api/hire/interfaces";
 import providerService from "@/api/provider";
 import { useUserStore } from "@/stores/userStore";
 import { join } from "lodash";
+import hireService from "@/api/hire";
 
 const props = defineProps<{
     title: String;
@@ -87,19 +88,25 @@ const onClickCancel = () => {
     emit("cancel");
 };
 
-const onSubmit = () => {
-    emit("onSubmit");
-    providerService.reviewPro({
-        providerId: props.hireInfor.providerId,
-        comment: comment.value,
-        note: note.value,
-        rating: rating.value,
-        userName: join(
-            [userComputed.value?.firstName, userComputed.value?.lastName],
-            " "
-        ),
-        hireId: props.hireInfor.id,
-    });
+const onSubmit = async () => {
+    try {
+        await providerService.reviewPro({
+            providerId: props.hireInfor.providerId,
+            comment: comment.value,
+            note: note.value,
+            rating: rating.value,
+            userName: join(
+                [userComputed.value?.firstName, userComputed.value?.lastName],
+                " "
+            ),
+            hireId: props.hireInfor.id,
+        });
+        await hireService.updateStatusHire(
+            props.hireInfor.id,
+            HireStatus.REVIEW
+        );
+        emit("onSubmit");
+    } catch (error) {}
 };
 </script>
 

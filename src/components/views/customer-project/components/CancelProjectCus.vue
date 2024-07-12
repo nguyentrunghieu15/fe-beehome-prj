@@ -116,7 +116,7 @@ onMounted(() => {
     }
     setTimeout(() => {
         loadData(counterPage.value);
-    }, 200);
+    }, 1000);
     serviceManagerService.listServices({}).then((e) => {
         listService.value = e.services;
     });

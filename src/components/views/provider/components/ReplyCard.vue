@@ -41,7 +41,7 @@
                 :is-required="false"
                 label=""
                 v-model:model-value="message"
-                :is-disable="(message?.length ?? 0) > 0"
+                :is-disable="(reply?.length ?? 0) > 0"
             ></AreaTextField>
             <div class="mt-4 text-right">
                 <span class="font-bold">- {{ author }}</span>
@@ -52,6 +52,7 @@
 
 <script setup lang="ts">
 import AreaTextField from "@/components/base/AreaTextField.vue";
+import { onMounted } from "vue";
 
 const props = defineProps<{
     reviewAt?: String;
@@ -60,6 +61,7 @@ const props = defineProps<{
     note: String;
     title: String;
     author: String;
+    reply?: string;
 }>();
 
 const message = defineModel<string>("message");
