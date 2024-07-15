@@ -74,6 +74,6 @@ export class ServiceManagerService extends BaseService {
 }
 
 const serviceManagerService = new ServiceManagerService(
-    "http://localhost:3003/api/v1/services"
+    `${import.meta.env.VITE_APP_BASE_URL}/api/v1/services`
 );
 export default serviceManagerService;

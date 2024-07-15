@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import {  ref } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 const curentNavItem = ref(0);
 const navItems = ref([
@@ -40,7 +40,6 @@ const navItems = ref([
     "Đã Hủy",
 ]);
 const router = useRouter();
-
 
 function onClickNavItem(idx: number) {
     if (curentNavItem.value === idx) return;

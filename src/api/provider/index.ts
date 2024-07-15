@@ -175,7 +175,7 @@ export class ProviderService extends BaseService {
 }
 
 const providerService = new ProviderService(
-    "http://localhost:3003/api/v1/providers"
+    `${import.meta.env.VITE_APP_BASE_URL}/api/v1/providers`
 );
 
 providerService.addInterceptor("auth", new AuthInterceptor());

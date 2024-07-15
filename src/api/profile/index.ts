@@ -47,7 +47,7 @@ export class ProfileService extends BaseService {
 }
 
 const profileService = new ProfileService(
-    "http://localhost:3000/api/v1/profile"
+    `${import.meta.env.VITE_APP_BASE_URL}/api/v1/profile`
 );
 profileService.addInterceptor("error", new ErrorInterceptor());
 profileService.addInterceptor("auth", new AuthInterceptor());

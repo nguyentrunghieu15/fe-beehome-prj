@@ -65,7 +65,7 @@ export class UserService extends BaseService {
     }
 }
 
-const userService = new UserService("http://localhost:3000/api/v1");
+const userService = new UserService(`${import.meta.env.VITE_APP_BASE_URL}/api/v1`);
 userService.addInterceptor("error", new ErrorInterceptor());
 userService.addInterceptor("auth", new AuthInterceptor());
 

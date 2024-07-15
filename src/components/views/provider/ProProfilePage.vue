@@ -13,6 +13,7 @@
 <script setup lang="ts">
 import Footer from "@/components/base/Footer.vue";
 import InforSection from "../mainsite/components/InforSection.vue";
+
 </script>
 <style scoped>
 /*

@@ -15,9 +15,7 @@ export class HireService extends BaseService {
         super(baseURL);
     }
 
-    public async findHires(
-        data: FindHiresRequest
-    ): Promise<FindHireResponse> {
+    public async findHires(data: FindHiresRequest): Promise<FindHireResponse> {
         const response = await this.axiosInstance.get<FindHireResponse>("", {
             params: data,
         });
@@ -55,7 +53,9 @@ export class HireService extends BaseService {
     // Add other methods as needed
 }
 
-const hireService = new HireService("http://localhost:3003/api/v1/hires");
+const hireService = new HireService(
+    `${import.meta.env.VITE_APP_BASE_URL}/api/v1/hires`
+);
 hireService.addInterceptor("auth", new AuthInterceptor());
 hireService.addInterceptor("error", new ErrorInterceptor());
 export default hireService;

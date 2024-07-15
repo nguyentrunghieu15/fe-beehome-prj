@@ -99,6 +99,7 @@ watch(
         curentPage.value = 0;
         provider.value = [];
         if (newName?.length && route.query.address?.length) {
+            isShowLoader.value = true;
             loadData(curentPage.value);
         }
     }
@@ -110,6 +111,7 @@ watch(
         curentPage.value = 0;
         provider.value = [];
         if (newName?.length && route.query.name?.length) {
+            isShowLoader.value = true;
             loadData(curentPage.value);
         }
     }

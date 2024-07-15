@@ -17,16 +17,13 @@ export class AddressService extends BaseService {
         provinceFullName?: string
     ): Promise<CheckExistAddressResponse> {
         const response =
-            await this.axiosInstance.get<CheckExistAddressResponse>(
-                "/check",
-                {
-                    params: {
-                        "address.wardFullName": wardFullName,
-                        "address.districtFullName": districtFullName,
-                        "address.provinceFullName": provinceFullName,
-                    },
-                }
-            );
+            await this.axiosInstance.get<CheckExistAddressResponse>("/check", {
+                params: {
+                    "address.wardFullName": wardFullName,
+                    "address.districtFullName": districtFullName,
+                    "address.provinceFullName": provinceFullName,
+                },
+            });
         return response.data;
     }
 
@@ -61,6 +58,8 @@ export class AddressService extends BaseService {
         return response.data;
     }
 }
-const addressService = new AddressService("http://localhost:3004/api/v1/address");
+const addressService = new AddressService(
+    `${import.meta.env.VITE_APP_BASE_URL}/api/v1/address`
+);
 addressService.addInterceptor("error", new ErrorInterceptor());
 export default addressService;

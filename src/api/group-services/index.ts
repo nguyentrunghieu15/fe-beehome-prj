@@ -69,6 +69,6 @@ export class GroupServiceManagerService extends BaseService {
 }
 
 const groupServiceManagerService = new GroupServiceManagerService(
-    "http://localhost:3003/api/v1/group_services"
+    `${import.meta.env.VITE_APP_BASE_URL}/api/v1/group_services`
 );
 export default groupServiceManagerService;

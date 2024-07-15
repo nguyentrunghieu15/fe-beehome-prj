@@ -50,7 +50,7 @@ export class AuthService extends BaseService {
     }
 }
 
-const authService = new AuthService("http://localhost:3000/api/v1/auth");
+const authService = new AuthService(`${import.meta.env.VITE_APP_BASE_URL}/api/v1/auth`);
 authService.addInterceptor("login", new LoginInterceptor());
 authService.addInterceptor("error", new ErrorInterceptor());
 
